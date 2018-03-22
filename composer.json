@@ -1,0 +1,24 @@
+{
+    "name": "nicat/htmlfactory",
+    "description": "Convenient and powerful HTML-builder for Laravel 5.5",
+    "authors": [
+        {
+            "name": "Gerald Buttinger",
+            "email": "gerald.buttinger@nic.at"
+        }
+    ],
+    "require": {
+		"laravel/framework": "5.5.*"
+	},
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "orchestra/testbench": "~3.5",
+        "gajus/dindent": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nicat\\HtmlFactory\\": "src/",
+            "HtmlFactoryTests\\": "tests/"
+        }
+    }
+}
