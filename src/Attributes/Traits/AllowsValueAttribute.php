@@ -11,7 +11,7 @@ trait AllowsValueAttribute
      * @param string $value
      * @return $this
      */
-    public function value(string $value)
+    public function value($value)
     {
         $this->attributes->establish('value')->setValue($value);
         return $this;

@@ -47,6 +47,13 @@ abstract class Element
     public $wrapper;
 
     /**
+     * Array of calls to be applied to this element's wrapper.
+     *
+     * @var []
+     */
+    private $wrapperCallbacks = [];
+
+    /**
      * Used for generation of wrapper.
      *
      * @var bool
@@ -113,8 +120,14 @@ abstract class Element
         // and call the wrapper's generate() function.
         // $this->wrapperGenerationInitiated is set to true to avoid a loop,
         // when the wrapper calls generate() on it's content.
+        // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
         if (!is_null($this->wrapper) && !$this->wrapperGenerationInitiated) {
             $this->wrapperGenerationInitiated = true;
+
+            foreach ($this->wrapperCallbacks as $callback) {
+                call_user_func_array([$this,$callback[0]],$callback[1]);
+            }
+
             return $this->wrapper->prependContent($this)->generate();
         }
 
@@ -212,6 +225,21 @@ abstract class Element
             $wrapper = null;
         }
         $this->wrapper = $wrapper;
+        return $this;
+    }
+
+    /**
+     * Adds a callback to be applied to this element's wrapper.
+     *
+     * @param $methodName
+     * @param array $parameters
+     * @return $this
+     */
+    public function addWrapperCallback($methodName, $parameters=[]) {
+        $this->wrapperCallbacks[] = [
+            $methodName,
+            $parameters
+        ];
         return $this;
     }
 

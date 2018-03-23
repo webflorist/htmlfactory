@@ -9,10 +9,10 @@ trait AllowsDataAttribute
      * Sets a HTML-data-attribute.
      *
      * @param string $suffix
-     * @param string $value
+     * @param string|bool $value
      * @return $this
      */
-    public function data(string $suffix, string $value)
+    public function data(string $suffix, $value=true)
     {
         $this->attributes->establish('data-' . $suffix)->setValue($value);
         return $this;

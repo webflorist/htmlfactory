@@ -71,7 +71,7 @@ abstract class StringAttribute extends Attribute
      * @param string $value
      * @throws ValueNotAllowedException
      */
-    public function setValue(string $value)
+    public function setValue($value)
     {
         if (!$this->valueIsAllowed($value)) {
             throw new ValueNotAllowedException('Value "'.$value.'" is not allowed for attribute "'.$this->getName().'".');
@@ -86,7 +86,7 @@ abstract class StringAttribute extends Attribute
      * @param string $value
      * @return bool
      */
-    protected function valueIsAllowed(string $value) : bool
+    protected function valueIsAllowed($value) : bool
     {
         $allowedValues = $this->getAllowedValues();
         if (!is_null($allowedValues) && (count($allowedValues) > 0)) {
