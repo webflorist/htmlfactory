@@ -43,13 +43,13 @@ trait AssertsHtml
         $headerBefore = "\n\n==================\n";
         $headerAfter = "\n==================\n";
 
-        /*
+
         try {
-            //$this->actualHtml = (new Indenter())->indent($this->actualHtml);
-            //$this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
+            $this->actualHtml = (new Indenter())->indent($this->actualHtml);
+            $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
         } catch (RuntimeException $e) {
         }
-        */
+
 
         return
             $headerBefore .

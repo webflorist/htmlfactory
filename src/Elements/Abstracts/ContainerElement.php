@@ -2,6 +2,7 @@
 
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
+use Nicat\FormFactory\Components\Additional\InputGroup;
 use Nicat\HtmlFactory\Content\ContentManager;
 
 /**
@@ -84,13 +85,18 @@ abstract class ContainerElement extends Element
      */
     public function applyDecorators()
     {
-        parent::applyDecorators();
 
-        foreach ($this->content->getChildrenByClassName(Element::class) as $childElement) {
-            $childElement->applyDecorators();
+        if (!$this->wasDecorated) {
+
+            parent::applyDecorators();
+
+            foreach ($this->content->getChildrenByClassName(Element::class) as $childElement) {
+                $childElement->applyDecorators();
+            }
+
+            $this->afterChildrenDecoration();
+
         }
-
-        $this->afterChildrenDecoration();
 
     }
 
@@ -111,7 +117,7 @@ abstract class ContainerElement extends Element
     {
         $html = '';
         foreach ($this->content->get() as $child) {
-            if (is_a($child,Element::class)) {
+            if (is_a($child, Element::class)) {
                 /** @var Element $child */
                 $child = $child->generate();
             }
