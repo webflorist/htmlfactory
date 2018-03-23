@@ -125,7 +125,7 @@ abstract class Element
             $this->wrapperGenerationInitiated = true;
 
             foreach ($this->wrapperCallbacks as $callback) {
-                call_user_func_array([$this,$callback[0]],$callback[1]);
+                call_user_func_array([$this->wrapper,$callback[0]],$callback[1]);
             }
 
             return $this->wrapper->prependContent($this)->generate();
