@@ -65,7 +65,7 @@ abstract class Element
      *
      * @var bool
      */
-    private $wasDecorated = false;
+    protected $wasDecorated = false;
 
     /**
      * Array of elements to be rendered before this element.
@@ -130,7 +130,6 @@ abstract class Element
 
             return $this->wrapper->prependContent($this)->generate();
         }
-
 
         $output = $this->generateBeforeItems() . $this->render() . $this->generateAfterItems();
 
