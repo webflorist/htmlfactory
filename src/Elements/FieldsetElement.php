@@ -28,10 +28,10 @@ class FieldsetElement extends ContainerElement
     /**
      * Set content to be used for the legend-tag.
      *
-     * @param string $legend
+     * @param string|false $legend
      * @return $this
      */
-    public function legend(string $legend) {
+    public function legend($legend) {
         $this->legend = $legend;
         return $this;
     }
@@ -42,7 +42,7 @@ class FieldsetElement extends ContainerElement
      */
     protected function afterDecoration()
     {
-        if (!is_null($this->legend)) {
+        if (!is_null($this->legend) && ($this->legend !== false)) {
             $this->prependContent((new LegendElement())->content($this->legend));
         }
     }
