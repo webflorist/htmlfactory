@@ -5,6 +5,7 @@ namespace Nicat\HtmlFactory\Components;
 use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
 use Nicat\HtmlFactory\Elements\InputElement;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsCheckedAttribute;
+use Nicat\HtmlFactory\Components\Traits\CanBeInline;
 
 /**
  * Class representing the HTML-component '<input type="radio" />'
@@ -18,6 +19,8 @@ class RadioInputComponent extends InputElement implements RegisteredComponentInt
      * Use corresponding traits for all type-specific HTML-attributes.
      */
     use AllowsCheckedAttribute;
+	
+	use CanBeInline;
 
     /**
      * Gets called during construction.
