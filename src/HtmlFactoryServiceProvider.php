@@ -34,6 +34,10 @@ class HtmlFactoryServiceProvider extends ServiceProvider
             __DIR__.'/Decorators/Bootstrap/v3'
         );
         $this->app[HtmlFactory::class]->decorators->registerFromFolder(
+            'Nicat\HtmlFactory\Decorators\Bootstrap\v4',
+            __DIR__.'/Decorators/Bootstrap/v4'
+        );
+        $this->app[HtmlFactory::class]->decorators->registerFromFolder(
             'Nicat\HtmlFactory\Decorators\Foundation\v6',
             __DIR__.'/Decorators/Foundation/v6'
         );
