@@ -11,6 +11,7 @@ use Nicat\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsPlaceholderAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsReadonlyAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsRequiredAttribute;
+use Nicat\HtmlFactory\Attributes\Traits\AllowsRowsAttribute;
 
 /**
  * Class representing the HTML-element '<textarea></textarea>'
@@ -30,7 +31,8 @@ class TextareaElement extends ContainerElement
         AllowsPlaceholderAttribute,
         AllowsReadonlyAttribute,
         AllowsRequiredAttribute,
-        AllowsAriaInvalidAttribute;
+        AllowsAriaInvalidAttribute,
+        AllowsRowsAttribute;
 
     /**
      * Returns the name of the element.
