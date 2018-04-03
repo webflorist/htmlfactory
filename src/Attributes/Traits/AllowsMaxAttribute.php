@@ -8,10 +8,10 @@ trait AllowsMaxAttribute
     /**
      * Set value of HTML-attribute 'max'.
      *
-     * @param int $max
+     * @param int|string $max
      * @return $this
      */
-    public function max(int $max)
+    public function max($max)
     {
         $this->attributes->establish('max')->setValue($max);
         return $this;

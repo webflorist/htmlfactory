@@ -8,10 +8,10 @@ trait AllowsMinAttribute
     /**
      * Set value of HTML-attribute 'min'.
      *
-     * @param int $min
+     * @param int|string $min
      * @return $this
      */
-    public function min(int $min)
+    public function min($min)
     {
         $this->attributes->establish('min')->setValue($min);
         return $this;
