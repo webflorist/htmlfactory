@@ -2,14 +2,9 @@
 
 namespace HtmlFactoryTests\Traits;
 
-use DOMDocument;
-use DOMNode;
-use Gajus\Dindent\Exception\RuntimeException;
-use Gajus\Dindent\Indenter;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Elements\ButtonElement;
 use Nicat\HtmlFactory\Elements\InputElement;
-use PHPUnit\Framework\ExpectationFailedException;
 
 trait AppliesAttributeSets
 {

@@ -2,7 +2,6 @@
 
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
-use Nicat\FormFactory\Components\Additional\InputGroup;
 use Nicat\HtmlFactory\Content\ContentManager;
 
 /**

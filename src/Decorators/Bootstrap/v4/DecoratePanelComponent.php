@@ -2,11 +2,8 @@
 
 namespace Nicat\HtmlFactory\Decorators\Bootstrap\v4;
 
-use Nicat\HtmlFactory\Components\AlertComponent;
 use Nicat\HtmlFactory\Components\PanelComponent;
 use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\ButtonElement;
-use Nicat\HtmlFactory\Elements\SpanElement;
 
 class DecoratePanelComponent extends Decorator
 {

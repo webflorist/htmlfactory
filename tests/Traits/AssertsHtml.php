@@ -4,6 +4,7 @@ namespace HtmlFactoryTests\Traits;
 
 use DOMDocument;
 use DOMNode;
+use Gajus\Dindent\Exception\InvalidArgumentException;
 use Gajus\Dindent\Exception\RuntimeException;
 use Gajus\Dindent\Indenter;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -20,6 +21,7 @@ trait AssertsHtml
      *
      * @param string $expected
      * @param string $actual
+     * @param bool $checkHtmlSyntax
      */
     protected function assertHtmlEquals(string $expected, string $actual, $checkHtmlSyntax=false)
     {
@@ -48,6 +50,7 @@ trait AssertsHtml
             $this->actualHtml = (new Indenter())->indent($this->actualHtml);
             $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
         } catch (RuntimeException $e) {
+        } catch (InvalidArgumentException $e) {
         }
 
 
@@ -203,6 +206,7 @@ trait AssertsHtml
      * Parses HTML into a DOMNode
      *
      * @param string $html
+     * @param bool $checkHtmlSyntax
      * @return DOMNode
      */
     protected function parseHtml2DomNode(string $html, $checkHtmlSyntax=false): DOMNode

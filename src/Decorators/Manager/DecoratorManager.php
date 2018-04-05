@@ -15,7 +15,7 @@ class DecoratorManager
      *
      * @var HtmlFactory
      */
-    protected $htmlfactory;
+    protected $htmlFactory;
 
     /**
      * Array of registered decorators.
@@ -28,17 +28,17 @@ class DecoratorManager
      * A two-dimensional array, that lists all (parent-)classes of elements.
      * Gets populated at the start of decoration to determine the applicable decorators.
      *
-     * @var string[]
+     * @var string[][]
      */
     protected $elementClasses = [];
 
     /**
      * DecoratorManager constructor.
-     * @param HtmlFactory $htmlfactory
+     * @param HtmlFactory $htmlFactory
      */
-    public function __construct(HtmlFactory $htmlfactory)
+    public function __construct(HtmlFactory $htmlFactory)
     {
-        $this->htmlfactory = $htmlfactory;
+        $this->htmlFactory = $htmlFactory;
     }
 
     /**
@@ -153,13 +153,13 @@ class DecoratorManager
         }
 
         // If the specific framework is supported regardless of version, return true.
-        if (array_search($this->htmlfactory->frontendFramework,$supportedFrameworks) !== false) {
+        if (array_search($this->htmlFactory->frontendFramework,$supportedFrameworks) !== false) {
             return true;
         }
 
         // If a specific version is stated, this decorator must explicitly support that version.
-        if (!is_null($this->htmlfactory->frontendFrameworkVersion)) {
-            if (array_search($this->htmlfactory->frontendFramework.':'.$this->htmlfactory->frontendFrameworkVersion,$supportedFrameworks) !== false) {
+        if (!is_null($this->htmlFactory->frontendFrameworkVersion)) {
+            if (array_search($this->htmlFactory->frontendFramework.':'.$this->htmlFactory->frontendFrameworkVersion,$supportedFrameworks) !== false) {
                 return true;
             }
         }

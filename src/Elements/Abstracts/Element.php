@@ -42,7 +42,7 @@ abstract class Element
     /**
      * Wrapper.
      *
-     * @var ContainerElement
+     * @var ContainerElement|false
      */
     public $wrapper;
 
@@ -121,14 +121,16 @@ abstract class Element
         // $this->wrapperGenerationInitiated is set to true to avoid a loop,
         // when the wrapper calls generate() on it's content.
         // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
-        if (!is_null($this->wrapper) && !$this->wrapperGenerationInitiated) {
+        if (!is_null($this->wrapper) && ($this->wrapper !== false) && !$this->wrapperGenerationInitiated) {
             $this->wrapperGenerationInitiated = true;
+
+            $this->wrapper->prependContent($this);
 
             foreach ($this->wrapperCallbacks as $callback) {
                 call_user_func_array([$this->wrapper,$callback[0]],$callback[1]);
             }
 
-            return $this->wrapper->prependContent($this)->generate();
+            return $this->wrapper->generate();
         }
 
         $output = $this->generateBeforeItems() . $this->render() . $this->generateAfterItems();
@@ -220,9 +222,6 @@ abstract class Element
      */
     public function wrap($wrapper)
     {
-        if ($wrapper === false) {
-            $wrapper = null;
-        }
         $this->wrapper = $wrapper;
         return $this;
     }
