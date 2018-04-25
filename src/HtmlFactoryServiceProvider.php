@@ -9,9 +9,13 @@ class HtmlFactoryServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      *
+     * @param HtmlFactory $htmlFactory
      * @return void
+     * @throws Exceptions\ComponentAccessorAlreadyUsedException
+     * @throws Exceptions\ComponentNotFoundException
+     * @throws Exceptions\DecoratorNotFoundException
      */
-    public function boot()
+    public function boot(HtmlFactory $htmlFactory)
     {
 
         // Publish the config.
@@ -20,21 +24,21 @@ class HtmlFactoryServiceProvider extends ServiceProvider
         ]);
 
         // Register included components.
-        $this->app[HtmlFactory::class]->components->registerFromFolder(
+        $htmlFactory->components->registerFromFolder(
             'Nicat\HtmlFactory\Components',
             __DIR__.'/Components'
         );
 
         // Register included decorators.
-        $this->app[HtmlFactory::class]->decorators->registerFromFolder(
+        $htmlFactory->decorators->registerFromFolder(
             'Nicat\HtmlFactory\Decorators\Bootstrap\v3',
             __DIR__.'/Decorators/Bootstrap/v3'
         );
-        $this->app[HtmlFactory::class]->decorators->registerFromFolder(
+        $htmlFactory->decorators->registerFromFolder(
             'Nicat\HtmlFactory\Decorators\Bootstrap\v4',
             __DIR__.'/Decorators/Bootstrap/v4'
         );
-        $this->app[HtmlFactory::class]->decorators->registerFromFolder(
+        $htmlFactory->decorators->registerFromFolder(
             'Nicat\HtmlFactory\Decorators\Foundation\v6',
             __DIR__.'/Decorators/Foundation/v6'
         );
@@ -48,13 +52,15 @@ class HtmlFactoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        // Merge the config.
+        $this->mergeConfigFrom(__DIR__.'/config/htmlfactory.php', 'htmlfactory');
+
+        // Register the HtmlFactory service as a singleton.
         $this->app->singleton(HtmlFactory::class, function()
         {
             return new HtmlFactory();
         });
-
-        // Merge the config.
-        $this->mergeConfigFrom(__DIR__.'/config/htmlfactory.php', 'htmlfactory');
 
     }
 }
