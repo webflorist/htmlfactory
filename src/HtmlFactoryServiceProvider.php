@@ -19,9 +19,6 @@ class HtmlFactoryServiceProvider extends ServiceProvider
             __DIR__.'/config/htmlfactory.php' => config_path('htmlfactory.php'),
         ]);
 
-        // Merge the config.
-        $this->mergeConfigFrom(__DIR__.'/config/htmlfactory.php', 'htmlfactory');
-
         // Register included components.
         $this->app[HtmlFactory::class]->components->registerFromFolder(
             'Nicat\HtmlFactory\Components',
@@ -55,6 +52,9 @@ class HtmlFactoryServiceProvider extends ServiceProvider
         {
             return new HtmlFactory();
         });
+
+        // Merge the config.
+        $this->mergeConfigFrom(__DIR__.'/config/htmlfactory.php', 'htmlfactory');
 
     }
 }
