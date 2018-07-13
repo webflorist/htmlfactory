@@ -42,6 +42,10 @@ class HtmlFactoryServiceProvider extends ServiceProvider
             'Nicat\HtmlFactory\Decorators\Foundation\v6',
             __DIR__.'/Decorators/Foundation/v6'
         );
+        $htmlFactory->decorators->registerFromFolder(
+            'Nicat\HtmlFactory\Decorators\Bulma\v0',
+            __DIR__.'/Decorators/Bulma/v0'
+        );
 
     }
 
