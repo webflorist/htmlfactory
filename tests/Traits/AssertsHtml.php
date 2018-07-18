@@ -47,8 +47,8 @@ trait AssertsHtml
 
 
         try {
-            $this->actualHtml = (new Indenter())->indent($this->actualHtml);
-            $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
+            //$this->actualHtml = (new Indenter())->indent($this->actualHtml);
+            //$this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
         } catch (RuntimeException $e) {
         } catch (InvalidArgumentException $e) {
         }
