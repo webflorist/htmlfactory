@@ -204,9 +204,9 @@ abstract class Element
 
             $this->beforeDecoration();
 
-            /** @var HtmlFactory $htmlfactoryService */
-            $htmlfactoryService = app(HtmlFactory::class);
-            $htmlfactoryService->decorators->decorate($this);
+            /** @var HtmlFactory $htmlFactoryService */
+            $htmlFactoryService = app(HtmlFactory::class);
+            $htmlFactoryService->decorators->decorate($this);
 
             $this->afterDecoration();
 
