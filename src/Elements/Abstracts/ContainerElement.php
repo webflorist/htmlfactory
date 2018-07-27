@@ -31,14 +31,14 @@ abstract class ContainerElement extends Element
     }
 
     /**
-     * Renders the element.
+     * Render the element to an HTML-string.
      *
      * @return string
      */
-    protected function render(): string
+    public function renderHtml(): string
     {
         return
-            '<' . $this->getName() . $this->attributes->render() . '>' .
+            '<' . $this->getName() . $this->attributes->render(true) . '>' .
             $this->generateContent() .
             '</' . $this->getName() . '>';
     }
@@ -112,7 +112,7 @@ abstract class ContainerElement extends Element
      *
      * @return string
      */
-    private function generateContent()
+    public function generateContent()
     {
         $html = '';
         foreach ($this->content->get() as $child) {

@@ -84,18 +84,25 @@ abstract class Element
     private $insertAfter = [];
 
     /**
-     * Render the element to a string.
+     * The view this element should be rendered with.
      *
-     * @return string
+     * @var string
      */
-    abstract protected function render(): string;
+    public $view = null;
 
     /**
      * Returns the name of the element.
      *
      * @return string
      */
-    abstract protected function getName(): string;
+    abstract public function getName(): string;
+
+    /**
+     * Render the element to an HTML-string.
+     *
+     * @return string
+     */
+    abstract public function renderHtml(): string;
 
     /**
      * Element constructor.
@@ -104,6 +111,34 @@ abstract class Element
     {
         $this->attributes = new AttributeManager($this);
         $this->setUp();
+    }
+
+    /**
+     * Render the element to a string.
+     *
+     * @return string
+     */
+    protected function render() : string
+    {
+        if (!is_null($this->view) && ($this->view) !== false) {
+            return $this->renderView();
+        }
+        return $this->renderHtml();
+    }
+
+    /**
+     * Render the element to a string using a view.
+     *
+     * @return string
+     */
+    protected function renderView(): string
+    {
+        return view(
+            $this->view,
+            [
+                'element' => $this
+            ]
+        );
     }
 
     /**
@@ -127,13 +162,16 @@ abstract class Element
             $this->wrapper->prependContent($this);
 
             foreach ($this->wrapperCallbacks as $callback) {
-                call_user_func_array([$this->wrapper,$callback[0]],$callback[1]);
+                call_user_func_array([$this->wrapper, $callback[0]], $callback[1]);
             }
 
             return $this->wrapper->generate();
         }
 
-        $output = $this->generateBeforeItems() . $this->render() . $this->generateAfterItems();
+        $output =
+            $this->generateBeforeItems() .
+            $this->render() .
+            $this->generateAfterItems();
 
         $this->manipulateOutput($output);
 
@@ -233,7 +271,8 @@ abstract class Element
      * @param array $parameters
      * @return $this
      */
-    public function addWrapperCallback($methodName, $parameters=[]) {
+    public function addWrapperCallback($methodName, $parameters = [])
+    {
         $this->wrapperCallbacks[] = [
             $methodName,
             $parameters
@@ -299,6 +338,18 @@ abstract class Element
             $html .= $child;
         }
         return $html;
+    }
+
+    /**
+     * Sets the view this element should be rendered with.
+     *
+     * @param string|false $view
+     * @return $this
+     */
+    public function view($view)
+    {
+        $this->view = $view;
+        return $this;
     }
 
 }

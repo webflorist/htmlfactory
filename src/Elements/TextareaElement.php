@@ -39,7 +39,7 @@ class TextareaElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'textarea';
     }

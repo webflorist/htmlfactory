@@ -20,7 +20,7 @@ class FieldsetElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'fieldset';
     }

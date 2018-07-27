@@ -77,9 +77,10 @@ class AttributeManager
     /**
      * Renders all attributes.
      *
+     * @param bool $prefixSpace: prefixes the generated string with a space-character.
      * @return string
      */
-    public function render()
+    public function render($prefixSpace=true)
     {
         $html = '';
         foreach ($this->attributes as $attribute) {
@@ -87,9 +88,13 @@ class AttributeManager
                 $html .= $attribute->render() . ' ';
             }
         }
-        if (strlen($html)>0) {
-            $html = ' '.trim($html);
+
+        $html = trim($html);
+
+        if ($prefixSpace && (strlen($html) > 0)) {
+            $html = ' ' . $html;
         }
+
         return $html;
     }
 

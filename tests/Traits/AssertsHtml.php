@@ -27,9 +27,17 @@ trait AssertsHtml
     {
         $this->expectedHtml = $expected;
         $this->actualHtml = $actual;
+
+        try {
+            $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
+            $this->actualHtml = (new Indenter())->indent($this->actualHtml);
+        } catch (RuntimeException $e) {
+        } catch (InvalidArgumentException $e) {
+        }
+
         $this->assertDomNodeEquals(
-            $this->parseHtml2DomNode($expected, $checkHtmlSyntax),
-            $this->parseHtml2DomNode($actual, $checkHtmlSyntax)
+            $this->parseHtml2DomNode($this->expectedHtml, $checkHtmlSyntax),
+            $this->parseHtml2DomNode($this->actualHtml, $checkHtmlSyntax)
         );
     }
 
@@ -44,15 +52,6 @@ trait AssertsHtml
 
         $headerBefore = "\n\n==================\n";
         $headerAfter = "\n==================\n";
-
-
-        try {
-            //$this->actualHtml = (new Indenter())->indent($this->actualHtml);
-            //$this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
-        } catch (RuntimeException $e) {
-        } catch (InvalidArgumentException $e) {
-        }
-
 
         return
             $headerBefore .
@@ -177,6 +176,9 @@ trait AssertsHtml
         // Assert, that the child-count is the desired one.
         $expectedChildCount = ($expected->hasChildNodes()?$expected->childNodes->length:0);
         $actualChildCount = ($actual->hasChildNodes()?$actual->childNodes->length:0);
+        if ($expectedChildCount !== $actualChildCount) {
+            dd($actual->childNodes->item(0), $expected->childNodes->item(0));
+        }
         $this->assertEquals(
             $expectedChildCount,
             $actualChildCount,

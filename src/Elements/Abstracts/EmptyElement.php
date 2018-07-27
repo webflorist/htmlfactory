@@ -12,13 +12,13 @@ namespace Nicat\HtmlFactory\Elements\Abstracts;
 abstract class EmptyElement extends Element
 {
     /**
-     * Renders the element.
+     * Render the element to an HTML-string.
      *
      * @return string
      */
-    public function render(): string
+    public function renderHtml(): string
     {
-        return '<' . $this->getName() . $this->attributes->render() . ' />';
+        return '<' . $this->getName() . $this->attributes->render(true) . ' />';
 
     }
 }

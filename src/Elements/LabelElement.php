@@ -23,7 +23,7 @@ class LabelElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'label';
     }
