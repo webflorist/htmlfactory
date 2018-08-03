@@ -17,7 +17,7 @@ abstract class StringAttribute extends Attribute
     /**
      * The attribute's string value
      *
-     * @var null
+     * @var null|string
      */
     protected $value = null;
 
