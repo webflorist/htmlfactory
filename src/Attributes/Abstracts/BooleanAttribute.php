@@ -14,9 +14,9 @@ abstract class BooleanAttribute extends Attribute
     /**
      * Boolean value.
      *
-     * @var bool
+     * @var null|bool
      */
-    private $value = false;
+    private $value = null;
 
     /**
      * Returns the rendered value.
@@ -35,7 +35,7 @@ abstract class BooleanAttribute extends Attribute
      */
     public function isSet(): bool
     {
-        return $this->value;
+        return !is_null($this->value);
     }
 
     /**
@@ -45,7 +45,7 @@ abstract class BooleanAttribute extends Attribute
      */
     public function render(): string
     {
-        if ($this->isSet()) {
+        if ($this->value === true) {
             return $this->getName();
         }
         return '';
