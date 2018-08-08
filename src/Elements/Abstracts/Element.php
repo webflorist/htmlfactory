@@ -2,6 +2,7 @@
 
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
+use Nicat\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
 use Nicat\HtmlFactory\HtmlFactory;
 use Nicat\HtmlFactory\Attributes\Manager\AttributeManager;
@@ -30,7 +31,8 @@ abstract class Element
         AllowsIdAttribute,
         AllowsRoleAttribute,
         AllowsStyleAttribute,
-        AllowsTitleAttribute;
+        AllowsTitleAttribute,
+        AllowsGeneralVueDirectives;
 
     /**
      * AttributeManager

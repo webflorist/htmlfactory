@@ -4,6 +4,9 @@ namespace Nicat\HtmlFactory;
 
 use Nicat\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Nicat\HtmlFactory\Components\Manager\ComponentManager;
+use Nicat\HtmlFactory\Elements\H1Element;
+use Nicat\HtmlFactory\Elements\ImgElement;
+use Nicat\HtmlFactory\Elements\PElement;
 use Nicat\HtmlFactory\Exceptions\InvalidAccessorException;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Elements\SpanElement;
@@ -59,11 +62,14 @@ use Nicat\HtmlFactory\Components\PanelComponent;
  * @method static DivElement                div()
  * @method static FieldsetElement           fieldset()
  * @method static FormElement               form()
+ * @method static H1Element                 h1()
+ * @method static ImgElement                img()
  * @method static InputElement              input()
  * @method static LabelElement              label()
  * @method static LegendElement             legend()
  * @method static OptgroupElement           optgroup()
  * @method static OptionElement             option()
+ * @method static PElement                  p()
  * @method static SelectElement             select()
  * @method static SmallElement              small()
  * @method static SpanElement               span()
