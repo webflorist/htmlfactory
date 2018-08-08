@@ -69,6 +69,7 @@ class AttributeManager
         if (!isset($this->attributes[$attributeName])) {
             $attribute = $this->init($attributeName);
             $this->attributes[$attribute->getName()] = $attribute;
+            return $attribute;
         }
 
         return $this->attributes[$attributeName];
@@ -110,19 +111,19 @@ class AttributeManager
     private function init(string $attributeName): Attribute
     {
 
-        // For data-attributes we extract the suffix and add it to $constructorParams.
-        $constructorParams = [];
-        if (strpos($attributeName, 'data-') === 0) {
-            $constructorParams = [substr($attributeName, 5)];
-            $attributeName = 'data';
-        }
-
         // We check, if the attribute is allowed for $this->element
         if (!$this->isAllowed($attributeName)) {
             throw new AttributeNotAllowedException('Attribute "' . $attributeName . '" is not allowed for element "' . get_class($this->element) . '".');
         }
 
-        $attributeClass = self::getClassNameOfAttribute($attributeName);
+        $attributeClass = '';
+        $constructorParams = [];
+        if (self::isVueDirective($attributeName)) {
+            self::getClassNameAndConstructorParamsOfVueDirective(substr($attributeName,2), $attributeClass, $constructorParams);
+        }
+        else {
+            self::getClassNameAndConstructorParamsOfAttribute($attributeName, $attributeClass, $constructorParams);
+        }
 
         /** @var Attribute $attribute */
         $attribute = new $attributeClass(...$constructorParams);
@@ -132,32 +133,49 @@ class AttributeManager
     }
 
     /**
-     * Finds out full qualified class name for an HTML-attribute.
+     * Finds out full qualified class name for an HTML-attribute and saves it under as $attributeClass.
+     * Also populates $constructorParams in various conditions.
      * Throws exception, if no class was found.
      *
      * @param string $attributeName
-     * @return string
+     * @param $attributeClass
+     * @param $constructorParams
      * @throws AttributeNotFoundException
      */
-    private static function getClassNameOfAttribute(string $attributeName): string
+    private static function getClassNameAndConstructorParamsOfAttribute(string $attributeName, &$attributeClass, &$constructorParams)
     {
-        // Attributes containing a hyphen (e.g. 'accept-charset')
-        // must be converted to StudlyCase (e.g. 'AcceptCharset') for the class-name.
-        if (strpos($attributeName, '-') !== false) {
-            $attributeNameParts = explode('-', $attributeName);
-            foreach ($attributeNameParts as $key => $namePart) {
-                $attributeNameParts[$key] = ucfirst($namePart);
-            }
-            $attributeName = implode('', $attributeNameParts);
-        }
 
-        $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\' . ucfirst($attributeName) . 'Attribute';
+        if (self::isDataAttribute($attributeName)) {
+            $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\DataAttribute';
+            $constructorParams = [substr($attributeName, 5)];
+        }
+        else {
+            $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\' . self::convertToStudlyCase($attributeName) . 'Attribute';
+            if (!class_exists($attributeClass)) {
+                throw new AttributeNotFoundException('No class for attribute "' . $attributeName . '" found.');
+            }
+        }
+    }
+
+    /**
+     * Finds out full qualified class name for a Vue-Direceive and saves it under as $attributeClass.
+     * Also populates $constructorParams in various conditions.
+     * Throws exception, if no class was found.
+     *
+     * @param string $directiveName
+     * @param $attributeClass
+     * @param $constructorParams
+     * @return string
+     */
+    private static function getClassNameAndConstructorParamsOfVueDirective(string $directiveName, &$attributeClass, &$constructorParams)
+    {
+
+        $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\Vue\\' . self::convertToStudlyCase($directiveName) . 'Directive';
 
         if (!class_exists($attributeClass)) {
-            throw new AttributeNotFoundException('No class for attribute "' . $attributeName . '" found.');
+            $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\Vue\\CustomDirective';
+            $constructorParams = [$directiveName];
         }
-
-        return $attributeClass;
     }
 
     /**
@@ -214,6 +232,17 @@ class AttributeManager
      */
     public function isAllowed(string $attributeName): bool
     {
+
+        // Vue-directives are always allowed.
+        if (self::isVueDirective($attributeName)) {
+            return true;
+        }
+
+        // Data-attributes are also always allowed.
+        if (self::isDataAttribute($attributeName)) {
+            return true;
+        }
+
         return array_search($attributeName, $this->allowedAttributes) !== false;
     }
 
@@ -255,6 +284,60 @@ class AttributeManager
     {
         if (isset($this->attributes[$attributeName])) {
             unset($this->attributes[$attributeName]);
+        }
+    }
+
+    /**
+     * Is the attribute a Vue-directive (=does it start with a 'v-');
+     *
+     * @param string $attributeName
+     * @return bool
+     */
+    private static function isVueDirective(string $attributeName): bool
+    {
+        return substr($attributeName, 0, 2) === 'v-';
+    }
+
+    /**
+     * Is the attribute a data-attribute (=does it start with a 'data-');
+     *
+     * @param string $attributeName
+     * @return bool
+     */
+    private static function isDataAttribute(string $attributeName): bool
+    {
+        return substr($attributeName, 0, 5) === 'data-';
+    }
+
+    /**
+     * Converts a string to StudlyCase.
+     *
+     * @param string $string
+     * @return string
+     */
+    private static function convertToStudlyCase(string $string): string
+    {
+        if (strpos($string, '-') !== false) {
+            $stringNameParts = explode('-', $string);
+            foreach ($stringNameParts as $key => $namePart) {
+                $stringNameParts[$key] = ucfirst($namePart);
+            }
+            $string = implode('', $stringNameParts);
+        }
+        return ucfirst($string);
+    }
+
+    /**
+     * For data- and v-attributes we extract the suffix and add it to $constructorParams.
+     *
+     * @param string $attributeName
+     * @param $constructorParams
+     */
+    private function processConstructorParams(string &$attributeName, &$constructorParams)
+    {
+        if (strpos($attributeName, 'data-') === 0) {
+            $constructorParams = [substr($attributeName, 5)];
+            $attributeName = 'data';
         }
     }
 }

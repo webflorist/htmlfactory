@@ -112,6 +112,38 @@ Since this package is built in an IDE-friendly way, you just have to type e.g. `
 
 And since this package strives to only output valid HTML, the available methods differ from element to element. E.g. you can not use the method ->selected() on an input-element, because it is not allowed according to HTML-standards.
 
+##### Vue Directives
+
+In addition to standard HTMl-attributes, you can also set [all possible Vue directives](https://vuejs.org/v2/api/#Directives) via corresponding element-methods:
+
+Method | Vue Directive
+-------|--------
+**vText**(string $text) | v-text
+**vHtml**(string $html) | v-html
+**vShow**(string $expression) | v-show
+**vIf**(string $expression) | v-if
+**vElse**() | v-else
+**vElseIf**(string $expression) | v-else-if
+**vFor**(string expression) | v-for
+**vOn**($argument, string $expression, array $modifiers=[]) | v-on
+**vBind**($argument, string $expression, array $modifiers=[]) | v-bind
+**vPre**() | v-pre
+**vCloak**() | v-cloak
+**vOnce**() | v-once
+**vCustom**(string $name, $argument=null, string $expression=null, array $modifiers=[]) | Custom Vue directive with name $name
+
+Furthermore shortcut-methods for `vOn()` are provided for the most common DOM events:
+
+Method | Vue Directive
+-------|--------
+**vOnClick**(string $expression, array $modifiers=[]) | v-on:click
+**vOnChange**(string $expression, array $modifiers=[]) | v-on:change
+**vOnMouseOver**(string $expression, array $modifiers=[]) | v-on:mouseover
+**vOnMouseOut**(string $expression, array $modifiers=[]) | v-on:mouseout
+**vOnKeyDown**(string $expression, array $modifiers=[]) | v-on:keydown
+**vOnKeyUp**(string $expression, array $modifiers=[]) | v-on:keyup
+**vOnLoad**(string $expression, array $modifiers=[]) | v-on:load
+
 ### Extendability
 
 #### Components
