@@ -9,12 +9,21 @@ use Nicat\HtmlFactory\HtmlFactoryFacade;
 use Nicat\HtmlFactory\HtmlFactoryServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
+/**
+ * Class TestCase
+ * @package HtmlFactoryTests
+ */
 class TestCase extends BaseTestCase
 {
 
     use AssertsHtml, AppliesAttributeSets;
 
-    protected $frontendFramework;
+    /**
+     * Array of group-IDs of decorators, that should be loaded.
+     *
+     * @var string[]
+     */
+    protected $decorators = [];
 
     protected function getPackageProviders($app)
     {
@@ -30,7 +39,7 @@ class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('htmlfactory.frontend_framework', $this->frontendFramework);
+        $app['config']->set('htmlfactory.decorators', $this->decorators);
         /** @var Factory $viewService */
         $viewService = $app['view'];
         $viewService->addNamespace('ElementsTestViews', __DIR__ . '/Feature/Elements/views');
@@ -38,13 +47,9 @@ class TestCase extends BaseTestCase
 
     }
 
-    protected function setFrontendFramework(string $frameworkId, string $frameworkVersion = null)
+    protected function setDecorators(array $decorators)
     {
-        $frontendFramework = $frameworkId;
-        if (!is_null($frameworkVersion)) {
-            $frontendFramework .= ':' . $frameworkVersion;
-        }
-        $this->frontendFramework = $frontendFramework;
+        $this->decorators = $decorators;
         $this->refreshApplication();
     }
 

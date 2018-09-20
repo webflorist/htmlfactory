@@ -19,7 +19,7 @@ class ButtonElementTest extends TestCase
 
     public function testSimpleButtonElementForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::button()
             ->generate();
 

@@ -20,7 +20,7 @@ class AlertComponentTest extends TestCase
 
     public function testDismissibleAlertForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::alert('success')
             ->content('This is an alert!')
             ->dismissible()
@@ -34,7 +34,7 @@ class AlertComponentTest extends TestCase
 
     public function testDismissibleAlertForFoundation6()
     {
-        $this->setFrontendFramework('foundation', '6');
+        $this->setDecorators(['foundation:v6']);
         $html = \Html::alert('success')
             ->content('This is an alert!')
             ->dismissible()

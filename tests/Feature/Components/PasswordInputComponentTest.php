@@ -20,7 +20,7 @@ class PasswordInputComponentTest extends TestCase
 
     public function testSimplePasswordInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::passwordInput()
             ->generate();
 

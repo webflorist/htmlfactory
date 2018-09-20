@@ -20,7 +20,7 @@ class TextInputComponentTest extends TestCase
 
     public function testSimpleTextInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::textInput()
             ->generate();
 

@@ -20,7 +20,7 @@ class ColorInputComponentTest extends TestCase
 
     public function testSimpleColorInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::colorInput()
             ->generate();
 

@@ -33,7 +33,6 @@ class DivElementTest extends TestCase
     {
         $html = \Html::div();
         $this->applyGeneralAttributes($html);
-        $this->applyGeneralAttributes($html);
         $this->applyCorrespondingView($html);
         $result = $html->generate();
 

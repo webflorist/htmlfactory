@@ -19,7 +19,7 @@ class LabelElementTest extends TestCase
 
     public function testSimpleLabelElementForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::label()
             ->generate();
 

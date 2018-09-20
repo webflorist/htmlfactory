@@ -9,7 +9,7 @@ This package allows you to:
 * Chain fluid method-calls to set HTML-attributes (that are valid for the current element).
 * Fully use the benefits of IDEs (auto-completion).
 * Style output for specific frontend-frameworks using `Decorator`-Classes
-* Keep your views frontend-framework-agnostic.
+* Keep your views frontend-agnostic.
 * Extend it's features using `Decorators` and `Components`.
 * Produce accessibility-conform valid HTML 5 output.
 
@@ -20,11 +20,11 @@ This package is used as a foundation for [nicat/formbuilder](https://github.com/
 2. Add the Service-Provider to config/app.php:  `Nicat\HtmlFactory\HtmlFactoryServiceProvider::class`
 3. Add the Html-facade to config/app.php: `'Html' => Nicat\HtmlFactory\HtmlFactoryFacade::class`
 4. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
-5. Set the `frontend_framework` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
+5. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
 
 ## Configuration
 The package can be configured via `config/htmlfactory.php`. There is only one setting at the moment:
-* `frontend_framework`: Set the frontend framework-id (and version) your website is using. As a result all corresponding decorators will be applied to the generated HTML-elements (e.g. 'bootstrap:3').
+* `decorators`: Set the group-IDs of the decorators, that should be loaded. As a result all corresponding decorators will be applied to the generated HTML-elements (e.g. 'bootstrap:v3').
 
 ## Basic Concepts
 
@@ -35,7 +35,7 @@ Concept | Description
 **Element** | A classic HTML-element. Can either be a container (e.g. `<div></div>`) or an empty element (e.g. `<br />`). Each element is represented by a distinct class within the `Nicat\HtmlFactory\Elements`-namespace. Each element has a factory-method with the same name within the main `HtmlFactory` class (and thus also in the `Html` facade).
 **Attribute** | An HTML-attribute of a HTML-element. (e.g. `class="myClass"`). Each attribute is represented by a distinct class within the `Nicat\HtmlFactory\Attributes`-namespace. Each attribute has a corresponding method within each `Element`-class it supports.
 **Component** | A class, that is extending one of the `Element`-classes to create more complex HTML with attributes or content already set. An example would be the `TextInputComponent`, which has the attribute `type` set to `text` by default. Components can be registered with the `HtmlFactory`-service, so that they are accessible via the `Html` facade. They are one of the two main ways to extend `HtmlFactory`'s functionality (see section on `Components` below for further details).
-**Decorator** | The second main way to customize your output. Decorators can be registered with the `HtmlFactory`-service to further manipulate a defined set of elements or components (and optionally for a certain frontend-framework and -version). This way you can for example add HTML-attributes, content or wrappers to all generated elements of a special kind. See special section on decorators below for more info.
+**Decorator** | The second main way to customize your output. Decorators can be registered with the `HtmlFactory`-service to further manipulate a defined set of elements or components. This way you can for example add HTML-attributes, content or wrappers to all generated elements of a special kind. See special section on decorators below for more info.
 
 Please note, that whenever this document uses the term `Element` it is meant to also include `Component`-classes (except if stated otherwise), since they are technically also `Element`-classes.
 
@@ -248,13 +248,13 @@ Check out the other included components for more examples!
 
 #### Decorators
 
-The second way to customize HtmlFactory's output is by using decorators. Decorators are classes, that define themselves, which _Elements_ they are eligible to process. You can for example create a decorator, that adds a CSS-class to all ButtonElements. Decorators are also a great way to apply frontend-framework-specific modifications (e.g. add the `form-control`-class to field-elements when using bootstrap as the frontend-framework). The decorator itself can also state, which frontend-framework it supports and is then only used, if the `frontend_framework` config-string corresponds to this setting.
+The second way to customize HtmlFactory's output is by using decorators. Decorators are classes, that define themselves, which _Elements_ they are eligible to process. You can for example create a decorator, that adds a CSS-class to all ButtonElements. Decorators are also a great way to apply frontend-framework-specific modifications (e.g. add the `form-control`-class to field-elements when using bootstrap as the frontend-framework). The decorator itself can also state a group-ID, which results in the decorator only getting applied, if it's group-ID is present in the `decorators` config-string.
 
 Decorators must expand the abstract class `Nicat\HtmlFactory\Decorators\Abstracts\Decorator`, forcing it to implement the following abstract methods:
 
 Method | Description
 -------|--------
-**getSupportedFrameworks**() | Should return an array of frontend-framework-ids (e.g. 'bootstrap'). Optionally you can also specify the version prefixed with a colon (e.g. 'bootstrap:3'). The decorator will only be applied, if the current value for the config-setting `frontend_framework` is represented in this array. If you want the decorator to be applied regardless of the frontend-framework, simply return an empty array here.
+**getGroupId**() | Should return a string (e.g. 'bootstrap:v3'). The decorator will only be applied, if it's group-ID is present in the config-setting `decorators`. If you want the decorator to be applied regardless this config, simply return `null` here.
 **getSupportedElements**() | Should return an array of FQCNs of any element- or component-classes, that should be processed by this decorator. This also applies to all child-classes of the stated class-names. (E.g. If you return `Nicat\HtmlFactory\Elements\Abstact\Element` in this array, the decorator would be applied to ALL elements or components generated with HtmlFactory.
 **decorate**() | This is the main method to perform the desired modifications to the element, which accessible via `$this->element`.
 
@@ -292,11 +292,9 @@ use Nicat\HtmlFactory\Elements\ButtonElement;
 class DecorateButtonElement extends Decorator
 {
 
-    public static function getSupportedFrameworks(): array
+    public static function getGroupId()
     {
-        return [
-            'bootstrap:3'
-        ];
+        return 'bootstrap:v3';
     }
 
     public static function getSupportedElements(): array
@@ -314,6 +312,6 @@ class DecorateButtonElement extends Decorator
 }
 ```
 
-It's functionality should be quite obvious. The decorator is only applied, if the current config `frontend_framework` is set to 'bootstrap:3'. Also it is only applied to elements or components that are identical to or descendants of `Nicat\HtmlFactory\Elements\ButtonElement`. It's function is to add the bootstrap-specific CSS-class 'btn' to buttons.
+It's functionality should be quite obvious. The decorator is only applied, if 'bootstrap:3' is present in the current config `htmlfactory.decorators`. Also it is only applied to elements or components that are identical to or descendants of `Nicat\HtmlFactory\Elements\ButtonElement`. It's function is to add the bootstrap-specific CSS-class 'btn' to buttons.
 
 Check out the other included decorators for more examples!

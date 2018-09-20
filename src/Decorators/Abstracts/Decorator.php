@@ -25,12 +25,13 @@ abstract class Decorator
     }
 
     /**
-     * Returns an array of frontend-framework-ids, this decorator is specific for.
-     * Returning an empty array means all frameworks are supported.
+     * Returns the group-ID of this decorator.
      *
-     * @return string[]
+     * Returning null means this decorator will always be applied.
+     *
+     * @return string|null
      */
-    public abstract static function getSupportedFrameworks(): array;
+    public abstract static function getGroupId();
 
     /**
      * Returns an array of class-names of elements, that should be decorated by this decorator.

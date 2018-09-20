@@ -19,7 +19,7 @@ class FormElementTest extends TestCase
 
     public function testSimpleFormElementForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::form()
             ->generate();
 

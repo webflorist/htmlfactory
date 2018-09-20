@@ -125,25 +125,10 @@ class HtmlFactory
     public $decorators;
 
     /**
-     * The frontend-framework configured in config('htmlfactory.frontend_framework').
-     *
-     * @var string
-     */
-    public $frontendFramework;
-
-    /**
-     * The frontend-framework-version configured in config('htmlfactory.frontend_framework').
-     *
-     * @var string
-     */
-    public $frontendFrameworkVersion;
-
-    /**
      * HtmlFactory constructor.
      */
     public function __construct()
     {
-        $this->evaluateFrontendFramework();
         $this->components = new ComponentManager();
         $this->decorators = new DecoratorManager($this);
     }
@@ -177,20 +162,6 @@ class HtmlFactory
         // If the accessor is neither a element nor a component, we throw an exception.
         throw new InvalidAccessorException('No element found for accessor "'.$accessor.'".');
 
-    }
-
-    /**
-     * Evaluate config 'htmlfactory.frontend_framework'
-     * and fill $this->frontendFramework and $this->frontendFrameworkVersion accordingly.
-     */
-    private function evaluateFrontendFramework()
-    {
-        $frontendFramework = config('htmlfactory.frontend_framework');
-        if (strpos($frontendFramework,':') > 0) {
-            $this->frontendFrameworkVersion =  str_after($frontendFramework,':');
-            $frontendFramework = str_before($frontendFramework,':');
-        }
-        $this->frontendFramework = $frontendFramework;
     }
 
 }

@@ -4,15 +4,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Frontend Framework (and version)
+    | Decorators
     |--------------------------------------------------------------------------
     |
-    | Set the frontend framework-id (and version) your website is using.
-    | As a result all corresponding decorators will be applied to the generated
-    | HTML-elements.
-    |
-    | (e.g. 'bootstrap:3')
+    | Set the decorator group-IDs, that should be automatically applied.
+    | (e.g. 'bootstrap:v4' will apply all decorators having this set as their group-ID.)
     |
     */
-    'frontend_framework' => 'bootstrap:3'
+    'decorators' => [
+        'bootstrap:v4'
+    ]
 ];

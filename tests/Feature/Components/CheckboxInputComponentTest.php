@@ -20,7 +20,7 @@ class CheckboxInputComponentTest extends TestCase
 
     public function testSimpleCheckboxInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::checkboxInput()
             ->generate();
 

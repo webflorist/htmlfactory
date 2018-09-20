@@ -19,7 +19,7 @@ class SubmitButtonComponentTest extends TestCase
 
     public function testSimpleSubmitButtonComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::submitButton()
             ->generate();
 

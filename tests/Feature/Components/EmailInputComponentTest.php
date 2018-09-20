@@ -20,7 +20,7 @@ class EmailInputComponentTest extends TestCase
 
     public function testSimpleEmailInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::emailInput()
             ->generate();
 

@@ -70,18 +70,20 @@ abstract class ListAttribute extends Attribute
      */
     public function addValue(string $value)
     {
-        // If multiple values are stated, we try to explode by the attribute's divider
-        // and add each value separately.
-        if (strpos($value, $this->divider) !== false) {
-            foreach (explode($this->divider, $value) as $singleValue) {
-                $this->addValue($singleValue);
+        if (strlen($value)>0) {
+            // If multiple values are stated, we try to explode by the attribute's divider
+            // and add each value separately.
+            if (strpos($value, $this->divider) !== false) {
+                foreach (explode($this->divider, $value) as $singleValue) {
+                    $this->addValue($singleValue);
+                }
+                return;
             }
-            return;
-        }
 
-        // If a value does not exist yet, we add it.
-        if (array_search($value, $this->values) === false) {
-            $this->values[] = $value;
+            // If a value does not exist yet, we add it.
+            if (array_search($value, $this->values) === false) {
+                $this->values[] = $value;
+            }
         }
     }
 }

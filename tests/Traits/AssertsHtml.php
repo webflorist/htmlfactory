@@ -167,8 +167,8 @@ trait AssertsHtml
         // Assert, that the plain text is identical (only for nodes which contain plain-text and no tags..
         if (isset($expected->wholeText)) {
             $this->assertEquals(
-                $expected->wholeText,
-                $actual->wholeText,
+                trim($expected->wholeText),
+                trim($actual->wholeText),
                 $this->generateHtmlStructureErrorMsg($humanReadableNode . ' has an unexpected text: "' . $actual->wholeText . '".')
             );
         }
@@ -176,15 +176,11 @@ trait AssertsHtml
         // Assert, that the child-count is the desired one.
         $expectedChildCount = ($expected->hasChildNodes()?$expected->childNodes->length:0);
         $actualChildCount = ($actual->hasChildNodes()?$actual->childNodes->length:0);
-        if ($expectedChildCount !== $actualChildCount) {
-            dd($actual->childNodes->item(0), $expected->childNodes->item(0));
-        }
         $this->assertEquals(
             $expectedChildCount,
             $actualChildCount,
             $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have ' . $expectedChildCount . ' children, but it has ' . $actualChildCount . ' instead.')
         );
-
 
         // If the node should have children, we assert those also recursively.
         if ($expected->hasChildNodes()) {

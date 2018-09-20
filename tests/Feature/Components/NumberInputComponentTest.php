@@ -20,7 +20,7 @@ class NumberInputComponentTest extends TestCase
 
     public function testSimpleNumberInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::numberInput()
             ->generate();
 

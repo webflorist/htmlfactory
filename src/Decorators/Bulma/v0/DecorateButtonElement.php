@@ -9,16 +9,17 @@ class DecorateButtonElement extends Decorator
 {
 
     /**
-     * Returns an array of frontend-framework-ids, this decorator is specific for.
+     * Returns the group-ID of this decorator.
      *
-     * @return string[]
+     * Returning null means this decorator will always be applied.
+     *
+     * @return string|null
      */
-    public static function getSupportedFrameworks(): array
+    public static function getGroupId()
     {
-        return [
-            'bulma:0'
-        ];
+        return 'bulma:v0';
     }
+
 
     /**
      * Returns an array of class-names of elements, that should be decorated by this decorator.

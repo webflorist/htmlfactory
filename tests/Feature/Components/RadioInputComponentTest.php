@@ -20,7 +20,7 @@ class RadioInputComponentTest extends TestCase
 
     public function testSimpleRadioInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::radioInput()
             ->generate();
 

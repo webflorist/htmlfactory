@@ -20,7 +20,7 @@ class RangeInputComponentTest extends TestCase
 
     public function testSimpleRangeInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::rangeInput()
             ->generate();
 

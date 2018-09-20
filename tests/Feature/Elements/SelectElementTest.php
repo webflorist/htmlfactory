@@ -19,7 +19,7 @@ class SelectElementTest extends TestCase
 
     public function testSimpleSelectElementForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::select()
             ->generate();
 

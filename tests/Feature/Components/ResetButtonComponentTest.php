@@ -19,7 +19,7 @@ class ResetButtonComponentTest extends TestCase
 
     public function testSimpleResetButtonComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::resetButton()
             ->generate();
 
