@@ -95,11 +95,9 @@ class DecoratorManager
     {
         foreach ($this->decorators as $decoratorClass) {
             if ($this->decoratorCanDecorateElement($decoratorClass, $element)) {
-                \Log::info("before:".$decoratorClass);
                 /** @var Decorator $decorator */
                 $decorator = new $decoratorClass($element);
                 $decorator->decorate();
-                \Log::info("after:".$decoratorClass);
             }
         }
     }
