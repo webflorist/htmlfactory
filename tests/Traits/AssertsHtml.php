@@ -78,6 +78,9 @@ trait AssertsHtml
      */
     protected function assertDomNodeEquals(DOMNode $expected, DOMNode $actual)
     {
+        // Remove any children only consisting of linefeeds and spaces.
+        $this->removeIrrelevantChildren($expected);
+        $this->removeIrrelevantChildren($actual);
 
         $actualNodePath = str_replace('/html/body','',$actual->getNodePath());
 
@@ -239,5 +242,22 @@ trait AssertsHtml
             }
         }
         return $attributes;
+    }
+
+    /**
+     * Remove any children only consisting of linefeeds and spaces.
+     *
+     * @param DOMNode $node
+     */
+    private function removeIrrelevantChildren(\DOMNode $node)
+    {
+        if ($node->hasChildNodes()) {
+            foreach ($node->childNodes as $child) {
+                if (is_a($child, \DOMText::class) && strlen(trim($child->wholeText)) === 0) {
+                    $node->removeChild($child);
+                    $this->removeIrrelevantChildren($node);
+                }
+            }
+        }
     }
 }
