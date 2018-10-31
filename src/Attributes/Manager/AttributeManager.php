@@ -3,7 +3,6 @@
 namespace Nicat\HtmlFactory\Attributes\Manager;
 
 use Nicat\HtmlFactory\Attributes\Abstracts\Attribute;
-use Nicat\HtmlFactory\Exceptions\AttributeNotAllowedException;
 use Nicat\HtmlFactory\Exceptions\AttributeNotFoundException;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 
@@ -25,13 +24,6 @@ class AttributeManager
     protected $element;
 
     /**
-     * Array of attributes, that are allowed for $this->element.
-     *
-     * @var string[]
-     */
-    protected $allowedAttributes;
-
-    /**
      * AttributeManager constructor.
      *
      * @param Element $element
@@ -39,8 +31,6 @@ class AttributeManager
     public function __construct(Element $element)
     {
         $this->element = $element;
-
-        $this->evaluateAllowedAttributes();
     }
 
     /**
@@ -101,20 +91,14 @@ class AttributeManager
 
     /**
      * Initializes a new attribute-object from it's attribute-name.
-     * Throws exception, if no corresponding class was found or the attribute is not allowed for $this->element.
+     * Throws exception, if no corresponding class was found.
      *
      * @param string $attributeName
      * @return Attribute
      * @throws AttributeNotFoundException
-     * @throws AttributeNotAllowedException
      */
     private function init(string $attributeName): Attribute
     {
-
-        // We check, if the attribute is allowed for $this->element
-        if (!$this->isAllowed($attributeName)) {
-            throw new AttributeNotAllowedException('Attribute "' . $attributeName . '" is not allowed for element "' . get_class($this->element) . '".');
-        }
 
         $attributeClass = '';
         $constructorParams = [];
@@ -206,44 +190,6 @@ class AttributeManager
         }
 
         return array_unique($traits);
-    }
-
-    /**
-     * Evaluates which HTML-attributes are allowed for $this->element
-     * and fills $this->allowedAttributes accordingly.
-     */
-    private function evaluateAllowedAttributes()
-    {
-        $elementTraits = self::getClassTraits(get_class($this->element));
-        $traitPrefix = 'Nicat\HtmlFactory\Attributes\Traits\Allows';
-        $traitSuffix = 'Attribute';
-        foreach ($elementTraits as $traitClass) {
-            if (strpos($traitClass, $traitPrefix) === 0) {
-                $this->allowedAttributes[] = kebab_case(str_before(str_after($traitClass, $traitPrefix), $traitSuffix));
-            }
-        }
-    }
-
-    /**
-     * Is an attribute allowed for $this->element?
-     *
-     * @param string $attributeName
-     * @return bool
-     */
-    public function isAllowed(string $attributeName): bool
-    {
-
-        // Vue-directives are always allowed.
-        if (self::isVueDirective($attributeName)) {
-            return true;
-        }
-
-        // Data-attributes are also always allowed.
-        if (self::isDataAttribute($attributeName)) {
-            return true;
-        }
-
-        return array_search($attributeName, $this->allowedAttributes) !== false;
     }
 
     /**
