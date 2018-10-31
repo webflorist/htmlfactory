@@ -51,7 +51,6 @@ class AttributeManager
      * @param string $attributeName
      * @return Attribute
      * @throws AttributeNotFoundException
-     * @throws AttributeNotAllowedException
      */
     public function establish(string $attributeName): Attribute
     {
