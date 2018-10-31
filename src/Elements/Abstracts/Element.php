@@ -138,7 +138,7 @@ abstract class Element
         return view(
             $this->view,
             [
-                'element' => $this
+                'el' => $this
             ]
         );
     }
