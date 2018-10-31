@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\MultipleAttribute;
+
 trait AllowsMultipleAttribute
 {
 
@@ -16,7 +18,7 @@ trait AllowsMultipleAttribute
      */
     public function multiple(bool $multiple = true)
     {
-        $this->attributes->establish('multiple')->setValue($multiple);
+        $this->attributes->establish(MultipleAttribute::class)->setValue($multiple);
         return $this;
     }
 

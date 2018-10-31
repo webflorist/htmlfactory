@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\ForAttribute;
+
 trait AllowsForAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsForAttribute
      */
     public function for(string $id)
     {
-        $this->attributes->establish('for')->setValue($id);
+        $this->attributes->establish(ForAttribute::class)->setValue($id);
         return $this;
     }
 

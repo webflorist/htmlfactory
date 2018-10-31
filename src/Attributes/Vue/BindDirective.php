@@ -13,7 +13,19 @@ use Nicat\HtmlFactory\Attributes\Abstracts\VueDirective;
 class BindDirective extends VueDirective
 {
 
-    public function getName(): string
+    /**
+     * BindDirective constructor.
+     *
+     * @param $attrOrProp
+     */
+    public function __construct($attrOrProp = null)
+    {
+        if (!is_null($attrOrProp)) {
+            $this->setArgument($attrOrProp);
+        }
+    }
+
+    public function getDirectiveName(): string
     {
         return 'v-bind';
     }

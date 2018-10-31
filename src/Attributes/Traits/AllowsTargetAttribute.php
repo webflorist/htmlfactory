@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\TargetAttribute;
+
 trait AllowsTargetAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsTargetAttribute
      */
     public function target(string $target)
     {
-        $this->attributes->establish('target')->setValue($target);
+        $this->attributes->establish(TargetAttribute::class)->setValue($target);
         return $this;
     }
 

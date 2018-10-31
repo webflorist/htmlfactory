@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\NovalidateAttribute;
+
 trait AllowsNovalidateAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsNovalidateAttribute
      */
     public function novalidate(bool $novalidate = true)
     {
-        $this->attributes->establish('novalidate')->setValue($novalidate);
+        $this->attributes->establish(NovalidateAttribute::class)->setValue($novalidate);
         return $this;
     }
 

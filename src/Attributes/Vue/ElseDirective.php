@@ -15,7 +15,7 @@ class ElseDirective extends VueDirective
 
     protected $expectsExpression = false;
 
-    public function getName(): string
+    public function getDirectiveName(): string
     {
         return 'v-else';
     }

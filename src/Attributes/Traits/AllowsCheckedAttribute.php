@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\CheckedAttribute;
+
 trait AllowsCheckedAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsCheckedAttribute
      */
     public function checked(bool $checked = true)
     {
-        $this->attributes->establish('checked')->setValue($checked);
+        $this->attributes->establish(CheckedAttribute::class)->setValue($checked);
         return $this;
     }
 

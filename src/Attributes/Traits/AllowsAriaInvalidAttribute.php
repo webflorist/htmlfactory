@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AriaInvalidAttribute;
+
 trait AllowsAriaInvalidAttribute
 {
 
@@ -19,7 +21,7 @@ trait AllowsAriaInvalidAttribute
      */
     public function ariaInvalid(string $invalid = 'true')
     {
-        $this->attributes->establish('aria-invalid')->setValue($invalid);
+        $this->attributes->establish(AriaInvalidAttribute::class)->setValue($invalid);
         return $this;
     }
 

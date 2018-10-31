@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\SrcAttribute;
+
 trait AllowsSrcAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsSrcAttribute
      */
     public function src(string $source)
     {
-        $this->attributes->establish('src')->setValue($source);
+        $this->attributes->establish(SrcAttribute::class)->setValue($source);
         return $this;
     }
 

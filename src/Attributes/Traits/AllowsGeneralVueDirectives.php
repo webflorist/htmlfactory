@@ -3,12 +3,16 @@
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
 use Nicat\HtmlFactory\Attributes\Vue\BindDirective;
+use Nicat\HtmlFactory\Attributes\Vue\CloakDirective;
 use Nicat\HtmlFactory\Attributes\Vue\CustomDirective;
 use Nicat\HtmlFactory\Attributes\Vue\ElseDirective;
 use Nicat\HtmlFactory\Attributes\Vue\ElseIfDirective;
+use Nicat\HtmlFactory\Attributes\Vue\ForDirective;
 use Nicat\HtmlFactory\Attributes\Vue\HtmlDirective;
 use Nicat\HtmlFactory\Attributes\Vue\IfDirective;
+use Nicat\HtmlFactory\Attributes\Vue\OnceDirective;
 use Nicat\HtmlFactory\Attributes\Vue\OnDirective;
+use Nicat\HtmlFactory\Attributes\Vue\PreDirective;
 use Nicat\HtmlFactory\Attributes\Vue\ShowDirective;
 use Nicat\HtmlFactory\Attributes\Vue\TextDirective;
 
@@ -23,9 +27,8 @@ trait AllowsGeneralVueDirectives
      */
     public function vText(string $text)
     {
-        /** @var TextDirective $directive */
-        $directive = $this->attributes->establish('v-text');
-        $directive->setExpression($text);
+        $this->attributes->establish(TextDirective::class)
+            ->setExpression($text);
         return $this;
     }
 
@@ -37,9 +40,8 @@ trait AllowsGeneralVueDirectives
      */
     public function vHtml(string $html)
     {
-        /** @var HtmlDirective $directive */
-        $directive = $this->attributes->establish('v-html');
-        $directive->setExpression($html);
+        $this->attributes->establish(HtmlDirective::class)
+            ->setExpression($html);
         return $this;
     }
 
@@ -51,9 +53,8 @@ trait AllowsGeneralVueDirectives
      */
     public function vShow(string $expression)
     {
-        /** @var ShowDirective $directive */
-        $directive = $this->attributes->establish('v-show');
-        $directive->setExpression($expression);
+        $this->attributes->establish(ShowDirective::class)
+            ->setExpression($expression);
         return $this;
     }
 
@@ -65,9 +66,8 @@ trait AllowsGeneralVueDirectives
      */
     public function vIf(string $expression)
     {
-        /** @var IfDirective $directive */
-        $directive = $this->attributes->establish('v-if');
-        $directive->setExpression($expression);
+        $this->attributes->establish(IfDirective::class)
+            ->setExpression($expression);
         return $this;
     }
 
@@ -78,7 +78,7 @@ trait AllowsGeneralVueDirectives
      */
     public function vElse()
     {
-        $this->attributes->establish('v-else');
+        $this->attributes->establish(ElseDirective::class);
         return $this;
     }
 
@@ -90,9 +90,8 @@ trait AllowsGeneralVueDirectives
      */
     public function vElseIf(string $expression)
     {
-        /** @var ElseIfDirective $directive */
-        $directive = $this->attributes->establish('v-else-if');
-        $directive->setExpression($expression);
+        $this->attributes->establish(ElseIfDirective::class)
+            ->setExpression($expression);
         return $this;
     }
 
@@ -104,47 +103,41 @@ trait AllowsGeneralVueDirectives
      */
     public function vFor(string $expression)
     {
-        /** @var ElseIfDirective $directive */
-        $directive = $this->attributes->establish('v-for');
-        $directive->setExpression($expression);
+        $this->attributes->establish(ForDirective::class)
+            ->setExpression($expression);
         return $this;
     }
 
     /**
      * Set the Vue-Directive 'v-on'.
      *
-     * @param string|null $argument
+     * @param string|null $event
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOn($argument, string $expression, array $modifiers=[])
+    public function vOn($event, string $expression, array $modifiers = [])
     {
         /** @var OnDirective $directive */
-        $directive = $this->attributes->establish('v-on');
-        $directive->setArgument($argument);
-        $directive->setExpression($expression);
-        $directive->addModifiers($modifiers);
+        $this->attributes->establish(OnDirective::class, [$event])
+            ->setExpression($expression)
+            ->addModifiers($modifiers);
         return $this;
     }
 
     /**
      * Set the Vue-Directive 'v-bind'.
      *
-     * @param string|null $argument
+     * @param string|null $attrOrProp
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vBind($argument, string $expression, array $modifiers=[])
+    public function vBind($attrOrProp, string $expression, array $modifiers = [])
     {
-        /** @var BindDirective $directive */
-        $directive = $this->attributes->establish('v-bind');
-        $directive->setArgument($argument);
-        $directive->setExpression($expression);
-        $directive->addModifiers($modifiers);
+        $this->attributes->establish(BindDirective::class, [$attrOrProp])
+            ->setExpression($expression)
+            ->addModifiers($modifiers);
         return $this;
     }
 
@@ -155,7 +148,7 @@ trait AllowsGeneralVueDirectives
      */
     public function vPre()
     {
-        $this->attributes->establish('v-pre');
+        $this->attributes->establish(PreDirective::class);
         return $this;
     }
 
@@ -166,7 +159,7 @@ trait AllowsGeneralVueDirectives
      */
     public function vCloak()
     {
-        $this->attributes->establish('v-cloak');
+        $this->attributes->establish(CloakDirective::class);
         return $this;
     }
 
@@ -177,7 +170,7 @@ trait AllowsGeneralVueDirectives
      */
     public function vOnce()
     {
-        $this->attributes->establish('v-once');
+        $this->attributes->establish(OnceDirective::class);
         return $this;
     }
 
@@ -189,15 +182,12 @@ trait AllowsGeneralVueDirectives
      * @param string|null $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vCustom(string $name, $argument=null, string $expression=null, array $modifiers=[])
+    public function vCustom(string $name, $argument = null, string $expression = null, array $modifiers = [])
     {
-        /** @var CustomDirective $directive */
-        $directive = $this->attributes->establish('v-' . $name);
-        $directive->setArgument($argument);
-        $directive->setExpression($expression);
-        $directive->addModifiers($modifiers);
+        $this->attributes->establish(CustomDirective::class, [$name, $argument])
+            ->setExpression($expression)
+            ->addModifiers($modifiers);
         return $this;
     }
 
@@ -207,9 +197,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnClick(string $expression, array $modifiers=[])
+    public function vOnClick(string $expression, array $modifiers = [])
     {
         $this->vOn('click', $expression, $modifiers);
         return $this;
@@ -221,9 +210,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnChange(string $expression, array $modifiers=[])
+    public function vOnChange(string $expression, array $modifiers = [])
     {
         $this->vOn('change', $expression, $modifiers);
         return $this;
@@ -235,9 +223,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnMouseOver(string $expression, array $modifiers=[])
+    public function vOnMouseOver(string $expression, array $modifiers = [])
     {
         $this->vOn('mouseover', $expression, $modifiers);
         return $this;
@@ -249,9 +236,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnMouseOut(string $expression, array $modifiers=[])
+    public function vOnMouseOut(string $expression, array $modifiers = [])
     {
         $this->vOn('mouseout', $expression, $modifiers);
         return $this;
@@ -263,9 +249,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnKeyDown(string $expression, array $modifiers=[])
+    public function vOnKeyDown(string $expression, array $modifiers = [])
     {
         $this->vOn('keydown', $expression, $modifiers);
         return $this;
@@ -277,9 +262,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnKeyUp(string $expression, array $modifiers=[])
+    public function vOnKeyUp(string $expression, array $modifiers = [])
     {
         $this->vOn('keyup', $expression, $modifiers);
         return $this;
@@ -291,9 +275,8 @@ trait AllowsGeneralVueDirectives
      * @param string $expression
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
-    public function vOnLoad(string $expression, array $modifiers=[])
+    public function vOnLoad(string $expression, array $modifiers = [])
     {
         $this->vOn('load', $expression, $modifiers);
         return $this;

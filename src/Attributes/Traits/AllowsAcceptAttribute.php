@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AcceptAttribute;
+
 trait AllowsAcceptAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsAcceptAttribute
      */
     public function accept(string $value)
     {
-        $this->attributes->establish('accept')->addValue($value);
+        $this->attributes->establish(AcceptAttribute::class)->addValue($value);
         return $this;
     }
 

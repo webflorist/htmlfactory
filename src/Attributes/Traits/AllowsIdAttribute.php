@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\IdAttribute;
+
 trait AllowsIdAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsIdAttribute
      */
     public function id(string $id)
     {
-        $this->attributes->establish('id')->setValue($id);
+        $this->attributes->establish(IdAttribute::class)->setValue($id);
         return $this;
     }
 

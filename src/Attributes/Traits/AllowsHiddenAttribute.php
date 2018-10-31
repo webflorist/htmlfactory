@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\HiddenAttribute;
+
 trait AllowsHiddenAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsHiddenAttribute
      */
     public function hidden(bool $hidden = true)
     {
-        $this->attributes->establish('hidden')->setValue($hidden);
+        $this->attributes->establish(HiddenAttribute::class)->setValue($hidden);
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\EnctypeAttribute;
+
 trait AllowsEnctypeAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsEnctypeAttribute
      */
     public function enctype(string $enctype)
     {
-        $this->attributes->establish('enctype')->setValue($enctype);
+        $this->attributes->establish(EnctypeAttribute::class)->setValue($enctype);
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\PlaceholderAttribute;
+
 trait AllowsPlaceholderAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsPlaceholderAttribute
      */
     public function placeholder(string $placeholder)
     {
-        $this->attributes->establish('placeholder')->setValue($placeholder);
+        $this->attributes->establish(PlaceholderAttribute::class)->setValue($placeholder);
         return $this;
     }
 

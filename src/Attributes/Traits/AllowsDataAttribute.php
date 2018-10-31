@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\DataAttribute;
+
 trait AllowsDataAttribute
 {
 
@@ -14,7 +16,7 @@ trait AllowsDataAttribute
      */
     public function data(string $suffix, $value=true)
     {
-        $this->attributes->establish('data-' . $suffix)->setValue($value);
+        $this->attributes->establish(DataAttribute::class, [$suffix])->setValue($value);
         return $this;
     }
 

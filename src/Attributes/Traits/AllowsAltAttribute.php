@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AltAttribute;
+
 trait AllowsAltAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsAltAttribute
      */
     public function alt(string $text)
     {
-        $this->attributes->establish('alt')->setValue($text);
+        $this->attributes->establish(AltAttribute::class)->setValue($text);
         return $this;
     }
 

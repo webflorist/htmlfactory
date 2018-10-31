@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\LabelAttribute;
+
 trait AllowsLabelAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsLabelAttribute
      */
     public function label(string $label)
     {
-        $this->attributes->establish('label')->setValue($label);
+        $this->attributes->establish(LabelAttribute::class)->setValue($label);
         return $this;
     }
 

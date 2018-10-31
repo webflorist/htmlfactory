@@ -10,11 +10,12 @@ class OnDirectiveTest extends TestCase
     public function test_method_handler()
     {
         $html = \Html::button()
-            ->vOn('click', 'doThis')
+            ->vOn('mousedown', 'doThis')
+            ->vOn('mouseup', 'doThat')
             ->generate();
 
         $this->assertHtmlEquals(
-            '<button type="button" v-on:click="doThis"></button>',
+            '<button type="button" v-on:mousedown="doThis" v-on:mouseup="doThat"></button>',
             $html
         );
     }

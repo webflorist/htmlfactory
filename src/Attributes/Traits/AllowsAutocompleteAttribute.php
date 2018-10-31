@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AutocompleteAttribute;
+
 trait AllowsAutocompleteAttribute
 {
 
@@ -14,7 +16,7 @@ trait AllowsAutocompleteAttribute
     public function autocomplete(bool $autocomplete = true)
     {
         $autocomplete = ($autocomplete ? 'on' : 'off');
-        $this->attributes->establish('autocomplete')->setValue($autocomplete);
+        $this->attributes->establish(AutocompleteAttribute::class)->setValue($autocomplete);
         return $this;
     }
 

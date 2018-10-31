@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\ReadonlyAttribute;
+
 trait AllowsReadonlyAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsReadonlyAttribute
      */
     public function readonly(bool $readonly = true)
     {
-        $this->attributes->establish('readonly')->setValue($readonly);
+        $this->attributes->establish(ReadonlyAttribute::class)->setValue($readonly);
         return $this;
     }
 

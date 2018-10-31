@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\TitleAttribute;
+
 trait AllowsTitleAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsTitleAttribute
      */
     public function title(string $title)
     {
-        $this->attributes->establish('title')->setValue($title);
+        $this->attributes->establish(TitleAttribute::class)->setValue($title);
         return $this;
     }
 

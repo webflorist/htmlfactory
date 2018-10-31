@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\MaxlengthAttribute;
+
 trait AllowsMaxlengthAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsMaxlengthAttribute
      */
     public function maxlength(int $maxlength)
     {
-        $this->attributes->establish('maxlength')->setValue($maxlength);
+        $this->attributes->establish(MaxlengthAttribute::class)->setValue($maxlength);
         return $this;
     }
 

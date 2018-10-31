@@ -11,10 +11,11 @@ class BindDirectiveTest extends TestCase
     {
         $html = \Html::img()
             ->vBind('src', 'imageSrc')
+            ->vBind('id', 'imageId')
             ->generate();
 
         $this->assertHtmlEquals(
-            '<img v-bind:src="imageSrc" \>',
+            '<img v-bind:src="imageSrc" v-bind:id="imageId" \>',
             $html
         );
     }

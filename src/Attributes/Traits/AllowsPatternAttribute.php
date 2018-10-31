@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\PatternAttribute;
+
 trait AllowsPatternAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsPatternAttribute
      */
     public function pattern(string $pattern)
     {
-        $this->attributes->establish('pattern')->setValue($pattern);
+        $this->attributes->establish(PatternAttribute::class)->setValue($pattern);
         return $this;
     }
 

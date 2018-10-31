@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\RoleAttribute;
+
 trait AllowsRoleAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsRoleAttribute
      */
     public function addRole(string $role)
     {
-        $this->attributes->establish('role')->addValue($role);
+        $this->attributes->establish(RoleAttribute::class)->addValue($role);
         return $this;
     }
 

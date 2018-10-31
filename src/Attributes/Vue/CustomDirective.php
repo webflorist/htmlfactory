@@ -24,10 +24,15 @@ class CustomDirective extends VueDirective
      * CustomDirective constructor.
      *
      * @param string $directiveName
+     * @param null $argument
      */
-    public function __construct(string $directiveName)
+    public function __construct(string $directiveName, $argument = null)
     {
         $this->directiveName = $directiveName;
+
+        if (!is_null($argument)) {
+            $this->setArgument($argument);
+        }
     }
 
     /**
@@ -35,7 +40,7 @@ class CustomDirective extends VueDirective
      *
      * @return string
      */
-    public function getName(): string
+    public function getDirectiveName(): string
     {
         return 'v-'.$this->directiveName;
     }

@@ -26,7 +26,7 @@ trait AllowsVueModelDirective
     public function vModel(string $key, array $modifiers=[])
     {
         /** @var ModelDirective $directive */
-        $directive = $this->attributes->establish('v-model');
+        $directive = $this->attributes->establish(ModelDirective::class);
         $directive->setExpression($key);
         $directive->addModifiers($modifiers);
         return $this;

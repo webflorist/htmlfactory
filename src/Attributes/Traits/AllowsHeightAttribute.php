@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\HeightAttribute;
+
 trait AllowsHeightAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsHeightAttribute
      */
     public function height(int $height)
     {
-        $this->attributes->establish('height')->setValue($height);
+        $this->attributes->establish(HeightAttribute::class)->setValue($height);
         return $this;
     }
 

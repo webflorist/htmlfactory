@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\ActionAttribute;
+
 trait AllowsActionAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsActionAttribute
      */
     public function action(string $action)
     {
-        $this->attributes->establish('action')->setValue($action);
+        $this->attributes->establish(ActionAttribute::class)->setValue($action);
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\SelectedAttribute;
+
 trait AllowsSelectedAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsSelectedAttribute
      */
     public function selected(bool $selected = true)
     {
-        $this->attributes->establish('selected')->setValue($selected);
+        $this->attributes->establish(SelectedAttribute::class)->setValue($selected);
         return $this;
     }
 

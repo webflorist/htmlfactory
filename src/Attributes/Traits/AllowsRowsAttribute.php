@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\RowsAttribute;
+
 trait AllowsRowsAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsRowsAttribute
      */
     public function rows(int $rows)
     {
-        $this->attributes->establish('rows')->setValue($rows);
+        $this->attributes->establish(RowsAttribute::class)->setValue($rows);
         return $this;
     }
 

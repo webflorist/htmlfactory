@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AutofocusAttribute;
+
 trait AllowsAutofocusAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsAutofocusAttribute
      */
     public function autofocus(bool $autofocus = true)
     {
-        $this->attributes->establish('autofocus')->setValue($autofocus);
+        $this->attributes->establish(AutofocusAttribute::class)->setValue($autofocus);
         return $this;
     }
 

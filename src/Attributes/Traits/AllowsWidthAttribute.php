@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\WidthAttribute;
+
 trait AllowsWidthAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsWidthAttribute
      */
     public function width(int $width)
     {
-        $this->attributes->establish('width')->setValue($width);
+        $this->attributes->establish(WidthAttribute::class)->setValue($width);
         return $this;
     }
 

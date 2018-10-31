@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\TypeAttribute;
+
 trait AllowsTypeAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsTypeAttribute
      */
     public function type(string $type)
     {
-        $this->attributes->establish('type')->setValue($type);
+        $this->attributes->establish(TypeAttribute::class)->setValue($type);
         return $this;
     }
 

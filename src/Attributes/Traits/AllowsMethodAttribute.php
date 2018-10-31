@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\MethodAttribute;
+
 trait AllowsMethodAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsMethodAttribute
      */
     public function method(string $method)
     {
-        $this->attributes->establish('method')->setValue(strtoupper($method));
+        $this->attributes->establish(MethodAttribute::class)->setValue(strtoupper($method));
         return $this;
     }
 

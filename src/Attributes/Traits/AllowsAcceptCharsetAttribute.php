@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AcceptCharsetAttribute;
+
 trait AllowsAcceptCharsetAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsAcceptCharsetAttribute
      */
     public function acceptCharset(string $charset)
     {
-        $this->attributes->establish('accept-charset')->setValue($charset);
+        $this->attributes->establish(AcceptCharsetAttribute::class)->setValue($charset);
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AriaDescribedbyAttribute;
+
 trait AllowsAriaDescribedbyAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsAriaDescribedbyAttribute
      */
     public function addAriaDescribedby(string $id)
     {
-        $this->attributes->establish('aria-describedby')->addValue($id);
+        $this->attributes->establish(AriaDescribedbyAttribute::class)->addValue($id);
         return $this;
     }
 

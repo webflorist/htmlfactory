@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\StyleAttribute;
+
 trait AllowsStyleAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsStyleAttribute
      */
     public function addStyle(string $style)
     {
-        $this->attributes->establish('style')->addValue($style);
+        $this->attributes->establish(StyleAttribute::class)->addValue($style);
         return $this;
     }
 

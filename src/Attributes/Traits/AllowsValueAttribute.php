@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\ValueAttribute;
+
 trait AllowsValueAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsValueAttribute
      */
     public function value($value)
     {
-        $this->attributes->establish('value')->setValue($value);
+        $this->attributes->establish(ValueAttribute::class)->setValue($value);
         return $this;
     }
 

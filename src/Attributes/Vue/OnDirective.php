@@ -13,7 +13,19 @@ use Nicat\HtmlFactory\Attributes\Abstracts\VueDirective;
 class OnDirective extends VueDirective
 {
 
-    public function getName(): string
+    /**
+     * OnDirective constructor.
+     *
+     * @param $event
+     */
+    public function __construct($event)
+    {
+        if (!is_null($event)) {
+            $this->setArgument($event);
+        }
+    }
+
+    public function getDirectiveName(): string
     {
         return 'v-on';
     }

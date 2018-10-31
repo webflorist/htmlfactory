@@ -43,6 +43,33 @@ abstract class VueDirective extends Attribute
     private $modifiers = [];
 
     /**
+     * Returns the name of the directive.
+     *
+     * @return string
+     */
+    abstract public function getDirectiveName(): string;
+
+    /**
+     * Returns the name of the attribute.
+     *
+     * @return string
+     */
+    public final function getName(): string
+    {
+        $name = $this->getDirectiveName();
+
+        if (!is_null($this->argument)) {
+            $name .= ':' . $this->argument;
+        }
+
+        if (count($this->modifiers) > 0) {
+            $name .= '.' . implode('.', $this->modifiers);
+        }
+
+        return $name;
+    }
+
+    /**
      * Returns the rendered value.
      *
      * @return string|null
@@ -72,14 +99,6 @@ abstract class VueDirective extends Attribute
     {
         $output = $this->getName();
 
-        if (!is_null($this->argument)) {
-            $output .= ':' . $this->argument;
-        }
-
-        if (count($this->modifiers) > 0) {
-            $output .= '.' . implode('.', $this->modifiers);
-        }
-
         if ($this->expectsExpression) {
             $output .= '="' . $this->expression . '"';
         }
@@ -92,26 +111,41 @@ abstract class VueDirective extends Attribute
      * Sets the directive's expression.
      *
      * @param string $expression
+     * @return $this
      */
     public function setExpression(string $expression)
     {
         $this->expression = $expression;
+        return $this;
     }
 
     /**
      * Sets the directive's argument.
      *
      * @param string|null $argument
+     * @return $this
      */
     public function setArgument($argument)
     {
         $this->argument = $argument;
+        return $this;
+    }
+
+    /**
+     * Does this directive have any argument set?
+     *
+     * @return bool
+     */
+    public function hasArgument()
+    {
+        return !is_null($this->argument);
     }
 
     /**
      * Adds a modifier.
      *
      * @param string $modifier
+     * @return $this
      * @throws VueDirectiveModifierNotAllowedException
      */
     public function addModifier(string $modifier)
@@ -123,12 +157,15 @@ abstract class VueDirective extends Attribute
         if (!$this->hasModifier($modifier)) {
             $this->modifiers[] = $modifier;
         }
+
+        return $this;
     }
 
     /**
      * Adds multiple modifiers.
      *
      * @param array $modifiers
+     * @return $this
      * @throws VueDirectiveModifierNotAllowedException
      */
     public function addModifiers(array $modifiers)
@@ -136,6 +173,8 @@ abstract class VueDirective extends Attribute
         foreach ($modifiers as $modifier) {
             $this->addModifier($modifier);
         }
+
+        return $this;
     }
 
     /**

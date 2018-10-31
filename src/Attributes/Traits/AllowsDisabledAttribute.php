@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\DisabledAttribute;
+
 trait AllowsDisabledAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsDisabledAttribute
      */
     public function disabled(bool $disabled = true)
     {
-        $this->attributes->establish('disabled')->setValue($disabled);
+        $this->attributes->establish(DisabledAttribute::class)->setValue($disabled);
         return $this;
     }
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\StepAttribute;
+
 trait AllowsStepAttribute
 {
 
@@ -13,7 +15,7 @@ trait AllowsStepAttribute
      */
     public function step(int $step)
     {
-        $this->attributes->establish('step')->setValue($step);
+        $this->attributes->establish(StepAttribute::class)->setValue($step);
         return $this;
     }
 

@@ -13,7 +13,7 @@ use Nicat\HtmlFactory\Attributes\Abstracts\VueDirective;
 class ForDirective extends VueDirective
 {
 
-    public function getName(): string
+    public function getDirectiveName(): string
     {
         return 'v-for';
     }
