@@ -10,10 +10,10 @@ trait AllowsCheckedAttribute
     /**
      * Set value of HTML-attribute 'checked'.
      *
-     * @param bool $checked
+     * @param bool|\Closure $checked
      * @return $this
      */
-    public function checked(bool $checked = true)
+    public function checked($checked = true)
     {
         $this->attributes->establish(CheckedAttribute::class)->setValue($checked);
         return $this;

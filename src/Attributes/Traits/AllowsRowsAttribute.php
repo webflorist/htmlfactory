@@ -10,10 +10,10 @@ trait AllowsRowsAttribute
     /**
      * Set value of HTML-attribute 'rows'.
      *
-     * @param int $rows
+     * @param int|\Closure $rows
      * @return $this
      */
-    public function rows(int $rows)
+    public function rows($rows)
     {
         $this->attributes->establish(RowsAttribute::class)->setValue($rows);
         return $this;

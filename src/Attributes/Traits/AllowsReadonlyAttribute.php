@@ -10,10 +10,10 @@ trait AllowsReadonlyAttribute
     /**
      * Set value of HTML-attribute 'readonly'.
      *
-     * @param bool $readonly
+     * @param bool|\Closure $readonly
      * @return $this
      */
-    public function readonly(bool $readonly = true)
+    public function readonly($readonly = true)
     {
         $this->attributes->establish(ReadonlyAttribute::class)->setValue($readonly);
         return $this;

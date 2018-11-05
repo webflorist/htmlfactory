@@ -10,10 +10,10 @@ trait AllowsHeightAttribute
     /**
      * Set value of HTML-attribute 'height'.
      *
-     * @param int $height
+     * @param int|\Closure $height
      * @return $this
      */
-    public function height(int $height)
+    public function height($height)
     {
         $this->attributes->establish(HeightAttribute::class)->setValue($height);
         return $this;

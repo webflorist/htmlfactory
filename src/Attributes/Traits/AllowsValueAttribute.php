@@ -10,7 +10,7 @@ trait AllowsValueAttribute
     /**
      * Set value of HTML-attribute 'value'.
      *
-     * @param string $value
+     * @param string|\Closure $value
      * @return $this
      */
     public function value($value)

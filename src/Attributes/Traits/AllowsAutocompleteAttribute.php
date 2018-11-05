@@ -10,10 +10,10 @@ trait AllowsAutocompleteAttribute
     /**
      * Set value of HTML-attribute 'autocomplete'.
      *
-     * @param bool $autocomplete
+     * @param bool|\Closure $autocomplete
      * @return $this
      */
-    public function autocomplete(bool $autocomplete = true)
+    public function autocomplete($autocomplete = true)
     {
         $autocomplete = ($autocomplete ? 'on' : 'off');
         $this->attributes->establish(AutocompleteAttribute::class)->setValue($autocomplete);

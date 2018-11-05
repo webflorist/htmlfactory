@@ -31,6 +31,28 @@ abstract class Attribute
     }
 
     /**
+     *
+     * Checks, if $value is a Closure.
+     *
+     * @param $value
+     * @return bool
+     */
+    function isClosure($value) {
+        return is_object($value) && ($value instanceof \Closure);
+    }
+
+    /**
+     * Calls a closure used to store a value.
+     *
+     * @param $value
+     * @return mixed
+     */
+    protected function callClosure(\Closure $value)
+    {
+        return call_user_func_array($value, ['element' => $this->element]);
+    }
+
+    /**
      * Returns the name of the attribute.
      *
      * @return string

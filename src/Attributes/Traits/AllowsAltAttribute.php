@@ -10,10 +10,10 @@ trait AllowsAltAttribute
     /**
      * Set value of HTML-attribute 'alt'.
      *
-     * @param string $text
+     * @param string|\Closure $text
      * @return $this
      */
-    public function alt(string $text)
+    public function alt($text)
     {
         $this->attributes->establish(AltAttribute::class)->setValue($text);
         return $this;

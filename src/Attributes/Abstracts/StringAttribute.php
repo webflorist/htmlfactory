@@ -17,7 +17,7 @@ abstract class StringAttribute extends Attribute
     /**
      * The attribute's string value
      *
-     * @var null|string
+     * @var null|string|\Closure
      */
     protected $value = null;
 
@@ -28,6 +28,9 @@ abstract class StringAttribute extends Attribute
      */
     public function getValue()
     {
+        if ($this->isClosure($this->value)) {
+            return $this->callClosure($this->value);
+        }
         return $this->value;
     }
 
@@ -68,7 +71,7 @@ abstract class StringAttribute extends Attribute
     /**
      * Sets the attribute's value.
      *
-     * @param string $value
+     * @param string|\Closure $value
      * @throws ValueNotAllowedException
      */
     public function setValue($value)

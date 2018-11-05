@@ -10,10 +10,10 @@ trait AllowsMaxlengthAttribute
     /**
      * Set value of HTML-attribute 'maxlength'.
      *
-     * @param int $maxlength
+     * @param int|\Closure $maxlength
      * @return $this
      */
-    public function maxlength(int $maxlength)
+    public function maxlength($maxlength)
     {
         $this->attributes->establish(MaxlengthAttribute::class)->setValue($maxlength);
         return $this;
