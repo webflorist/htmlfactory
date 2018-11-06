@@ -3,6 +3,7 @@
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
 use Nicat\HtmlFactory\Content\ContentManager;
+use Nicat\HtmlFactory\Elements\TemplateElement;
 
 /**
  * A HTML-element, that can contain content.
@@ -38,9 +39,29 @@ abstract class ContainerElement extends Element
     public function renderHtml(): string
     {
         return
-            '<' . $this->getName() . $this->attributes->render(true) . '>' .
+            $this->renderStartTag() .
             $this->generateContent() .
-            '</' . $this->getName() . '>';
+            $this->renderEndTag();
+    }
+
+    /**
+     * Renders the element's start-tag to an HTML-string.
+     *
+     * @return string
+     */
+    public function renderStartTag(): string
+    {
+        return '<' . $this->getName() . $this->attributes->render(true) . '>';
+    }
+
+    /**
+     * Renders the element's end-tag to an HTML-string.
+     *
+     * @return string
+     */
+    public function renderEndTag(): string
+    {
+        return '</' . $this->getName() . '>';
     }
 
     /**

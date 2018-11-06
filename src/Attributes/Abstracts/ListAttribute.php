@@ -34,7 +34,7 @@ abstract class ListAttribute extends Attribute
      */
     public function getValue()
     {
-        if ($this->isSet()) {
+        if (count($this->values) > 0) {
 
             $values = $this->values;
             foreach ($values as $key => $value) {
@@ -43,7 +43,7 @@ abstract class ListAttribute extends Attribute
                 }
             }
 
-            return implode($this->divider, $values);
+            return trim(implode($this->divider, $values));
         }
         return null;
     }
@@ -55,7 +55,7 @@ abstract class ListAttribute extends Attribute
      */
     public function isSet(): bool
     {
-        return count($this->values) > 0;
+        return strlen($this->getValue()) > 0;
     }
 
     /**

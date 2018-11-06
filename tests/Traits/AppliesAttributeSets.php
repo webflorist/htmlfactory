@@ -22,9 +22,7 @@ trait AppliesAttributeSets
             ->addAriaDescribedby("describedById")
             ->addClass('myFirstClass')
             ->addClass(function (Element $element){
-                if ($element->attributes->isset('class')) {
-                    return 'mySecondClass';
-                }
+                return 'mySecondClass';
             })
             ->data('my-first-data-attribute','myFirstDataAttributeValue')
             ->data('my-second-data-attribute',function (Element $element){
