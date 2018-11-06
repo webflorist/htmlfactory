@@ -133,7 +133,7 @@ trait AssertsHtml
                     // Assert, that the node has no superfluous classes.
                     $this->assertEmpty(
                         $presentValues,
-                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have the class "' . current($presentValues) . '". But it has.')
+                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have an attribute "' . $attributeName . '" with the value "' . current($presentValues) . '". But it has.')
                     );
 
                 } else if ($attributeValue !== true) {
