@@ -13,6 +13,7 @@ use Nicat\HtmlFactory\Attributes\Traits\AllowsHiddenAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsIdAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
+use Nicat\HtmlFactory\HtmlFactoryTools;
 
 /**
  * A HTML-element.
@@ -93,6 +94,13 @@ abstract class Element
     public $view = null;
 
     /**
+     * The generated output.
+     *
+     * @var string
+     */
+    private $output = null;
+
+    /**
      * Returns the name of the element.
      *
      * @return string
@@ -151,33 +159,37 @@ abstract class Element
     public function generate()
     {
 
-        $this->applyDecorators();
+        if (is_null($this->output)) {
 
-        // If this element has a wrapper, we add this element as it's content,
-        // and call the wrapper's generate() function.
-        // $this->wrapperGenerationInitiated is set to true to avoid a loop,
-        // when the wrapper calls generate() on it's content.
-        // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
-        if (!is_null($this->wrapper) && ($this->wrapper !== false) && !$this->wrapperGenerationInitiated) {
-            $this->wrapperGenerationInitiated = true;
+            $this->applyDecorators();
 
-            $this->wrapper->prependContent($this);
+            // If this element has a wrapper, we add this element as it's content,
+            // and call the wrapper's generate() function.
+            // $this->wrapperGenerationInitiated is set to true to avoid a loop,
+            // when the wrapper calls generate() on it's content.
+            // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
+            if (!is_null($this->wrapper) && ($this->wrapper !== false) && !$this->wrapperGenerationInitiated) {
+                $this->wrapperGenerationInitiated = true;
 
-            foreach ($this->wrapperCallbacks as $callback) {
-                call_user_func_array([$this->wrapper, $callback[0]], $callback[1]);
+                $this->wrapper->prependContent($this);
+
+                foreach ($this->wrapperCallbacks as $callback) {
+                    call_user_func_array([$this->wrapper, $callback[0]], $callback[1]);
+                }
+
+                return $this->wrapper->generate();
             }
 
-            return $this->wrapper->generate();
+            $this->output =
+                $this->generateBeforeItems() .
+                $this->render() .
+                $this->generateAfterItems();
+
+            $this->manipulateOutput($this->output);
+
         }
 
-        $output =
-            $this->generateBeforeItems() .
-            $this->render() .
-            $this->generateAfterItems();
-
-        $this->manipulateOutput($output);
-
-        return $output;
+        return $this->output;
     }
 
     /**
@@ -232,7 +244,10 @@ abstract class Element
      */
     public function is(string $class)
     {
-        return is_a($this, $class);
+        if (is_a($this, $class)) {
+            return true;
+        }
+        return array_search($class, HtmlFactoryTools::resolveObjectClasses($this)) !== false;
     }
 
     /**

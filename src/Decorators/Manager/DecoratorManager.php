@@ -6,6 +6,7 @@ use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Exceptions\DecoratorNotFoundException;
 use Nicat\HtmlFactory\HtmlFactory;
+use Nicat\HtmlFactory\HtmlFactoryTools;
 
 class DecoratorManager
 {
@@ -110,11 +111,7 @@ class DecoratorManager
     private function resolveElementClasses($elementClass)
     {
         if (!isset($this->elementClasses[$elementClass])) {
-            $this->elementClasses[$elementClass] = array_merge(
-                [$elementClass => $elementClass],
-                class_parents($elementClass),
-                class_implements($elementClass)
-            );
+            $this->elementClasses[$elementClass] = HtmlFactoryTools::resolveObjectClasses($elementClass);
         }
     }
 
