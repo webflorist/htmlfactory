@@ -43,7 +43,7 @@ abstract class ListAttribute extends Attribute
                 }
             }
 
-            return trim(implode($this->divider, $values));
+            return trim(implode($this->divider, array_unique($values)));
         }
         return null;
     }
