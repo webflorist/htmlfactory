@@ -14,7 +14,7 @@ abstract class BooleanAttribute extends Attribute
     /**
      * Boolean value.
      *
-     * @var null|bool
+     * @var null|bool|\Closure
      */
     private $value = null;
 
@@ -25,6 +25,9 @@ abstract class BooleanAttribute extends Attribute
      */
     public function getValue()
     {
+        if ($this->isClosure($this->value)) {
+            return $this->callClosure($this->value);
+        }
         return $this->value;
     }
 
@@ -45,7 +48,7 @@ abstract class BooleanAttribute extends Attribute
      */
     public function render(): string
     {
-        if ($this->value === true) {
+        if ($this->getValue() === true) {
             return $this->getName();
         }
         return '';
@@ -54,9 +57,9 @@ abstract class BooleanAttribute extends Attribute
     /**
      * Set the attribute's value.
      *
-     * @param bool $value
+     * @param bool|\Closure $value
      */
-    public function setValue(bool $value = true)
+    public function setValue($value = true)
     {
         $this->value = $value;
     }

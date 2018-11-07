@@ -10,10 +10,10 @@ trait AllowsAutofocusAttribute
     /**
      * Set value of HTML-attribute 'autofocus'.
      *
-     * @param bool $autofocus
+     * @param bool|\Closure $autofocus
      * @return $this
      */
-    public function autofocus(bool $autofocus = true)
+    public function autofocus($autofocus = true)
     {
         $this->attributes->establish(AutofocusAttribute::class)->setValue($autofocus);
         return $this;

@@ -17,7 +17,7 @@ abstract class StringAttribute extends Attribute
     /**
      * The attribute's string value
      *
-     * @var null|string
+     * @var null|string|\Closure
      */
     protected $value = null;
 
@@ -28,6 +28,9 @@ abstract class StringAttribute extends Attribute
      */
     public function getValue()
     {
+        if ($this->isClosure($this->value)) {
+            return $this->callClosure($this->value);
+        }
         return $this->value;
     }
 
@@ -49,7 +52,7 @@ abstract class StringAttribute extends Attribute
      */
     public function isSet(): bool
     {
-        return !is_null($this->value);
+        return !is_null($this->getValue());
     }
 
     /**
@@ -68,13 +71,17 @@ abstract class StringAttribute extends Attribute
     /**
      * Sets the attribute's value.
      *
-     * @param string $value
+     * @param string|\Closure $value
      * @throws ValueNotAllowedException
      */
     public function setValue($value)
     {
-        if (!$this->valueIsAllowed($value)) {
-            throw new ValueNotAllowedException('Value "'.$value.'" is not allowed for attribute "'.$this->getName().'".');
+        $valueToCheck = $value;
+        if ($this->isClosure($value)) {
+            $valueToCheck = $this->callClosure($value);
+        }
+        if (!$this->valueIsAllowed($valueToCheck)) {
+            throw new ValueNotAllowedException('Value "'.$valueToCheck.'" is not allowed for attribute "'.$this->getName().'".');
         }
         $this->value = $value;
     }
@@ -88,10 +95,16 @@ abstract class StringAttribute extends Attribute
      */
     protected function valueIsAllowed($value) : bool
     {
+        // A null-value is always allowed, since it unsets this attribute.
+        if (is_null($value)) {
+            return true;
+        }
+
         $allowedValues = $this->getAllowedValues();
         if (!is_null($allowedValues) && (count($allowedValues) > 0)) {
             return array_search($value,$allowedValues) !== false;
         }
+
         return true;
     }
 

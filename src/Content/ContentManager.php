@@ -4,6 +4,7 @@ namespace Nicat\HtmlFactory\Content;
 
 use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Nicat\HtmlFactory\HtmlFactoryTools;
 
 class ContentManager
 {
@@ -162,6 +163,7 @@ class ContentManager
     /**
      * Searches this element for any children of class $className
      * and returns them in an array.
+     * $className can also be an Interface.
      *
      * @param string $className
      * @param bool $recursive
@@ -171,12 +173,15 @@ class ContentManager
     {
         $foundElements = [];
         foreach ($this->content as $childElement) {
-            if (is_a($childElement,$className)) {
-                $foundElements[] = $childElement;
-            }
-            if ($recursive && is_a($childElement,ContainerElement::class)) {
-                /** @var ContainerElement $childElement */
-                $foundElements = array_merge($foundElements,$childElement->content->getChildrenByClassName($className,true));
+            if (is_object($childElement)) {
+                if ($childElement->is($className)) {
+                    $foundElements[] = $childElement;
+                }
+                if ($recursive && $childElement->is(ContainerElement::class)) {
+                    /** @var ContainerElement $childElement */
+                    $foundElements = array_merge($foundElements,$childElement->content->getChildrenByClassName($className,true));
+                }
+
             }
         }
         return $foundElements;

@@ -10,10 +10,10 @@ trait AllowsSrcAttribute
     /**
      * Set value of HTML-attribute 'src'.
      *
-     * @param string $source
+     * @param string|\Closure $source
      * @return $this
      */
-    public function src(string $source)
+    public function src($source)
     {
         $this->attributes->establish(SrcAttribute::class)->setValue($source);
         return $this;

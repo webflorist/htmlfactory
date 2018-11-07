@@ -10,10 +10,10 @@ trait AllowsAcceptAttribute
     /**
      * Set value of HTML-attribute 'accept'.
      *
-     * @param string $value
+     * @param string|\Closure $value
      * @return $this
      */
-    public function accept(string $value)
+    public function accept($value)
     {
         $this->attributes->establish(AcceptAttribute::class)->addValue($value);
         return $this;

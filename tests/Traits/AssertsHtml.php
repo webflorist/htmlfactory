@@ -113,27 +113,27 @@ trait AssertsHtml
                     $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have the attribute "' . $attributeName . '". But it has not.')
                 );
 
-                if ($attributeName === 'class') {
+                if (array_search($attributeName, ['class','aria-describedby']) !== false) {
 
-                    $desiredClasses = explode(' ', $attributeValue);
+                    $desiredValues = explode(' ', $attributeValue);
 
-                    $presentClasses = explode(' ', $actualAttributes[$attributeName]);
+                    $presentValues = explode(' ', $actualAttributes[$attributeName]);
 
-                    foreach ($desiredClasses as $key => $desiredClass) {
+                    foreach ($desiredValues as $key => $desiredValue) {
 
                         // Assert, that the desired class is indeed present.
                         $this->assertNotFalse(
-                            array_search($desiredClass, $presentClasses),
-                            $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have a class called "' . $desiredClass . '". But it has not.')
+                            array_search($desiredValue, $presentValues),
+                            $this->generateHtmlStructureErrorMsg($humanReadableNode . " should have an attribute '$attributeName' containing the value called '$desiredValue'. But it has not.")
                         );
 
-                        unset($presentClasses[array_search($desiredClass, $presentClasses)]);
+                        unset($presentValues[array_search($desiredValue, $presentValues)]);
                     }
 
                     // Assert, that the node has no superfluous classes.
                     $this->assertEmpty(
-                        $presentClasses,
-                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have the class "' . current($presentClasses) . '". But it has.')
+                        $presentValues,
+                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have an attribute "' . $attributeName . '" with the value "' . current($presentValues) . '". But it has.')
                     );
 
                 } else if ($attributeValue !== true) {

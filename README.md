@@ -95,6 +95,25 @@ The methods, that can be applied to a element consist mainly of the HTML-attribu
 * Attributes that can have multiple values have a corresponding method prefixed with `add` (and camelCased). An example would be `addClass()` for the `class` attribute (as used in the example above).
 * `data`-attributes are set via the `data()`-method, which takes the data-attribute's suffix as it's first and the value as it's second parameter (as shown in the example above).
 
+Values for all HTML-attribtues can also be Closures. The Closures get handled the Element-object itself as it's only parameter. Here is an example:
+
+```
+Blade Code:
+-----------
+{!! Html::div()
+    ->id('myId')
+    ->title(
+        function ($element) {
+            return "This div's id is ".$element->attributes->id;
+        }
+    )
+ !!}
+
+Generated HTML:
+---------------
+<div id="myId" title="The ID of this div is myId"></div>
+```
+
 In addition to the methods corresponding to HTML-attributes, there are also the following methods to add child-, wrapper- or sibling-elements:
 
 Method | Description

@@ -15,7 +15,7 @@ abstract class ListAttribute extends Attribute
     /**
      * Array of values.
      *
-     * @var string[]
+     * @var string[]|\Closure[]
      */
     private $values = [];
 
@@ -34,8 +34,16 @@ abstract class ListAttribute extends Attribute
      */
     public function getValue()
     {
-        if ($this->isSet()) {
-            return implode($this->divider, $this->values);
+        if (count($this->values) > 0) {
+
+            $values = $this->values;
+            foreach ($values as $key => $value) {
+                if ($this->isClosure($value)) {
+                    $values[$key] = $this->callClosure($value);
+                }
+            }
+
+            return trim(implode($this->divider, $values));
         }
         return null;
     }
@@ -47,7 +55,7 @@ abstract class ListAttribute extends Attribute
      */
     public function isSet(): bool
     {
-        return count($this->values) > 0;
+        return strlen($this->getValue()) > 0;
     }
 
     /**
@@ -66,10 +74,17 @@ abstract class ListAttribute extends Attribute
     /**
      * Adds a value.
      *
-     * @param string $value
+     * @param string|\Closure $value
      */
-    public function addValue(string $value)
+    public function addValue($value)
     {
+        // Closures are simply added to the values-array.
+        if ($this->isClosure($value)) {
+            $this->values[] = $value;
+            return;
+        }
+
+        // Handle strings.
         if (strlen($value)>0) {
             // If multiple values are stated, we try to explode by the attribute's divider
             // and add each value separately.

@@ -18,13 +18,21 @@ trait AppliesAttributeSets
     protected function applyGeneralAttributes(Element $element)
     {
         $element
+            ->id('myId')
             ->addAriaDescribedby("describedById")
             ->addClass('myFirstClass')
-            ->addClass('mySecondClass')
+            ->addClass(function (Element $element){
+                return 'mySecondClass';
+            })
             ->data('my-first-data-attribute','myFirstDataAttributeValue')
-            ->data('my-second-data-attribute','mySecondDataAttributeValue')
-            ->hidden()
-            ->id('myId')
+            ->data('my-second-data-attribute',function (Element $element){
+                if ($element->attributes->isset('data-my-first-data-attribute')) {
+                    return 'mySecondDataAttributeValue';
+                }
+            })
+            ->hidden(function (Element $element){
+                return true;
+            })
             ->addRole('myFirstRole')
             ->addRole('mySecondRole')
             ->addStyle('display:block')

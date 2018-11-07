@@ -10,7 +10,7 @@ trait AllowsMaxAttribute
     /**
      * Set value of HTML-attribute 'max'.
      *
-     * @param int|string $max
+     * @param int|string|\Closure $max
      * @return $this
      */
     public function max($max)

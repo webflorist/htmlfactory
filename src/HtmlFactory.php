@@ -7,6 +7,7 @@ use Nicat\HtmlFactory\Components\Manager\ComponentManager;
 use Nicat\HtmlFactory\Elements\H1Element;
 use Nicat\HtmlFactory\Elements\ImgElement;
 use Nicat\HtmlFactory\Elements\PElement;
+use Nicat\HtmlFactory\Elements\TemplateElement;
 use Nicat\HtmlFactory\Exceptions\InvalidAccessorException;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Elements\SpanElement;
@@ -75,6 +76,7 @@ use Nicat\HtmlFactory\Components\PanelComponent;
  * @method static SpanElement               span()
  * @method static SupElement                sup()
  * @method static TextareaElement           textarea()
+ * @method static TemplateElement           template()
  *
  * Components:
  * ===========

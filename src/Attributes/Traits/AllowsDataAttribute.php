@@ -11,7 +11,7 @@ trait AllowsDataAttribute
      * Sets a HTML-data-attribute.
      *
      * @param string $suffix
-     * @param string|bool $value
+     * @param string|bool|\Closure $value
      * @return $this
      */
     public function data(string $suffix, $value=true)

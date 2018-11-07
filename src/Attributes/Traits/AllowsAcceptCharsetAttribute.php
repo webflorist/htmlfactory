@@ -10,10 +10,10 @@ trait AllowsAcceptCharsetAttribute
     /**
      * Set value of HTML-attribute 'accept-charset'.
      *
-     * @param string $charset
+     * @param string|\Closure $charset
      * @return $this
      */
-    public function acceptCharset(string $charset)
+    public function acceptCharset($charset)
     {
         $this->attributes->establish(AcceptCharsetAttribute::class)->setValue($charset);
         return $this;

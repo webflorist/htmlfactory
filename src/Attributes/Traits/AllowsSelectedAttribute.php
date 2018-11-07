@@ -10,10 +10,10 @@ trait AllowsSelectedAttribute
     /**
      * Set value of HTML-attribute 'selected'.
      *
-     * @param bool $selected
+     * @param bool|\Closure $selected
      * @return $this
      */
-    public function selected(bool $selected = true)
+    public function selected($selected = true)
     {
         $this->attributes->establish(SelectedAttribute::class)->setValue($selected);
         return $this;

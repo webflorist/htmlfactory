@@ -10,10 +10,10 @@ trait AllowsWidthAttribute
     /**
      * Set value of HTML-attribute 'width'.
      *
-     * @param int $width
+     * @param int|\Closure $width
      * @return $this
      */
-    public function width(int $width)
+    public function width($width)
     {
         $this->attributes->establish(WidthAttribute::class)->setValue($width);
         return $this;

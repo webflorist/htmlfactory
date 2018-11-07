@@ -10,10 +10,10 @@ trait AllowsIdAttribute
     /**
      * Set value of HTML-attribute 'id'.
      *
-     * @param string $id
+     * @param string|\Closure $id
      * @return $this
      */
-    public function id(string $id)
+    public function id($id)
     {
         $this->attributes->establish(IdAttribute::class)->setValue($id);
         return $this;
