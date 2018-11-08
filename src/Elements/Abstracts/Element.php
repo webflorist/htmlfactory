@@ -330,14 +330,7 @@ abstract class Element
      */
     private function generateBeforeItems()
     {
-        $html = '';
-        foreach ($this->insertBefore as $child) {
-            if (is_a($child, Element::class)) {
-                $child = $child->generate();
-            }
-            $html .= $child;
-        }
-        return $html;
+        return $this->generateElements($this->insertBefore);
     }
 
     /**
@@ -347,14 +340,7 @@ abstract class Element
      */
     private function generateAfterItems()
     {
-        $html = '';
-        foreach ($this->insertAfter as $child) {
-            if (is_a($child, Element::class)) {
-                $child = $child->generate();
-            }
-            $html .= $child;
-        }
-        return $html;
+        return $this->generateElements($this->insertAfter);
     }
 
     /**
@@ -367,6 +353,24 @@ abstract class Element
     {
         $this->view = $view;
         return $this;
+    }
+
+    /**
+     * Generates all Elments in an array into a string.
+     *
+     * @param Element[] $elements
+     * @return string
+     */
+    protected function generateElements(array $elements)
+    {
+        $html = '';
+        foreach ($elements as $child) {
+            if (is_a($child, Element::class)) {
+                $child = $child->generate();
+            }
+            $html .= $child;
+        }
+        return $html;
     }
 
 }

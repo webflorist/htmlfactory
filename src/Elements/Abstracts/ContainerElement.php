@@ -135,14 +135,6 @@ abstract class ContainerElement extends Element
      */
     public function generateContent()
     {
-        $html = '';
-        foreach ($this->content->get() as $child) {
-            if (is_a($child, Element::class)) {
-                /** @var Element $child */
-                $child = $child->generate();
-            }
-            $html .= $child;
-        }
-        return $html;
+        return $this->generateElements($this->content->get());
     }
 }
