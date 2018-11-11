@@ -8,6 +8,12 @@ use Nicat\HtmlFactory\Exceptions\DecoratorNotFoundException;
 use Nicat\HtmlFactory\HtmlFactory;
 use Nicat\HtmlFactory\HtmlFactoryTools;
 
+/**
+ * This Class manages registration an application of Decorators.
+ *
+ * Class DecoratorManager
+ * @package Nicat\HtmlFactory\Decorators\Manager
+ */
 class DecoratorManager
 {
 

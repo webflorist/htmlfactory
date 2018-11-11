@@ -101,6 +101,13 @@ abstract class Element
     private $output = null;
 
     /**
+     * Closure-decorators, that were added via decorate().
+     *
+     * @var \Closure[]
+     */
+    private $closureDecorators = [];
+
+    /**
      * Returns the name of the element.
      *
      * @return string
@@ -128,7 +135,7 @@ abstract class Element
      *
      * @return string
      */
-    protected function render() : string
+    protected function render(): string
     {
         if (!is_null($this->view) && ($this->view) !== false) {
             return $this->renderView();
@@ -263,6 +270,8 @@ abstract class Element
             $htmlFactoryService = app(HtmlFactory::class);
             $htmlFactoryService->decorators->decorate($this);
 
+            $this->applyClosureDecorators();
+
             $this->afterDecoration();
 
             $this->wasDecorated = true;
@@ -371,6 +380,32 @@ abstract class Element
             $html .= $child;
         }
         return $html;
+    }
+
+    /**
+     * Adds a Decorator-closure to this element,
+     * that will be called on it's generation.
+     *
+     * The closure will be supplied with the element
+     * as it's only parameter.
+     *
+     * @param \Closure $closure
+     * @return Element
+     */
+    public function decorate(\Closure $closure)
+    {
+        $this->closureDecorators[] = $closure;
+        return $this;
+    }
+
+    /**
+     * Applies Decorator-closures supplied via ->decorate().
+     */
+    private function applyClosureDecorators()
+    {
+        foreach ($this->closureDecorators as $closure) {
+            call_user_func_array($closure, [$this]);
+        }
     }
 
 }
