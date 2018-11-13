@@ -17,12 +17,10 @@ This package is used as a foundation for [nicat/formbuilder](https://github.com/
 
 ## Installation
 1. Require the package via composer:  `composer require nicat/htmlfactory`
-2. Add the Service-Provider to config/app.php:  `Nicat\HtmlFactory\HtmlFactoryServiceProvider::class`
-3. Add the Html-facade to config/app.php: `'Html' => Nicat\HtmlFactory\HtmlFactoryFacade::class`
-4. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
-5. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
+2. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
+3. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`).
 
-Note that this package is configured for automatic discovery for Laravel. Thus the packages Service Provider `Nicat\HtmlFactory\HtmlFactoryServiceProvider` and the `Html`-Facade `Nicat\HtmlFactory\HtmlFactoryFacade` will be automatically registered with Laravel.
+Note that this package is configured for automatic discovery for Laravel. Thus the package's Service Provider `Nicat\HtmlFactory\HtmlFactoryServiceProvider` and the `Html`-Facade `Nicat\HtmlFactory\HtmlFactoryFacade` will be automatically registered with Laravel.
 
 ## Configuration
 The package can be configured via `config/htmlfactory.php`. There is only one setting at the moment:
