@@ -22,6 +22,8 @@ This package is used as a foundation for [nicat/formbuilder](https://github.com/
 4. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
 5. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
 
+Note that this package is configured for automatic discovery for Laravel. Thus the packages Service Provider `Nicat\HtmlFactory\HtmlFactoryServiceProvider` and the `Html`-Facade `Nicat\HtmlFactory\HtmlFactoryFacade` will be automatically registered with Laravel.
+
 ## Configuration
 The package can be configured via `config/htmlfactory.php`. There is only one setting at the moment:
 * `decorators`: Set the group-IDs of the decorators, that should be loaded. As a result all corresponding decorators will be applied to the generated HTML-elements (e.g. 'bootstrap:v3').
