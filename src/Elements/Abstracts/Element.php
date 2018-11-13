@@ -91,7 +91,7 @@ abstract class Element
      *
      * @var string
      */
-    public $view = null;
+    private $view = null;
 
     /**
      * The generated output.
