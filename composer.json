@@ -20,5 +20,15 @@
             "Nicat\\HtmlFactory\\": "src/",
             "HtmlFactoryTests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nicat\\HtmlFactory\\HtmlFactoryServiceProvider"
+            ],
+            "aliases": {
+                "Form": "Nicat\\HtmlFactory\\HtmlFactoryFacade"
+            }
+        }
     }
 }
