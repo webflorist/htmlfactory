@@ -6,7 +6,7 @@ This package provides functionality for building HTML in Laravel 5.5 without the
 
 This package allows you to:
 * Use static factory methods for all relevant HTML-elements.
-* Chain fluid method-calls to set HTML-attributes (that are valid for the current element).
+* Chain fluent method-calls to set HTML-attributes (that are valid for the current element).
 * Fully use the benefits of IDEs (auto-completion).
 * Style output for specific frontend-frameworks using `Decorator`-Classes
 * Keep your views frontend-agnostic.
@@ -17,10 +17,10 @@ This package is used as a foundation for [nicat/formbuilder](https://github.com/
 
 ## Installation
 1. Require the package via composer:  `composer require nicat/htmlfactory`
-2. Add the Service-Provider to config/app.php:  `Nicat\HtmlFactory\HtmlFactoryServiceProvider::class`
-3. Add the Html-facade to config/app.php: `'Html' => Nicat\HtmlFactory\HtmlFactoryFacade::class`
-4. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
-5. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
+2. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
+3. Set the `decorators` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`).
+
+Note that this package is configured for automatic discovery for Laravel. Thus the package's Service Provider `Nicat\HtmlFactory\HtmlFactoryServiceProvider` and the `Html`-Facade `Nicat\HtmlFactory\HtmlFactoryFacade` will be automatically registered with Laravel.
 
 ## Configuration
 The package can be configured via `config/htmlfactory.php`. There is only one setting at the moment:
@@ -41,12 +41,16 @@ Please note, that whenever this document uses the term `Element` it is meant to 
 
 ## Usage
 
-### Basics
+A HTML-element or component is generated using the corresponding method of the `Html-`facade, or by simply instantiating the corresponding `Element` or `Component` class.
+ 
+Since this package is built IDE-friendly way, you just have to type `Html::`in your auto-completion-enabled IDE and you should immediately get a list of available elements as well as the included components. (This auto-completion will of course not work with your own components.)
 
-A HTML-element or component is generated using the corresponding method of the `Html-`facade, or by simply instantiating the corresponding `Element` or `Component` class. You can then manipulate the generated output by "chaining" fluent setter methods (e.g. to set attributes). The final HTML-string is generated using the `generate()`-method. But since the `Element`-class of the HtmlFactory-package includes a magic `__toString()`-method doing exactly that, you can omit the `generate()`-method when using the Html-facade in a blade-template.
+The final HTML-string is generated using the `generate()`-method. But since the `Element`-class of the HtmlFactory-package includes a magic `__toString()`-method doing exactly that, you can omit the `generate()`-method when using the Html-facade in a blade-template.
 
-#### A minimal example to create a element
+### Basic example
+
 Here is a very basic example for the generation of a `div`-element from within a laravel-blade-template:
+
 ```
 Blade Code:
 -----------
@@ -56,15 +60,17 @@ Generated HTML:
 ---------------
 <div></div>
 ```
-Since this package is built IDE-friendly way, you just have to type `Html::`in your auto-completion-enabled IDE and you should immediately get a list of available elements as well as the included components. (This auto-completion will of course not work with your own components.)
 
-#### Using element-methods to change the output
+### Modifying the Element using fluent methods
 
-Now let's say, we want change the output in the following way:
-* add an `id`-attribute with value `myId`
-* add a data-attribute `data-foo` with the value `bar`,
-* add a `span`-element including the text `Hello world!` within the `div`-element.
-* and wrap the whole element within another `div` element having the class `wrapper`.
+Further modifications (e.g. adding HTML-attributes or content) can be made by chaining various fluent methods of the Element. In your auto-completion-enabled you just have to type e.g. `Html::div()->` and you should immediately get a list of available methods for this element. Here is an overview of the provided methods:
+
+#### Adding HTML-attributes
+
+Now let's say, we want add some HTML-attributes to the Element:
+* an `id`-attribute with value `myId`
+* a data-attribute `data-foo` with the value `bar`
+* a class called `myClass`
 
 We can achieve this by applying the corresponding methods for these modifications:
 
@@ -74,28 +80,24 @@ Blade Code:
 {!! Html::div()
     ->id('myId')
     ->data('foo','bar')
-    ->content(
-        Html::span()->content('Hello world!')
-    )    
-    ->wrap(
-        Html::div()->addClass('wrapper')
-    )
+    ->addClass('myClass')
  !!}
 
 Generated HTML:
 ---------------
-<div class="wrapper">
-    <div id="myId" data-foo="bar">
-        <span>Hello world!</span>
-    </div>
+<div id="myId" data-foo="bar" class="myClass">
+    <span>Hello world!</span>
 </div>
 ```
-The methods, that can be applied to a element consist mainly of the HTML-attributes this element is allowed to have. As a rule-of-thumb, the methods to set HTML-attributes are identical to their name (e.g. the `id` attribute can be set with the `id()` method). Here are the exceptions to this rule:
+
+As a rule-of-thumb, the methods to set HTML-attributes are identical to their name (e.g. the `id` attribute can be set with the `id()` method). Here are the exceptions to this rule:
 * The setter-methods for attributes containing a hyphen (e.g. `accept-charset`) are the camelCased attribute-name (e.g. `acceptCharset()`).
 * Attributes that can have multiple values have a corresponding method prefixed with `add` (and camelCased). An example would be `addClass()` for the `class` attribute (as used in the example above).
 * `data`-attributes are set via the `data()`-method, which takes the data-attribute's suffix as it's first and the value as it's second parameter (as shown in the example above).
 
-Values for all HTML-attribtues can also be Closures. The Closures get handled the Element-object itself as it's only parameter. Here is an example:
+Note that since this package strives to only output valid HTML, the available methods differ from element to element. E.g. you can not use the method `selected()` on an div-element, because it is not allowed according to HTML-standards.
+
+Values for all HTML-attributes can also be Closures. The Closures get handled the Element-object itself as it's only parameter. Here is an example:
 
 ```
 Blade Code:
@@ -114,24 +116,7 @@ Generated HTML:
 <div id="myId" title="The ID of this div is myId"></div>
 ```
 
-In addition to the methods corresponding to HTML-attributes, there are also the following methods to add child-, wrapper- or sibling-elements:
-
-Method | Description
--------|--------
-**appendContent**($content) | Appends a single child or an array of children within this element. A child can either be another `Element`-object or a simple text-string.
-**content**($content) | Alias for `appendContent()`.
-**prependContent**($content) | Prepends a single child or an array of children within this element (positioning them before all already existing content). A child can either be another `Element`-object or a simple text-string.
-**insertAfter**($element) | Adds an element to be rendered as a sibling situated after this element. $element can either be another `Element`-object or a simple text-string.
-**insertBefore**($element) | Adds an element to be rendered as a sibling situated before this element. $element can either be another `Element`-object or a simple text-string.
-**wrap**($wrapper) | Wraps this element within another (Container)Element.
-
-(Note that the content/child-related methods are only available for container-elements.)
-
-Since this package is built in an IDE-friendly way, you just have to type e.g. `Html::text()->` in your auto-completion-enabled IDE and you should immediately get a list of available methods for this element.
-
-And since this package strives to only output valid HTML, the available methods differ from element to element. E.g. you can not use the method ->selected() on an input-element, because it is not allowed according to HTML-standards.
-
-##### Vue Directives
+##### Adding Vue-Directives
 
 In addition to standard HTMl-attributes, you can also set [all possible Vue directives](https://vuejs.org/v2/api/#Directives) via corresponding element-methods:
 
@@ -162,6 +147,137 @@ Method | Vue Directive
 **vOnKeyDown**(string $expression, array $modifiers=[]) | v-on:keydown
 **vOnKeyUp**(string $expression, array $modifiers=[]) | v-on:keyup
 **vOnLoad**(string $expression, array $modifiers=[]) | v-on:load
+
+#### Adding Content
+
+Of course ContainerElements can also have content.  Let's look at this example:
+
+```
+Blade Code:
+-----------
+{!! Html::div()
+    ->content([
+        Html::span()->content('Hello world!'),
+        "What's up?"
+    ])
+ !!}
+
+Generated HTML:
+---------------
+<div>
+    <span>Hello world!</span>
+    What's up?
+</div>
+```
+
+The `content()` method takes a single child or an array of children as it's parameter. A child can either be another `Element`-object or a simple text-string.
+There are also the additional methods `prependContent()` and `appendContent()`, which adds content prior or after already existing content. Here is an overview of all content-related methods:
+
+Method | Description
+-------|--------
+**appendContent**($content) | Appends a single child or an array of children within this element. A child can either be another `Element`-object or a simple text-string.
+**content**($content) | Alias for `appendContent()`.
+**prependContent**($content) | Prepends a single child or an array of children within this element (positioning them before all already existing content). A child can either be another `Element`-object or a simple text-string.
+
+#### Inserting a sibling before or after the Element
+
+The following methods allow you to insert a sibling (either plain-text or another `Element`) before or after the Element.
+
+Method | Description
+-------|--------
+**insertAfter**($element) | Adds an element to be rendered as a sibling situated after this element. $element can either be another `Element`-object or a simple text-string.
+**insertBefore**($element) | Adds an element to be rendered as a sibling situated before this element. $element can either be another `Element`-object or a simple text-string.
+
+#### Wrapping an Element within another Element.
+
+You can also apply a wrapper to an Element. Take a look at this example:
+
+```
+Blade Code:
+-----------
+{!! Html::div()
+    ->id('myDivElement')
+    ->wrap(
+        Html::div()->addClass('wrapper')
+    )
+ !!}
+
+Generated HTML:
+---------------
+<div class="wrapper">
+    <div id="myDivElement"></div>
+</div>
+```
+
+##### Applying a Blade-View to render the Element
+
+You can also apply Blade-Views to your Elements using the `view()` method. The Element itself is available in the view as `$el`. To render it, call `$el->renderHtml()`.
+
+Here is an example:
+
+```
+Blade Code:
+-----------
+{!! Html::div()
+    ->content('Hello World!')
+    ->view('my-view')
+!!}
+ 
+ 
+my-view.blade.php:
+-----------
+<div class="my-view-wrapper">
+    before element
+    {!! $el->renderHtml() !!}
+    after element    
+</div>
+
+Generated HTML:
+---------------
+<div class="my-view-wrapper">
+    before element
+    <div>Hello World!</div>
+    after element
+</div>
+```
+
+##### Closure Decorators
+
+Sometimes you may with to apply some complex decorations to a single element, or influence the Element after the global Decorator-Classes (see description below) were applied.
+You can use the Element-method `decorate()` for this. The method takes a Closure for it's only parameter and the Closure gets handed the Element itself as it's only attribtues
+
+Check out this example:
+
+```
+Blade Code:
+-----------
+{!! Html::div()
+    ->id('myId')
+    ->data('foo','bar')
+    ->content(
+        Html::span()->content('Hello world!')
+    )
+    ->wrap(
+        Html::div()->addClass('wrapper')
+    )
+    ->decorate( function($element) {
+        $element
+            ->id('myDecoratedId')
+            ->data('decorated-foo','decorated-bar')
+            ->appendContent("What's up?");
+        $element->wrapper->addClass('decoratedWrapper');
+    })
+ !!}
+
+Generated HTML:
+---------------
+<div class="wrapper decoratedWrapper">
+    <div id="myDecoratedId" data-foo="bar" data-decorated-foor="decorated-bar">
+        <span>Hello world!</span>
+        What's up?
+    </div>
+</div>
+```
 
 ### Extendability
 
@@ -218,7 +334,7 @@ Method | Description
 
 Of course you can also create your own constructor (for example to add mandatory parameters). Just be sure to call the parent's constructor.
 
-And of course you can also add additional fluid setters to be callable on the component in your views. The package already includes some traits, which provide some generic fluent setters and corresponding properties. You can find them at the namespace `Nicat\HtmlFactory\Components\Traits`. 
+And of course you can also add additional fluent setters to be callable on the component in your views. The package already includes some traits, which provide some generic fluent setters and corresponding properties. You can find them at the namespace `Nicat\HtmlFactory\Components\Traits`. 
 
 ##### Examples
 
@@ -300,7 +416,7 @@ Decorators must be registered with the HtmlFactory-service by using one of the f
 
 As with components, the best location to perform these registrations is within the `boot()`-method of your `AppServiceProvider` (or any other ServiceProvider).
 
-#### Examples
+##### Examples
 
 HtmlFactory already comes with some included decorators. Let's take at the `DecorateButtonElement`-class:
 

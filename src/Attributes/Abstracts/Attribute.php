@@ -49,7 +49,7 @@ abstract class Attribute
      */
     protected function callClosure(\Closure $value)
     {
-        return call_user_func_array($value, ['element' => $this->element]);
+        return call_user_func_array($value, [$this->element]);
     }
 
     /**
