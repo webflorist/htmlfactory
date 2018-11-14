@@ -27,7 +27,7 @@
                 "Nicat\\HtmlFactory\\HtmlFactoryServiceProvider"
             ],
             "aliases": {
-                "Form": "Nicat\\HtmlFactory\\HtmlFactoryFacade"
+                "Html": "Nicat\\HtmlFactory\\HtmlFactoryFacade"
             }
         }
     }
