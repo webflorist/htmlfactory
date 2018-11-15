@@ -20,7 +20,7 @@ class FileInputComponentTest extends TestCase
 
     public function testSimpleFileInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::fileInput()
             ->generate();
 

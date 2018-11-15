@@ -2,18 +2,20 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\RequiredAttribute;
+
 trait AllowsRequiredAttribute
 {
 
     /**
      * Set value of HTML-attribute 'required'.
      *
-     * @param bool $required
+     * @param bool|\Closure $required
      * @return $this
      */
-    public function required(bool $required = true)
+    public function required($required = true)
     {
-        $this->attributes->establish('required')->setValue($required);
+        $this->attributes->establish(RequiredAttribute::class)->setValue($required);
         return $this;
     }
 

@@ -6,7 +6,14 @@ use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Exceptions\DecoratorNotFoundException;
 use Nicat\HtmlFactory\HtmlFactory;
+use Nicat\HtmlFactory\HtmlFactoryTools;
 
+/**
+ * This Class manages registration an application of Decorators.
+ *
+ * Class DecoratorManager
+ * @package Nicat\HtmlFactory\Decorators\Manager
+ */
 class DecoratorManager
 {
 
@@ -80,8 +87,8 @@ class DecoratorManager
         }
 
         /** @var Decorator $className */
-        // We only register the decorator, if it supports the current frontend-framework.
-        if ($this->decoratorSupportsFrontendFramework($className)) {
+        // We only register the decorator, if it's group-ID is stated under the config key 'htmlfactory.decorators'.
+        if ($this->decoratorShouldBeRegistered($className)) {
             $this->decorators[$className] = $className;
         }
     }
@@ -110,10 +117,7 @@ class DecoratorManager
     private function resolveElementClasses($elementClass)
     {
         if (!isset($this->elementClasses[$elementClass])) {
-            $this->elementClasses[$elementClass] = array_merge(
-                [$elementClass => $elementClass],
-                class_parents($elementClass)
-            );
+            $this->elementClasses[$elementClass] = HtmlFactoryTools::resolveObjectClasses($elementClass);
         }
     }
 
@@ -137,33 +141,24 @@ class DecoratorManager
 
 
     /**
-     * Does this class support the currently set frontend framework (and version)?
+     * Should this decorator be used?
+     * (= Is it's group-ID stated under the config key 'htmlfactory.decorators').
      *
      * @param string $decoratorClass
      * @return bool
      */
-    private function decoratorSupportsFrontendFramework(string $decoratorClass)
+    private function decoratorShouldBeRegistered(string $decoratorClass)
     {
         /** @var Decorator $decoratorClass */
-        $supportedFrameworks = $decoratorClass::getSupportedFrameworks();
+        $decoratorGroupId = $decoratorClass::getGroupId();
 
-        // If $supportedFrameworks is an empty array, this decorator is always applicable.
-        if (count($supportedFrameworks) === 0) {
+        // If $decoratorGroupId is null, this decorator is always applicable.
+        if (is_null($decoratorGroupId)) {
             return true;
         }
 
-        // If the specific framework is supported regardless of version, return true.
-        if (array_search($this->htmlFactory->frontendFramework,$supportedFrameworks) !== false) {
-            return true;
-        }
-
-        // If a specific version is stated, this decorator must explicitly support that version.
-        if (!is_null($this->htmlFactory->frontendFrameworkVersion)) {
-            if (array_search($this->htmlFactory->frontendFramework.':'.$this->htmlFactory->frontendFrameworkVersion,$supportedFrameworks) !== false) {
-                return true;
-            }
-        }
-
-        return false;
+        // Otherwise we only return true, if the $decoratorGroupId
+        // is stated under the config-key 'htmlfactory.decorators'.
+        return array_search($decoratorGroupId,config('htmlfactory.decorators')) !== false;
     }
 }

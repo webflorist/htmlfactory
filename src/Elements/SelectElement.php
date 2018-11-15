@@ -2,6 +2,7 @@
 
 namespace Nicat\HtmlFactory\Elements;
 
+use Nicat\HtmlFactory\Attributes\Traits\AllowsVueModelDirective;
 use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
@@ -26,14 +27,15 @@ class SelectElement extends ContainerElement
         AllowsDisabledAttribute,
         AllowsMultipleAttribute,
         AllowsNameAttribute,
-        AllowsRequiredAttribute;
+        AllowsRequiredAttribute,
+        AllowsVueModelDirective;
 
     /**
      * Returns the name of the element.
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'select';
     }

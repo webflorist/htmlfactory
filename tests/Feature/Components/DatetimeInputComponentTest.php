@@ -20,7 +20,7 @@ class DatetimeInputComponentTest extends TestCase
 
     public function testSimpleDatetimeInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::datetimeInput()
             ->generate();
 

@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\MultipleAttribute;
+
 trait AllowsMultipleAttribute
 {
 
@@ -11,12 +13,12 @@ trait AllowsMultipleAttribute
      * The multiple attribute is a boolean attribute.
      * When present, it specifies that the user is allowed to enter/select more than one value.
      *
-     * @param bool $multiple
+     * @param bool|\Closure $multiple
      * @return $this
      */
-    public function multiple(bool $multiple = true)
+    public function multiple($multiple = true)
     {
-        $this->attributes->establish('multiple')->setValue($multiple);
+        $this->attributes->establish(MultipleAttribute::class)->setValue($multiple);
         return $this;
     }
 

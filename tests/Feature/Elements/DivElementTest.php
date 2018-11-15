@@ -29,4 +29,17 @@ class DivElementTest extends TestCase
         );
     }
 
+    public function testComplexDivElementUsingView()
+    {
+        $html = \Html::div();
+        $this->applyGeneralAttributes($html);
+        $this->applyCorrespondingView($html);
+        $result = $html->generate();
+
+        $this->assertHtmlEquals(
+            'text before element <div aria-describedby="describedById" class="myFirstClass mySecondClass" data-my-first-data-attribute="myFirstDataAttributeValue" data-my-second-data-attribute="mySecondDataAttributeValue" hidden id="myId" role="myFirstRole mySecondRole" style="display:block;color:black" title="My Title"></div> text after element',
+            $result
+        );
+    }
+
 }

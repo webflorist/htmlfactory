@@ -34,7 +34,7 @@ class PanelComponentTest extends TestCase
 
     public function testPanelWithContentOnlyForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::panel()
             ->content('This is the content.')
             ->generate();
@@ -47,7 +47,7 @@ class PanelComponentTest extends TestCase
 
     public function testPanelWithHeaderAndFooterAndContextForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::panel()
             ->header('This is the header.')
             ->footer('This is the footer.')

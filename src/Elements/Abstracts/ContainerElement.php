@@ -3,6 +3,7 @@
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
 use Nicat\HtmlFactory\Content\ContentManager;
+use Nicat\HtmlFactory\Elements\TemplateElement;
 
 /**
  * A HTML-element, that can contain content.
@@ -31,16 +32,36 @@ abstract class ContainerElement extends Element
     }
 
     /**
-     * Renders the element.
+     * Render the element to an HTML-string.
      *
      * @return string
      */
-    protected function render(): string
+    public function renderHtml(): string
     {
         return
-            '<' . $this->getName() . $this->attributes->render() . '>' .
+            $this->renderStartTag() .
             $this->generateContent() .
-            '</' . $this->getName() . '>';
+            $this->renderEndTag();
+    }
+
+    /**
+     * Renders the element's start-tag to an HTML-string.
+     *
+     * @return string
+     */
+    public function renderStartTag(): string
+    {
+        return '<' . $this->getName() . $this->attributes->render(true) . '>';
+    }
+
+    /**
+     * Renders the element's end-tag to an HTML-string.
+     *
+     * @return string
+     */
+    public function renderEndTag(): string
+    {
+        return '</' . $this->getName() . '>';
     }
 
     /**
@@ -112,16 +133,8 @@ abstract class ContainerElement extends Element
      *
      * @return string
      */
-    private function generateContent()
+    public function generateContent()
     {
-        $html = '';
-        foreach ($this->content->get() as $child) {
-            if (is_a($child, Element::class)) {
-                /** @var Element $child */
-                $child = $child->generate();
-            }
-            $html .= $child;
-        }
-        return $html;
+        return $this->generateElements($this->content->get());
     }
 }

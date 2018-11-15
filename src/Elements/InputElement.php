@@ -2,6 +2,7 @@
 
 namespace Nicat\HtmlFactory\Elements;
 
+use Nicat\HtmlFactory\Attributes\Traits\AllowsVueModelDirective;
 use Nicat\HtmlFactory\Elements\Abstracts\EmptyElement;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
@@ -30,14 +31,15 @@ class InputElement extends EmptyElement
         AllowsReadonlyAttribute,
         AllowsRequiredAttribute,
         AllowsTypeAttribute,
-        AllowsValueAttribute;
+        AllowsValueAttribute,
+        AllowsVueModelDirective;
 
     /**
      * Returns the name of the element.
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'input';
     }

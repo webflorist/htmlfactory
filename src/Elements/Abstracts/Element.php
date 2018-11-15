@@ -2,6 +2,7 @@
 
 namespace Nicat\HtmlFactory\Elements\Abstracts;
 
+use Nicat\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
 use Nicat\HtmlFactory\HtmlFactory;
 use Nicat\HtmlFactory\Attributes\Manager\AttributeManager;
@@ -12,6 +13,7 @@ use Nicat\HtmlFactory\Attributes\Traits\AllowsHiddenAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsIdAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
 use Nicat\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
+use Nicat\HtmlFactory\HtmlFactoryTools;
 
 /**
  * A HTML-element.
@@ -30,7 +32,8 @@ abstract class Element
         AllowsIdAttribute,
         AllowsRoleAttribute,
         AllowsStyleAttribute,
-        AllowsTitleAttribute;
+        AllowsTitleAttribute,
+        AllowsGeneralVueDirectives;
 
     /**
      * AttributeManager
@@ -84,18 +87,39 @@ abstract class Element
     private $insertAfter = [];
 
     /**
-     * Render the element to a string.
+     * The view this element should be rendered with.
      *
-     * @return string
+     * @var string
      */
-    abstract protected function render(): string;
+    private $view = null;
+
+    /**
+     * The generated output.
+     *
+     * @var string
+     */
+    private $output = null;
+
+    /**
+     * Closure-decorators, that were added via decorate().
+     *
+     * @var \Closure[]
+     */
+    private $closureDecorators = [];
 
     /**
      * Returns the name of the element.
      *
      * @return string
      */
-    abstract protected function getName(): string;
+    abstract public function getName(): string;
+
+    /**
+     * Render the element to an HTML-string.
+     *
+     * @return string
+     */
+    abstract public function renderHtml(): string;
 
     /**
      * Element constructor.
@@ -107,6 +131,34 @@ abstract class Element
     }
 
     /**
+     * Render the element to a string.
+     *
+     * @return string
+     */
+    protected function render(): string
+    {
+        if (!is_null($this->view) && ($this->view) !== false) {
+            return $this->renderView();
+        }
+        return $this->renderHtml();
+    }
+
+    /**
+     * Render the element to a string using a view.
+     *
+     * @return string
+     */
+    protected function renderView(): string
+    {
+        return view(
+            $this->view,
+            [
+                'el' => $this
+            ]
+        );
+    }
+
+    /**
      * Generate the element by applying decorators and rendering it.
      *
      * @return string
@@ -114,30 +166,37 @@ abstract class Element
     public function generate()
     {
 
-        $this->applyDecorators();
+        if (is_null($this->output)) {
 
-        // If this element has a wrapper, we add this element as it's content,
-        // and call the wrapper's generate() function.
-        // $this->wrapperGenerationInitiated is set to true to avoid a loop,
-        // when the wrapper calls generate() on it's content.
-        // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
-        if (!is_null($this->wrapper) && ($this->wrapper !== false) && !$this->wrapperGenerationInitiated) {
-            $this->wrapperGenerationInitiated = true;
+            $this->applyDecorators();
 
-            $this->wrapper->prependContent($this);
+            // If this element has a wrapper, we add this element as it's content,
+            // and call the wrapper's generate() function.
+            // $this->wrapperGenerationInitiated is set to true to avoid a loop,
+            // when the wrapper calls generate() on it's content.
+            // The wrapperCallbacks set via addWrapperCallback() are also applied to the wrapper here.
+            if (!is_null($this->wrapper) && ($this->wrapper !== false) && !$this->wrapperGenerationInitiated) {
+                $this->wrapperGenerationInitiated = true;
 
-            foreach ($this->wrapperCallbacks as $callback) {
-                call_user_func_array([$this->wrapper,$callback[0]],$callback[1]);
+                $this->wrapper->prependContent($this);
+
+                foreach ($this->wrapperCallbacks as $callback) {
+                    call_user_func_array([$this->wrapper, $callback[0]], $callback[1]);
+                }
+
+                return $this->wrapper->generate();
             }
 
-            return $this->wrapper->generate();
+            $this->output =
+                $this->generateBeforeItems() .
+                $this->render() .
+                $this->generateAfterItems();
+
+            $this->manipulateOutput($this->output);
+
         }
 
-        $output = $this->generateBeforeItems() . $this->render() . $this->generateAfterItems();
-
-        $this->manipulateOutput($output);
-
-        return $output;
+        return $this->output;
     }
 
     /**
@@ -192,7 +251,10 @@ abstract class Element
      */
     public function is(string $class)
     {
-        return is_a($this, $class);
+        if (is_a($this, $class)) {
+            return true;
+        }
+        return array_search($class, HtmlFactoryTools::resolveObjectClasses($this)) !== false;
     }
 
     /**
@@ -204,9 +266,11 @@ abstract class Element
 
             $this->beforeDecoration();
 
-            /** @var HtmlFactory $htmlfactoryService */
-            $htmlfactoryService = app(HtmlFactory::class);
-            $htmlfactoryService->decorators->decorate($this);
+            /** @var HtmlFactory $htmlFactoryService */
+            $htmlFactoryService = app(HtmlFactory::class);
+            $htmlFactoryService->decorators->decorate($this);
+
+            $this->applyClosureDecorators();
 
             $this->afterDecoration();
 
@@ -233,7 +297,8 @@ abstract class Element
      * @param array $parameters
      * @return $this
      */
-    public function addWrapperCallback($methodName, $parameters=[]) {
+    public function addWrapperCallback($methodName, $parameters = [])
+    {
         $this->wrapperCallbacks[] = [
             $methodName,
             $parameters
@@ -274,14 +339,7 @@ abstract class Element
      */
     private function generateBeforeItems()
     {
-        $html = '';
-        foreach ($this->insertBefore as $child) {
-            if (is_a($child, Element::class)) {
-                $child = $child->generate();
-            }
-            $html .= $child;
-        }
-        return $html;
+        return $this->generateElements($this->insertBefore);
     }
 
     /**
@@ -291,14 +349,63 @@ abstract class Element
      */
     private function generateAfterItems()
     {
+        return $this->generateElements($this->insertAfter);
+    }
+
+    /**
+     * Sets the view this element should be rendered with.
+     *
+     * @param string|false $view
+     * @return $this
+     */
+    public function view($view)
+    {
+        $this->view = $view;
+        return $this;
+    }
+
+    /**
+     * Generates all Elments in an array into a string.
+     *
+     * @param Element[] $elements
+     * @return string
+     */
+    protected function generateElements(array $elements)
+    {
         $html = '';
-        foreach ($this->insertAfter as $child) {
+        foreach ($elements as $child) {
             if (is_a($child, Element::class)) {
                 $child = $child->generate();
             }
             $html .= $child;
         }
         return $html;
+    }
+
+    /**
+     * Adds a Decorator-closure to this element,
+     * that will be called on it's generation.
+     *
+     * The closure will be supplied with the element
+     * as it's only parameter.
+     *
+     * @param \Closure $closure
+     * @return Element
+     */
+    public function decorate(\Closure $closure)
+    {
+        $this->closureDecorators[] = $closure;
+        return $this;
+    }
+
+    /**
+     * Applies Decorator-closures supplied via ->decorate().
+     */
+    private function applyClosureDecorators()
+    {
+        foreach ($this->closureDecorators as $closure) {
+            call_user_func_array($closure, [$this]);
+        }
     }
 
 }

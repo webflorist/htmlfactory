@@ -20,7 +20,7 @@ class DatetimeLocalLocalInputComponentTest extends TestCase
 
     public function testSimpleDatetimeLocalInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::datetimeLocalInput()
             ->generate();
 

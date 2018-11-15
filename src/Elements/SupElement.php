@@ -17,7 +17,7 @@ class SupElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'sup';
     }

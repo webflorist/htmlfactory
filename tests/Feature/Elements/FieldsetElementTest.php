@@ -19,7 +19,7 @@ class FieldsetElementTest extends TestCase
 
     public function testSimpleFieldsetElementForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::fieldset()
             ->generate();
 
@@ -33,12 +33,10 @@ class FieldsetElementTest extends TestCase
     {
         $html = \Html::fieldset();
         $this->applyGeneralAttributes($html);
-        $html
-            ->legend('MyLegend')
-            ->generate();
+        $html->generate();
 
         $this->assertHtmlEquals(
-            '<fieldset aria-describedby="describedById" class="myFirstClass mySecondClass" data-my-first-data-attribute="myFirstDataAttributeValue" data-my-second-data-attribute="mySecondDataAttributeValue" hidden id="myId" role="myFirstRole mySecondRole" style="display:block;color:black" title="My Title"><legend>MyLegend</legend></fieldset>',
+            '<fieldset aria-describedby="describedById" class="myFirstClass mySecondClass" data-my-first-data-attribute="myFirstDataAttributeValue" data-my-second-data-attribute="mySecondDataAttributeValue" hidden id="myId" role="myFirstRole mySecondRole" style="display:block;color:black" title="My Title"></fieldset>',
             $html
         );
     }

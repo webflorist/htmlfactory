@@ -37,7 +37,7 @@ class FormElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'form';
     }

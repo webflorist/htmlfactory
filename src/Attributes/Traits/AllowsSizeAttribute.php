@@ -2,18 +2,20 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\SizeAttribute;
+
 trait AllowsSizeAttribute
 {
 
     /**
      * Set value of HTML-attribute 'size'.
      *
-     * @param int $size
+     * @param int|\Closure $size
      * @return $this
      */
-    public function size(int $size)
+    public function size($size)
     {
-        $this->attributes->establish('size')->setValue($size);
+        $this->attributes->establish(SizeAttribute::class)->setValue($size);
         return $this;
     }
 

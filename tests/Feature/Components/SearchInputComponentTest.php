@@ -20,7 +20,7 @@ class SearchInputComponentTest extends TestCase
 
     public function testSimpleSearchInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::searchInput()
             ->generate();
 

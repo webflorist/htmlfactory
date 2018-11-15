@@ -2,6 +2,8 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\AriaInvalidAttribute;
+
 trait AllowsAriaInvalidAttribute
 {
 
@@ -14,12 +16,12 @@ trait AllowsAriaInvalidAttribute
      * - spelling:   A spelling error has been detected.
      * - true:       (default) The value has failed validation.
      *
-     * @param string $invalid
+     * @param string|\Closure $invalid
      * @return $this
      */
-    public function ariaInvalid(string $invalid = 'true')
+    public function ariaInvalid($invalid = 'true')
     {
-        $this->attributes->establish('aria-invalid')->setValue($invalid);
+        $this->attributes->establish(AriaInvalidAttribute::class)->setValue($invalid);
         return $this;
     }
 

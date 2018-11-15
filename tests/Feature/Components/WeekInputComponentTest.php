@@ -20,7 +20,7 @@ class weekInputComponentTest extends TestCase
 
     public function testSimpleweekInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::weekInput()
             ->generate();
 

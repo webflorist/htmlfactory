@@ -2,18 +2,20 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\ClassAttribute;
+
 trait AllowsClassAttribute
 {
 
     /**
      * Add a HTML-class to element.
      *
-     * @param string $class
+     * @param string|\Closure $class
      * @return $this
      */
-    public function addClass(string $class)
+    public function addClass($class)
     {
-        $this->attributes->establish('class')->addValue($class);
+        $this->attributes->establish(ClassAttribute::class)->addValue($class);
         return $this;
     }
 

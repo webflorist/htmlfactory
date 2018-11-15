@@ -2,18 +2,20 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\StyleAttribute;
+
 trait AllowsStyleAttribute
 {
 
     /**
      * Add a CSS-style to element.
      *
-     * @param string $style
+     * @param string|\Closure $style
      * @return $this
      */
-    public function addStyle(string $style)
+    public function addStyle($style)
     {
-        $this->attributes->establish('style')->addValue($style);
+        $this->attributes->establish(StyleAttribute::class)->addValue($style);
         return $this;
     }
 

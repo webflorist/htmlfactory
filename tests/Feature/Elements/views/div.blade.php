@@ -1,0 +1,1 @@
+text before element {!! $el->renderHtml() !!} text after element

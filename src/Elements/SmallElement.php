@@ -17,7 +17,7 @@ class SmallElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'small';
     }

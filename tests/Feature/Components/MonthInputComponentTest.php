@@ -20,7 +20,7 @@ class MonthInputComponentTest extends TestCase
 
     public function testSimpleMonthInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::monthInput()
             ->generate();
 

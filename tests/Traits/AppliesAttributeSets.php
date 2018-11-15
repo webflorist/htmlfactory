@@ -5,6 +5,7 @@ namespace HtmlFactoryTests\Traits;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Elements\ButtonElement;
 use Nicat\HtmlFactory\Elements\InputElement;
+use ReflectionClass;
 
 trait AppliesAttributeSets
 {
@@ -17,13 +18,21 @@ trait AppliesAttributeSets
     protected function applyGeneralAttributes(Element $element)
     {
         $element
+            ->id('myId')
             ->addAriaDescribedby("describedById")
             ->addClass('myFirstClass')
-            ->addClass('mySecondClass')
+            ->addClass(function (Element $element){
+                return 'mySecondClass';
+            })
             ->data('my-first-data-attribute','myFirstDataAttributeValue')
-            ->data('my-second-data-attribute','mySecondDataAttributeValue')
-            ->hidden()
-            ->id('myId')
+            ->data('my-second-data-attribute',function (Element $element){
+                if ($element->attributes->isset('data-my-first-data-attribute')) {
+                    return 'mySecondDataAttributeValue';
+                }
+            })
+            ->hidden(function (Element $element){
+                return true;
+            })
             ->addRole('myFirstRole')
             ->addRole('mySecondRole')
             ->addStyle('display:block')
@@ -64,6 +73,20 @@ trait AppliesAttributeSets
             ->value('myValue')
             ->content('This is a button.')
         ;
+    }
+
+    /**
+     * Applies the corresponding view.
+     *
+     * @param Element $element
+     */
+    protected function applyCorrespondingView(Element $element)
+    {
+        try {
+            $type = current(array_reverse(explode('/',dirname((new ReflectionClass($this))->getFileName()))));
+            $element->view($type.'TestViews::'.$element->getName());
+        } catch (\ReflectionException $e) {
+        }
     }
 
 }

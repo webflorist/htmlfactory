@@ -20,7 +20,7 @@ class TimeInputComponentTest extends TestCase
 
     public function testSimpletimeInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::timeInput()
             ->generate();
 

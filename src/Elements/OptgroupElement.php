@@ -24,7 +24,7 @@ class OptgroupElement extends ContainerElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'optgroup';
     }

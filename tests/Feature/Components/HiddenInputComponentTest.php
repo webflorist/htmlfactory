@@ -20,7 +20,7 @@ class HiddenInputComponentTest extends TestCase
 
     public function testSimpleHiddenInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::hiddenInput()
             ->generate();
 

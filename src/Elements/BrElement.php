@@ -17,7 +17,7 @@ class BrElement extends EmptyElement
      *
      * @return string
      */
-    protected function getName(): string
+    public function getName(): string
     {
         return 'br';
     }

@@ -2,18 +2,20 @@
 
 namespace Nicat\HtmlFactory\Attributes\Traits;
 
+use Nicat\HtmlFactory\Attributes\MethodAttribute;
+
 trait AllowsMethodAttribute
 {
 
     /**
      * Set value of HTML-attribute 'method'.
      *
-     * @param string $method
+     * @param string|\Closure $method
      * @return $this
      */
-    public function method(string $method)
+    public function method($method)
     {
-        $this->attributes->establish('method')->setValue(strtoupper($method));
+        $this->attributes->establish(MethodAttribute::class)->setValue(strtoupper($method));
         return $this;
     }
 

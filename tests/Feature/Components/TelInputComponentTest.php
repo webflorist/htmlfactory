@@ -20,7 +20,7 @@ class TelInputComponentTest extends TestCase
 
     public function testSimpleTelInputComponentForBootstrap3()
     {
-        $this->setFrontendFramework('bootstrap', '3');
+        $this->setDecorators(['bootstrap:v3']);
         $html = \Html::telInput()
             ->generate();
 

@@ -4,6 +4,10 @@ namespace Nicat\HtmlFactory;
 
 use Nicat\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Nicat\HtmlFactory\Components\Manager\ComponentManager;
+use Nicat\HtmlFactory\Elements\H1Element;
+use Nicat\HtmlFactory\Elements\ImgElement;
+use Nicat\HtmlFactory\Elements\PElement;
+use Nicat\HtmlFactory\Elements\TemplateElement;
 use Nicat\HtmlFactory\Exceptions\InvalidAccessorException;
 use Nicat\HtmlFactory\Elements\Abstracts\Element;
 use Nicat\HtmlFactory\Elements\SpanElement;
@@ -59,16 +63,20 @@ use Nicat\HtmlFactory\Components\PanelComponent;
  * @method static DivElement                div()
  * @method static FieldsetElement           fieldset()
  * @method static FormElement               form()
+ * @method static H1Element                 h1()
+ * @method static ImgElement                img()
  * @method static InputElement              input()
  * @method static LabelElement              label()
  * @method static LegendElement             legend()
  * @method static OptgroupElement           optgroup()
  * @method static OptionElement             option()
+ * @method static PElement                  p()
  * @method static SelectElement             select()
  * @method static SmallElement              small()
  * @method static SpanElement               span()
  * @method static SupElement                sup()
  * @method static TextareaElement           textarea()
+ * @method static TemplateElement           template()
  *
  * Components:
  * ===========
@@ -119,25 +127,10 @@ class HtmlFactory
     public $decorators;
 
     /**
-     * The frontend-framework configured in config('htmlfactory.frontend_framework').
-     *
-     * @var string
-     */
-    public $frontendFramework;
-
-    /**
-     * The frontend-framework-version configured in config('htmlfactory.frontend_framework').
-     *
-     * @var string
-     */
-    public $frontendFrameworkVersion;
-
-    /**
      * HtmlFactory constructor.
      */
     public function __construct()
     {
-        $this->evaluateFrontendFramework();
         $this->components = new ComponentManager();
         $this->decorators = new DecoratorManager($this);
     }
@@ -171,20 +164,6 @@ class HtmlFactory
         // If the accessor is neither a element nor a component, we throw an exception.
         throw new InvalidAccessorException('No element found for accessor "'.$accessor.'".');
 
-    }
-
-    /**
-     * Evaluate config 'htmlfactory.frontend_framework'
-     * and fill $this->frontendFramework and $this->frontendFrameworkVersion accordingly.
-     */
-    private function evaluateFrontendFramework()
-    {
-        $frontendFramework = config('htmlfactory.frontend_framework');
-        if (strpos($frontendFramework,':') > 0) {
-            $this->frontendFrameworkVersion =  str_after($frontendFramework,':');
-            $frontendFramework = str_before($frontendFramework,':');
-        }
-        $this->frontendFramework = $frontendFramework;
     }
 
 }
