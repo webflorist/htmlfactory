@@ -27,9 +27,17 @@ trait AssertsHtml
     {
         $this->expectedHtml = $expected;
         $this->actualHtml = $actual;
+
+        try {
+            $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
+            $this->actualHtml = (new Indenter())->indent($this->actualHtml);
+        } catch (RuntimeException $e) {
+        } catch (InvalidArgumentException $e) {
+        }
+
         $this->assertDomNodeEquals(
-            $this->parseHtml2DomNode($expected, $checkHtmlSyntax),
-            $this->parseHtml2DomNode($actual, $checkHtmlSyntax)
+            $this->parseHtml2DomNode($this->expectedHtml, $checkHtmlSyntax),
+            $this->parseHtml2DomNode($this->actualHtml, $checkHtmlSyntax)
         );
     }
 
@@ -44,15 +52,6 @@ trait AssertsHtml
 
         $headerBefore = "\n\n==================\n";
         $headerAfter = "\n==================\n";
-
-
-        try {
-            $this->actualHtml = (new Indenter())->indent($this->actualHtml);
-            $this->expectedHtml = (new Indenter())->indent($this->expectedHtml);
-        } catch (RuntimeException $e) {
-        } catch (InvalidArgumentException $e) {
-        }
-
 
         return
             $headerBefore .
@@ -79,6 +78,9 @@ trait AssertsHtml
      */
     protected function assertDomNodeEquals(DOMNode $expected, DOMNode $actual)
     {
+        // Remove any children only consisting of linefeeds and spaces.
+        $this->removeIrrelevantChildren($expected);
+        $this->removeIrrelevantChildren($actual);
 
         $actualNodePath = str_replace('/html/body','',$actual->getNodePath());
 
@@ -111,27 +113,27 @@ trait AssertsHtml
                     $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have the attribute "' . $attributeName . '". But it has not.')
                 );
 
-                if ($attributeName === 'class') {
+                if (array_search($attributeName, ['class','aria-describedby']) !== false) {
 
-                    $desiredClasses = explode(' ', $attributeValue);
+                    $desiredValues = explode(' ', $attributeValue);
 
-                    $presentClasses = explode(' ', $actualAttributes[$attributeName]);
+                    $presentValues = explode(' ', $actualAttributes[$attributeName]);
 
-                    foreach ($desiredClasses as $key => $desiredClass) {
+                    foreach ($desiredValues as $key => $desiredValue) {
 
                         // Assert, that the desired class is indeed present.
                         $this->assertNotFalse(
-                            array_search($desiredClass, $presentClasses),
-                            $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have a class called "' . $desiredClass . '". But it has not.')
+                            array_search($desiredValue, $presentValues),
+                            $this->generateHtmlStructureErrorMsg($humanReadableNode . " should have an attribute '$attributeName' containing the value called '$desiredValue'. But it has not.")
                         );
 
-                        unset($presentClasses[array_search($desiredClass, $presentClasses)]);
+                        unset($presentValues[array_search($desiredValue, $presentValues)]);
                     }
 
                     // Assert, that the node has no superfluous classes.
                     $this->assertEmpty(
-                        $presentClasses,
-                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have the class "' . current($presentClasses) . '". But it has.')
+                        $presentValues,
+                        $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should not have an attribute "' . $attributeName . '" with the value "' . current($presentValues) . '". But it has.')
                     );
 
                 } else if ($attributeValue !== true) {
@@ -168,8 +170,8 @@ trait AssertsHtml
         // Assert, that the plain text is identical (only for nodes which contain plain-text and no tags..
         if (isset($expected->wholeText)) {
             $this->assertEquals(
-                $expected->wholeText,
-                $actual->wholeText,
+                trim($expected->wholeText),
+                trim($actual->wholeText),
                 $this->generateHtmlStructureErrorMsg($humanReadableNode . ' has an unexpected text: "' . $actual->wholeText . '".')
             );
         }
@@ -182,7 +184,6 @@ trait AssertsHtml
             $actualChildCount,
             $this->generateHtmlStructureErrorMsg($humanReadableNode . ' should have ' . $expectedChildCount . ' children, but it has ' . $actualChildCount . ' instead.')
         );
-
 
         // If the node should have children, we assert those also recursively.
         if ($expected->hasChildNodes()) {
@@ -241,5 +242,22 @@ trait AssertsHtml
             }
         }
         return $attributes;
+    }
+
+    /**
+     * Remove any children only consisting of linefeeds and spaces.
+     *
+     * @param DOMNode $node
+     */
+    private function removeIrrelevantChildren(\DOMNode $node)
+    {
+        if ($node->hasChildNodes()) {
+            foreach ($node->childNodes as $child) {
+                if (is_a($child, \DOMText::class) && strlen(trim($child->wholeText)) === 0) {
+                    $node->removeChild($child);
+                    $this->removeIrrelevantChildren($node);
+                }
+            }
+        }
     }
 }
