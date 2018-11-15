@@ -1,23 +1,23 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\EmptyElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsReadonlyAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsRequiredAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsTypeAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\EmptyElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsReadonlyAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsRequiredAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsTypeAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
 
 /**
  * Class representing a HTML-element '<input />'
  * There are also type-specific component-classes for each input-type (e.g. 'TextInputComponent')
  *
  * Class InputElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class InputElement extends EmptyElement
 {

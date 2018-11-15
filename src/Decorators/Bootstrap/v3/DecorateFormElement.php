@@ -1,9 +1,9 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bootstrap\v3;
+namespace Webflorist\HtmlFactory\Decorators\Bootstrap\v3;
 
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\FormElement;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\FormElement;
 
 class DecorateFormElement extends Decorator
 {

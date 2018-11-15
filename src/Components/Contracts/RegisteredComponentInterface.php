@@ -1,6 +1,6 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components\Contracts;
+namespace Webflorist\HtmlFactory\Components\Contracts;
 
 interface RegisteredComponentInterface
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsLabelAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsLabelAttribute;
 
 /**
  * Class representing the HTML-element '<optgroup></optgroup>'.
  *
  * Class OptgroupElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class OptgroupElement extends ContainerElement
 {

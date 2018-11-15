@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements\Abstracts;
+namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
-use Nicat\HtmlFactory\Content\ContentManager;
+use Webflorist\HtmlFactory\Content\ContentManager;
 
 /**
  * A HTML-element, that can contain content.
  * They have a start and an end-tag (e.g. '<p></p>').
  *
  * Class ContainerElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class ContainerElement extends Element
 {

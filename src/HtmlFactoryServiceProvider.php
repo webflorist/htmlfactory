@@ -1,6 +1,6 @@
 <?php
 
-namespace Nicat\HtmlFactory;
+namespace Webflorist\HtmlFactory;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,21 +25,21 @@ class HtmlFactoryServiceProvider extends ServiceProvider
 
         // Register included components.
         $htmlFactory->components->registerFromFolder(
-            'Nicat\HtmlFactory\Components',
+            'Webflorist\HtmlFactory\Components',
             __DIR__.'/Components'
         );
 
         // Register included decorators.
         $htmlFactory->decorators->registerFromFolder(
-            'Nicat\HtmlFactory\Decorators\Bootstrap\v3',
+            'Webflorist\HtmlFactory\Decorators\Bootstrap\v3',
             __DIR__.'/Decorators/Bootstrap/v3'
         );
         $htmlFactory->decorators->registerFromFolder(
-            'Nicat\HtmlFactory\Decorators\Bootstrap\v4',
+            'Webflorist\HtmlFactory\Decorators\Bootstrap\v4',
             __DIR__.'/Decorators/Bootstrap/v4'
         );
         $htmlFactory->decorators->registerFromFolder(
-            'Nicat\HtmlFactory\Decorators\Foundation\v6',
+            'Webflorist\HtmlFactory\Decorators\Foundation\v6',
             __DIR__.'/Decorators/Foundation/v6'
         );
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Manager;
+namespace Webflorist\HtmlFactory\Attributes\Manager;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\Attribute;
-use Nicat\HtmlFactory\Exceptions\AttributeNotAllowedException;
-use Nicat\HtmlFactory\Exceptions\AttributeNotFoundException;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Attributes\Abstracts\Attribute;
+use Webflorist\HtmlFactory\Exceptions\AttributeNotAllowedException;
+use Webflorist\HtmlFactory\Exceptions\AttributeNotFoundException;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 class AttributeManager
 {
@@ -146,7 +146,7 @@ class AttributeManager
             $attributeName = implode('', $attributeNameParts);
         }
 
-        $attributeClass = 'Nicat\\HtmlFactory\\Attributes\\' . ucfirst($attributeName) . 'Attribute';
+        $attributeClass = 'Webflorist\\HtmlFactory\\Attributes\\' . ucfirst($attributeName) . 'Attribute';
 
         if (!class_exists($attributeClass)) {
             throw new AttributeNotFoundException('No class for attribute "' . $attributeName . '" found.');
@@ -192,7 +192,7 @@ class AttributeManager
     private function evaluateAllowedAttributes()
     {
         $elementTraits = self::getClassTraits(get_class($this->element));
-        $traitPrefix = 'Nicat\HtmlFactory\Attributes\Traits\Allows';
+        $traitPrefix = 'Webflorist\HtmlFactory\Attributes\Traits\Allows';
         $traitSuffix = 'Attribute';
         foreach ($elementTraits as $traitClass) {
             if (strpos($traitClass, $traitPrefix) === 0) {

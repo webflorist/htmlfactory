@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Abstracts;
+namespace Webflorist\HtmlFactory\Attributes\Abstracts;
 
-use Nicat\HtmlFactory\Exceptions\ValueNotAllowedException;
+use Webflorist\HtmlFactory\Exceptions\ValueNotAllowedException;
 
 /**
  * Abstract base-class for regular HTML-attributes,
  * that contain a string (e.g. 'id').
  *
  * Class StringAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class StringAttribute extends Attribute
 {

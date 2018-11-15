@@ -1,9 +1,9 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bootstrap\v4;
+namespace Webflorist\HtmlFactory\Decorators\Bootstrap\v4;
 
-use Nicat\HtmlFactory\Components\PanelComponent;
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Components\PanelComponent;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
 
 class DecoratePanelComponent extends Decorator
 {

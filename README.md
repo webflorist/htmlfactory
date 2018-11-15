@@ -1,4 +1,4 @@
-# nicat/htmlfactory
+# webflorist/htmlfactory
 **Convenient and powerful HTML-builder for Laravel 5.5**
 
 ## Description
@@ -13,13 +13,13 @@ This package allows you to:
 * Extend it's features using `Decorators` and `Components`.
 * Produce accessibility-conform valid HTML 5 output.
 
-This package is used as a foundation for [nicat/formbuilder](https://github.com/nic-at/formbuilder). Check out this package, if you want to create forms without much hassle in Laravel. 
+This package is used as a foundation for [webflorist/formbuilder](https://github.com/nic-at/formbuilder). Check out this package, if you want to create forms without much hassle in Laravel. 
 
 ## Installation
-1. Require the package via composer:  `composer require nicat/htmlfactory`
-2. Add the Service-Provider to config/app.php:  `Nicat\HtmlFactory\HtmlFactoryServiceProvider::class`
-3. Add the Html-facade to config/app.php: `'Html' => Nicat\HtmlFactory\HtmlFactoryFacade::class`
-4. Publish config:  `php artisan vendor:publish --provider="Nicat\HtmlFactory\HtmlFactoryServiceProvider"`
+1. Require the package via composer:  `composer require webflorist/htmlfactory`
+2. Add the Service-Provider to config/app.php:  `Webflorist\HtmlFactory\HtmlFactoryServiceProvider::class`
+3. Add the Html-facade to config/app.php: `'Html' => Webflorist\HtmlFactory\HtmlFactoryFacade::class`
+4. Publish config:  `php artisan vendor:publish --provider="Webflorist\HtmlFactory\HtmlFactoryServiceProvider"`
 5. Set the `frontend_framework` configuration in the newly published config-file (situated at `app/config/htmlfactory.php`)
 
 ## Configuration
@@ -32,8 +32,8 @@ Here are some definitions of basic concepts of this package to allow a better un
 
 Concept | Description
 -------|--------
-**Element** | A classic HTML-element. Can either be a container (e.g. `<div></div>`) or an empty element (e.g. `<br />`). Each element is represented by a distinct class within the `Nicat\HtmlFactory\Elements`-namespace. Each element has a factory-method with the same name within the main `HtmlFactory` class (and thus also in the `Html` facade).
-**Attribute** | An HTML-attribute of a HTML-element. (e.g. `class="myClass"`). Each attribute is represented by a distinct class within the `Nicat\HtmlFactory\Attributes`-namespace. Each attribute has a corresponding method within each `Element`-class it supports.
+**Element** | A classic HTML-element. Can either be a container (e.g. `<div></div>`) or an empty element (e.g. `<br />`). Each element is represented by a distinct class within the `Webflorist\HtmlFactory\Elements`-namespace. Each element has a factory-method with the same name within the main `HtmlFactory` class (and thus also in the `Html` facade).
+**Attribute** | An HTML-attribute of a HTML-element. (e.g. `class="myClass"`). Each attribute is represented by a distinct class within the `Webflorist\HtmlFactory\Attributes`-namespace. Each attribute has a corresponding method within each `Element`-class it supports.
 **Component** | A class, that is extending one of the `Element`-classes to create more complex HTML with attributes or content already set. An example would be the `TextInputComponent`, which has the attribute `type` set to `text` by default. Components can be registered with the `HtmlFactory`-service, so that they are accessible via the `Html` facade. They are one of the two main ways to extend `HtmlFactory`'s functionality (see section on `Components` below for further details).
 **Decorator** | The second main way to customize your output. Decorators can be registered with the `HtmlFactory`-service to further manipulate a defined set of elements or components (and optionally for a certain frontend-framework and -version). This way you can for example add HTML-attributes, content or wrappers to all generated elements of a special kind. See special section on decorators below for more info.
 
@@ -130,19 +130,19 @@ Registration is done by using one of the following methods:
 
   * Register a single (fully qualified) class-name as a component.
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->components->register(string $className, bool $force = false)
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->components->register(string $className, bool $force = false)
     ```
     Example:
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->components->register('FQCN\Of\My\AwesomeComponent')
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->components->register('FQCN\Of\My\AwesomeComponent')
     ```
   * Register components from the files in a directory.
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->components->registerFromFolder(string $namespace, string $folder, bool $force = false):
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->components->registerFromFolder(string $namespace, string $folder, bool $force = false):
     ```
     Example:
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->components->registerFromFolder('Fully\Qualified\Namespace','/path/to/my/awesome_components'):
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->components->registerFromFolder('Fully\Qualified\Namespace','/path/to/my/awesome_components'):
     ```
     
 Regarding the `$force`-parameter: Normally HtmlFactory will throw an error, if another component is already installed with the same accessor. This can be circumvented by setting `$force` to true. (This way you can also overrule the included components.)
@@ -167,17 +167,17 @@ Method | Description
 
 Of course you can also create your own constructor (for example to add mandatory parameters). Just be sure to call the parent's constructor.
 
-And of course you can also add additional fluid setters to be callable on the component in your views. The package already includes some traits, which provide some generic fluent setters and corresponding properties. You can find them at the namespace `Nicat\HtmlFactory\Components\Traits`. 
+And of course you can also add additional fluid setters to be callable on the component in your views. The package already includes some traits, which provide some generic fluent setters and corresponding properties. You can find them at the namespace `Webflorist\HtmlFactory\Components\Traits`. 
 
 ##### Examples
 
 Let's take a look at the included `SubmitButtonComponent` as a very basic example:
 
 ```php
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
 
 class SubmitButtonComponent extends ButtonElement implements RegisteredComponentInterface
 {
@@ -218,12 +218,12 @@ Check out the other included components for more examples!
 
 The second way to customize HtmlFactory's output is by using decorators. Decorators are classes, that define themselves, which _Elements_ they are eligible to process. You can for example create a decorator, that adds a CSS-class to all ButtonElements. Decorators are also a great way to apply frontend-framework-specific modifications (e.g. add the `form-control`-class to field-elements when using bootstrap as the frontend-framework). The decorator itself can also state, which frontend-framework it supports and is then only used, if the `frontend_framework` config-string corresponds to this setting.
 
-Decorators must expand the abstract class `Nicat\HtmlFactory\Decorators\Abstracts\Decorator`, forcing it to implement the following abstract methods:
+Decorators must expand the abstract class `Webflorist\HtmlFactory\Decorators\Abstracts\Decorator`, forcing it to implement the following abstract methods:
 
 Method | Description
 -------|--------
 **getSupportedFrameworks**() | Should return an array of frontend-framework-ids (e.g. 'bootstrap'). Optionally you can also specify the version prefixed with a colon (e.g. 'bootstrap:3'). The decorator will only be applied, if the current value for the config-setting `frontend_framework` is represented in this array. If you want the decorator to be applied regardless of the frontend-framework, simply return an empty array here.
-**getSupportedElements**() | Should return an array of FQCNs of any element- or component-classes, that should be processed by this decorator. This also applies to all child-classes of the stated class-names. (E.g. If you return `Nicat\HtmlFactory\Elements\Abstact\Element` in this array, the decorator would be applied to ALL elements or components generated with HtmlFactory.
+**getSupportedElements**() | Should return an array of FQCNs of any element- or component-classes, that should be processed by this decorator. This also applies to all child-classes of the stated class-names. (E.g. If you return `Webflorist\HtmlFactory\Elements\Abstact\Element` in this array, the decorator would be applied to ALL elements or components generated with HtmlFactory.
 **decorate**() | This is the main method to perform the desired modifications to the element, which accessible via `$this->element`.
 
 ##### Registering Decorators
@@ -232,19 +232,19 @@ Decorators must be registered with the HtmlFactory-service by using one of the f
 
   * Register a single (fully qualified) class-name as a decorator.
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->decorators->register(string $className)
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->decorators->register(string $className)
     ```
     Example:
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->decorators->register('FQCN\Of\My\AwesomeDecorator')
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->decorators->register('FQCN\Of\My\AwesomeDecorator')
     ```
   * Register decorators from the files in a directory.
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->decorators->registerFromFolder(string $namespace, string $folder):
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->decorators->registerFromFolder(string $namespace, string $folder):
     ```
     Example:
     ```php
-    app(Nicat\HtmlFactory\HtmlFactory::class)->decorators->registerFromFolder('Fully\Qualified\Namespace','/path/to/my/awesome_decorators'):
+    app(Webflorist\HtmlFactory\HtmlFactory::class)->decorators->registerFromFolder('Fully\Qualified\Namespace','/path/to/my/awesome_decorators'):
     ```
 
 As with components, the best location to perform these registrations is within the `boot()`-method of your `AppServiceProvider` (or any other ServiceProvider).
@@ -254,8 +254,8 @@ As with components, the best location to perform these registrations is within t
 HtmlFactory already comes with some included decorators. Let's take at the `DecorateButtonElement`-class:
 
 ```php
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
 
 class DecorateButtonElement extends Decorator
 {
@@ -282,6 +282,6 @@ class DecorateButtonElement extends Decorator
 }
 ```
 
-It's functionality should be quite obvious. The decorator is only applied, if the current config `frontend_framework` is set to 'bootstrap:3'. Also it is only applied to elements or components that are identical to or descendants of `Nicat\HtmlFactory\Elements\ButtonElement`. It's function is to add the bootstrap-specific CSS-class 'btn' to buttons.
+It's functionality should be quite obvious. The decorator is only applied, if the current config `frontend_framework` is set to 'bootstrap:3'. Also it is only applied to elements or components that are identical to or descendants of `Webflorist\HtmlFactory\Elements\ButtonElement`. It's function is to add the bootstrap-specific CSS-class 'btn' to buttons.
 
 Check out the other included decorators for more examples!

@@ -1,21 +1,21 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\InputElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAutocompleteAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsMaxlengthAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsMultipleAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsPatternAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsPlaceholderAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsSizeAttribute;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAutocompleteAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsMaxlengthAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsMultipleAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsPatternAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsPlaceholderAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsSizeAttribute;
 
 /**
  * Class representing the HTML-component '<input type="email" />'
  *
  * Class EmailInputComponent
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class EmailInputComponent extends InputElement implements RegisteredComponentInterface
 {

@@ -2,7 +2,7 @@
 
 namespace {
 
-    use Nicat\HtmlFactory\HtmlFactory;
+    use Webflorist\HtmlFactory\HtmlFactory;
 
     exit("This file should not be included, only analyzed by your IDE");
 

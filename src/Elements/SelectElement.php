@@ -1,20 +1,20 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsMultipleAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsRequiredAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaInvalidAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsMultipleAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsRequiredAttribute;
 
 /**
  * Class representing the HTML-element '<select></select>'
  *
  * Class SelectElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class SelectElement extends ContainerElement
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Abstracts;
+namespace Webflorist\HtmlFactory\Attributes\Abstracts;
 
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 /**
  * Abstract base-class for all HTML-attributes.
  *
  * Class Attribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class Attribute
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsSelectedAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsSelectedAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
 
 /**
  * Class representing the HTML-element '<option></option>'.
  *
  * Class OptionElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class OptionElement extends ContainerElement
 {

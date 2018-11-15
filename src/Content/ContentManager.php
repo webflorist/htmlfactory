@@ -1,9 +1,9 @@
 <?php
 
-namespace Nicat\HtmlFactory\Content;
+namespace Webflorist\HtmlFactory\Content;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 class ContentManager
 {

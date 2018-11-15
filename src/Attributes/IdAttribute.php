@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes;
+namespace Webflorist\HtmlFactory\Attributes;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\StringAttribute;
+use Webflorist\HtmlFactory\Attributes\Abstracts\StringAttribute;
 
 /**
  * Class representing the HTML-attribute 'id'
  *
  * Class IdAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class IdAttribute extends StringAttribute
 {

@@ -1,23 +1,23 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements\Abstracts;
+namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
-use Nicat\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
-use Nicat\HtmlFactory\HtmlFactory;
-use Nicat\HtmlFactory\Attributes\Manager\AttributeManager;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsClassAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsDataAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsHiddenAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsIdAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
+use Webflorist\HtmlFactory\HtmlFactory;
+use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsClassAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsDataAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsHiddenAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsIdAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
 
 /**
  * A HTML-element.
  *
  * Class Element
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class Element
 {

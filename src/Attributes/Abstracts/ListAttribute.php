@@ -1,13 +1,13 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Abstracts;
+namespace Webflorist\HtmlFactory\Attributes\Abstracts;
 
 /**
  * Abstract base-class for HTML-attributes,
  * that contain lists of values (e.g. 'class').
  *
  * Class ListAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class ListAttribute extends Attribute
 {

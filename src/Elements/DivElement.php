@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 
 /**
  * Class representing the HTML-element '<div></div>'
  *
  * Class DivElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class DivElement extends ContainerElement
 {

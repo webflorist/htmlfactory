@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsForAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsForAttribute;
 
 /**
  * Class representing the HTML-element '<label></label>'
  *
  * Class LabelElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class LabelElement extends ContainerElement
 {

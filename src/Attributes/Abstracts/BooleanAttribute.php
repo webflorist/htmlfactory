@@ -1,12 +1,12 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Abstracts;
+namespace Webflorist\HtmlFactory\Attributes\Abstracts;
 
 /**
  * Abstract base-class for boolean HTML-attributes (e.g. 'selected').
  *
  * Class BooleanAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class BooleanAttribute extends Attribute
 {

@@ -1,56 +1,56 @@
 <?php
 
-namespace Nicat\HtmlFactory;
+namespace Webflorist\HtmlFactory;
 
-use Nicat\HtmlFactory\Decorators\Manager\DecoratorManager;
-use Nicat\HtmlFactory\Components\Manager\ComponentManager;
-use Nicat\HtmlFactory\Exceptions\InvalidAccessorException;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\Elements\SpanElement;
-use Nicat\HtmlFactory\Elements\DivElement;
-use Nicat\HtmlFactory\Elements\FieldsetElement;
-use Nicat\HtmlFactory\Elements\BrElement;
-use Nicat\HtmlFactory\Elements\FormElement;
-use Nicat\HtmlFactory\Elements\LabelElement;
-use Nicat\HtmlFactory\Elements\LegendElement;
-use Nicat\HtmlFactory\Elements\InputElement;
-use Nicat\HtmlFactory\Components\TextInputComponent;
-use Nicat\HtmlFactory\Components\EmailInputComponent;
-use Nicat\HtmlFactory\Components\NumberInputComponent;
-use Nicat\HtmlFactory\Components\ColorInputComponent;
-use Nicat\HtmlFactory\Components\DateInputComponent;
-use Nicat\HtmlFactory\Components\DatetimeInputComponent;
-use Nicat\HtmlFactory\Components\DatetimeLocalInputComponent;
-use Nicat\HtmlFactory\Components\CheckboxInputComponent;
-use Nicat\HtmlFactory\Components\RadioInputComponent;
-use Nicat\HtmlFactory\Elements\TextareaElement;
-use Nicat\HtmlFactory\Components\HiddenInputComponent;
-use Nicat\HtmlFactory\Components\FileInputComponent;
-use Nicat\HtmlFactory\Components\MonthInputComponent;
-use Nicat\HtmlFactory\Components\PasswordInputComponent;
-use Nicat\HtmlFactory\Components\SearchInputComponent;
-use Nicat\HtmlFactory\Components\RangeInputComponent;
-use Nicat\HtmlFactory\Components\TelInputComponent;
-use Nicat\HtmlFactory\Components\TimeInputComponent;
-use Nicat\HtmlFactory\Components\WeekInputComponent;
-use Nicat\HtmlFactory\Components\UrlInputComponent;
-use Nicat\HtmlFactory\Elements\SmallElement;
-use Nicat\HtmlFactory\Elements\SupElement;
-use Nicat\HtmlFactory\Elements\ButtonElement;
-use Nicat\HtmlFactory\Elements\SelectElement;
-use Nicat\HtmlFactory\Elements\OptionElement;
-use Nicat\HtmlFactory\Elements\OptgroupElement;
-use Nicat\HtmlFactory\Components\SubmitButtonComponent;
-use Nicat\HtmlFactory\Components\ResetButtonComponent;
-use Nicat\HtmlFactory\Components\AlertComponent;
-use Nicat\HtmlFactory\Components\PanelComponent;
+use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
+use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
+use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\SpanElement;
+use Webflorist\HtmlFactory\Elements\DivElement;
+use Webflorist\HtmlFactory\Elements\FieldsetElement;
+use Webflorist\HtmlFactory\Elements\BrElement;
+use Webflorist\HtmlFactory\Elements\FormElement;
+use Webflorist\HtmlFactory\Elements\LabelElement;
+use Webflorist\HtmlFactory\Elements\LegendElement;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Components\TextInputComponent;
+use Webflorist\HtmlFactory\Components\EmailInputComponent;
+use Webflorist\HtmlFactory\Components\NumberInputComponent;
+use Webflorist\HtmlFactory\Components\ColorInputComponent;
+use Webflorist\HtmlFactory\Components\DateInputComponent;
+use Webflorist\HtmlFactory\Components\DatetimeInputComponent;
+use Webflorist\HtmlFactory\Components\DatetimeLocalInputComponent;
+use Webflorist\HtmlFactory\Components\CheckboxInputComponent;
+use Webflorist\HtmlFactory\Components\RadioInputComponent;
+use Webflorist\HtmlFactory\Elements\TextareaElement;
+use Webflorist\HtmlFactory\Components\HiddenInputComponent;
+use Webflorist\HtmlFactory\Components\FileInputComponent;
+use Webflorist\HtmlFactory\Components\MonthInputComponent;
+use Webflorist\HtmlFactory\Components\PasswordInputComponent;
+use Webflorist\HtmlFactory\Components\SearchInputComponent;
+use Webflorist\HtmlFactory\Components\RangeInputComponent;
+use Webflorist\HtmlFactory\Components\TelInputComponent;
+use Webflorist\HtmlFactory\Components\TimeInputComponent;
+use Webflorist\HtmlFactory\Components\WeekInputComponent;
+use Webflorist\HtmlFactory\Components\UrlInputComponent;
+use Webflorist\HtmlFactory\Elements\SmallElement;
+use Webflorist\HtmlFactory\Elements\SupElement;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Elements\SelectElement;
+use Webflorist\HtmlFactory\Elements\OptionElement;
+use Webflorist\HtmlFactory\Elements\OptgroupElement;
+use Webflorist\HtmlFactory\Components\SubmitButtonComponent;
+use Webflorist\HtmlFactory\Components\ResetButtonComponent;
+use Webflorist\HtmlFactory\Components\AlertComponent;
+use Webflorist\HtmlFactory\Components\PanelComponent;
 
 /**
  * The main class of this package.
  * Provides (magic) factory methods for all HTML-elements and included Components.
  *
  * Class HtmlFactory
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  *
  * Elements:
  * =========
@@ -157,7 +157,7 @@ class HtmlFactory
     public function __call($accessor, $arguments)
     {
         // If the accessor refers to a element, we return a new instance of it.
-        $elementClass = 'Nicat\\HtmlFactory\\Elements\\' . ucfirst($accessor) . 'Element';
+        $elementClass = 'Webflorist\\HtmlFactory\\Elements\\' . ucfirst($accessor) . 'Element';
         if (class_exists($elementClass)) {
             return new $elementClass(...$arguments);
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nicat\HtmlFactory\Exceptions;
+namespace Webflorist\HtmlFactory\Exceptions;
 
 use \Exception;
 

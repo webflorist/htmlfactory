@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bootstrap\v4;
+namespace Webflorist\HtmlFactory\Decorators\Bootstrap\v4;
 
-use Nicat\HtmlFactory\Decorators\Bootstrap\v3\DecorateAlertComponent as Bootstrap3DecorateAlertComponent;
+use Webflorist\HtmlFactory\Decorators\Bootstrap\v3\DecorateAlertComponent as Bootstrap3DecorateAlertComponent;
 
 class DecorateAlertComponent extends Bootstrap3DecorateAlertComponent
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\InputElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAutocompleteAttribute;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAutocompleteAttribute;
 
 /**
  * Class representing the HTML-component '<input type="color" />'
  *
  * Class ColorInputComponent
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class ColorInputComponent extends InputElement implements RegisteredComponentInterface
 {
