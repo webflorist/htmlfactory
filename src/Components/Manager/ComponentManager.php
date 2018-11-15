@@ -1,11 +1,11 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components\Manager;
+namespace Webflorist\HtmlFactory\Components\Manager;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\Exceptions\ComponentAccessorAlreadyUsedException;
-use Nicat\HtmlFactory\Exceptions\ComponentNotFoundException;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Exceptions\ComponentAccessorAlreadyUsedException;
+use Webflorist\HtmlFactory\Exceptions\ComponentNotFoundException;
 
 class ComponentManager
 {
@@ -44,8 +44,8 @@ class ComponentManager
      * Registers a className as a component.
      *
      * The class must fulfill the following requirements:
-     * - be a descendant of 'Nicat\HtmlFactory\Elements\Abstracts\Element'
-     * - and implement 'Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface'.
+     * - be a descendant of 'Webflorist\HtmlFactory\Elements\Abstracts\Element'
+     * - and implement 'Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface'.
      *
      * Set $force to true to forcefully register this component,
      * even if another component is already registered using the same accessor.

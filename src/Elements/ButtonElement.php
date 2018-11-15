@@ -1,19 +1,19 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsTypeAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAutofocusAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsDisabledAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsNameAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsTypeAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsValueAttribute;
 
 /**
  * Class representing the HTML-element '<button></button>'
  *
  * Class ButtonElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class ButtonElement extends ContainerElement
 {

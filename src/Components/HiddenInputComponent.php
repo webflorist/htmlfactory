@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\InputElement;
 
 /**
  * Class representing the HTML-component '<input type="hidden" />'
  *
  * Class HiddenInputComponent
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class HiddenInputComponent extends InputElement implements RegisteredComponentInterface
 {

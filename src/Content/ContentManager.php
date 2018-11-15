@@ -1,10 +1,10 @@
 <?php
 
-namespace Nicat\HtmlFactory\Content;
+namespace Webflorist\HtmlFactory\Content;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\HtmlFactoryTools;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\HtmlFactoryTools;
 
 class ContentManager
 {

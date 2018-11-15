@@ -2,7 +2,7 @@
 namespace HtmlFactoryTests\Feature\Elements;
 
 use HtmlFactoryTests\TestCase;
-use Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException;
+use Webflorist\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException;
 
 class BindDirectiveTest extends TestCase
 {

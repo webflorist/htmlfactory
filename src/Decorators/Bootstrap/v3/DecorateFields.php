@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bootstrap\v3;
+namespace Webflorist\HtmlFactory\Decorators\Bootstrap\v3;
 
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\InputElement;
-use Nicat\HtmlFactory\Components\CheckboxInputComponent;
-use Nicat\HtmlFactory\Components\FileInputComponent;
-use Nicat\HtmlFactory\Components\RadioInputComponent;
-use Nicat\HtmlFactory\Elements\SelectElement;
-use Nicat\HtmlFactory\Elements\TextareaElement;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Components\CheckboxInputComponent;
+use Webflorist\HtmlFactory\Components\FileInputComponent;
+use Webflorist\HtmlFactory\Components\RadioInputComponent;
+use Webflorist\HtmlFactory\Elements\SelectElement;
+use Webflorist\HtmlFactory\Elements\TextareaElement;
 
 class DecorateFields extends Decorator
 {

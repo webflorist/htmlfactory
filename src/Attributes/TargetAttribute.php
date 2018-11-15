@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes;
+namespace Webflorist\HtmlFactory\Attributes;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\StringAttribute;
+use Webflorist\HtmlFactory\Attributes\Abstracts\StringAttribute;
 
 /**
  * Class representing the HTML-attribute 'target'
  *
  * Class TargetAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class TargetAttribute extends StringAttribute
 {

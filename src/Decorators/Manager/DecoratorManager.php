@@ -1,18 +1,18 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Manager;
+namespace Webflorist\HtmlFactory\Decorators\Manager;
 
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\Exceptions\DecoratorNotFoundException;
-use Nicat\HtmlFactory\HtmlFactory;
-use Nicat\HtmlFactory\HtmlFactoryTools;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Exceptions\DecoratorNotFoundException;
+use Webflorist\HtmlFactory\HtmlFactory;
+use Webflorist\HtmlFactory\HtmlFactoryTools;
 
 /**
  * This Class manages registration an application of Decorators.
  *
  * Class DecoratorManager
- * @package Nicat\HtmlFactory\Decorators\Manager
+ * @package Webflorist\HtmlFactory\Decorators\Manager
  */
 class DecoratorManager
 {
@@ -51,7 +51,7 @@ class DecoratorManager
     /**
      * Register decorators from the files of a directory.
      *
-     * The classes of these files must extend 'Nicat\HtmlFactory\Decorators\Abstracts\Decorator'.
+     * The classes of these files must extend 'Webflorist\HtmlFactory\Decorators\Abstracts\Decorator'.
      *
      * @param string $namespace
      * @param string $folder
@@ -71,7 +71,7 @@ class DecoratorManager
     /**
      * Registers a className as a decorator.
      *
-     * The class must extend 'Nicat\HtmlFactory\Decorators\Abstracts\Decorator'.
+     * The class must extend 'Webflorist\HtmlFactory\Decorators\Abstracts\Decorator'.
      *
      * @param string $className
      * @throws DecoratorNotFoundException

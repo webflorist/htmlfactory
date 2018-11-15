@@ -1,6 +1,6 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components\Traits;
+namespace Webflorist\HtmlFactory\Components\Traits;
 
 trait IsDismissible
 {

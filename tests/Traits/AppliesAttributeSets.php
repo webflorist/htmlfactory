@@ -2,9 +2,9 @@
 
 namespace HtmlFactoryTests\Traits;
 
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\Elements\ButtonElement;
-use Nicat\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Elements\InputElement;
 use ReflectionClass;
 
 trait AppliesAttributeSets

@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\MultipleAttribute;
+use Webflorist\HtmlFactory\Attributes\MultipleAttribute;
 
 trait AllowsMultipleAttribute
 {

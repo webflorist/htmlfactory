@@ -1,16 +1,16 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes;
+namespace Webflorist\HtmlFactory\Attributes;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\StringAttribute;
-use Nicat\HtmlFactory\Elements\InputElement;
-use Nicat\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Attributes\Abstracts\StringAttribute;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
 
 /**
  * Class representing the HTML-attribute 'type'
  *
  * Class TypeAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class TypeAttribute extends StringAttribute
 {

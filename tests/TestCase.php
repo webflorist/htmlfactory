@@ -5,8 +5,8 @@ namespace HtmlFactoryTests;
 use HtmlFactoryTests\Traits\AppliesAttributeSets;
 use HtmlFactoryTests\Traits\AssertsHtml;
 use Illuminate\View\Factory;
-use Nicat\HtmlFactory\HtmlFactoryFacade;
-use Nicat\HtmlFactory\HtmlFactoryServiceProvider;
+use Webflorist\HtmlFactory\HtmlFactoryFacade;
+use Webflorist\HtmlFactory\HtmlFactoryServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**

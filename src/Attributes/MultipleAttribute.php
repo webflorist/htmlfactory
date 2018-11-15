@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes;
+namespace Webflorist\HtmlFactory\Attributes;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\BooleanAttribute;
+use Webflorist\HtmlFactory\Attributes\Abstracts\BooleanAttribute;
 
 /**
  * Class representing the HTML-attribute 'multiple'
  *
  * Class MultipleAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class MultipleAttribute extends BooleanAttribute
 {

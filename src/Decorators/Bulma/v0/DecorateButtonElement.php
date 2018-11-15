@@ -1,9 +1,9 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bulma\v0;
+namespace Webflorist\HtmlFactory\Decorators\Bulma\v0;
 
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
 
 class DecorateButtonElement extends Decorator
 {

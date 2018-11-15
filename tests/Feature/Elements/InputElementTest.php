@@ -2,8 +2,8 @@
 namespace HtmlFactoryTests\Feature\Elements;
 
 use HtmlFactoryTests\TestCase;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
-use Nicat\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\InputElement;
 
 class InputElementTest extends TestCase
 {

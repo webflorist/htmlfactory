@@ -1,11 +1,11 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bulma\v0;
+namespace Webflorist\HtmlFactory\Decorators\Bulma\v0;
 
-use Nicat\HtmlFactory\Components\AlertComponent;
-use Nicat\HtmlFactory\Decorators\Abstracts\Decorator;
-use Nicat\HtmlFactory\Elements\ButtonElement;
-use Nicat\HtmlFactory\Elements\SpanElement;
+use Webflorist\HtmlFactory\Components\AlertComponent;
+use Webflorist\HtmlFactory\Decorators\Abstracts\Decorator;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Elements\SpanElement;
 
 class DecorateAlertComponent extends Decorator
 {

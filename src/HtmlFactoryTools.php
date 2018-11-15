@@ -1,12 +1,12 @@
 <?php
 
-namespace Nicat\HtmlFactory;
+namespace Webflorist\HtmlFactory;
 
 /**
  * Class with various static helper-methods.
  *
  * Class HtmlFactoryTools
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  *
  */
 class HtmlFactoryTools

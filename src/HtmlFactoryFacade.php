@@ -1,6 +1,6 @@
 <?php
 
-namespace Nicat\HtmlFactory;
+namespace Webflorist\HtmlFactory;
 
 use Illuminate\Support\Facades\Facade;
 

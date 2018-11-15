@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Bootstrap\v4;
+namespace Webflorist\HtmlFactory\Decorators\Bootstrap\v4;
 
-use Nicat\HtmlFactory\Decorators\Bootstrap\v3\DecorateButtonElement as Bootstrap3DecorateButtonElement;
+use Webflorist\HtmlFactory\Decorators\Bootstrap\v3\DecorateButtonElement as Bootstrap3DecorateButtonElement;
 
 class DecorateButtonElement extends Bootstrap3DecorateButtonElement
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Abstracts;
+namespace Webflorist\HtmlFactory\Attributes\Abstracts;
 
-use Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException;
+use Webflorist\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException;
 
 /**
  * Abstract base-class for Vue-Directives.
  *
  * Class VueDirective
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 abstract class VueDirective extends Attribute
 {
