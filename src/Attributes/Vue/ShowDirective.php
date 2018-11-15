@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Vue;
+namespace Webflorist\HtmlFactory\Attributes\Vue;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\VueDirective;
+use Webflorist\HtmlFactory\Attributes\Abstracts\VueDirective;
 
 /**
  * Class representing the Vue-Directive 'v-show'
  *
  * Class ShowDirective
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class ShowDirective extends VueDirective
 {

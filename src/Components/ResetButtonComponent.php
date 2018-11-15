@@ -1,15 +1,15 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
 
 /**
  * Class representing the HTML-component '<button type="reset"></button>'
  *
  * Class ButtonElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class ResetButtonComponent extends ButtonElement implements RegisteredComponentInterface
 {

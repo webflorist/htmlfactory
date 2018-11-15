@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components\Traits;
+namespace Webflorist\HtmlFactory\Components\Traits;
 
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 trait HasFooter
 {

@@ -1,10 +1,10 @@
 {
-    "name": "nicat/htmlfactory",
+    "name": "webflorist/htmlfactory",
     "description": "Convenient and powerful HTML-builder for Laravel 5.5",
     "authors": [
         {
             "name": "Gerald Buttinger",
-            "email": "gerald.buttinger@nic.at"
+            "email": "gerald@code.florist"
         }
     ],
     "require": {
@@ -17,17 +17,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Nicat\\HtmlFactory\\": "src/",
+            "Webflorist\\HtmlFactory\\": "src/",
             "HtmlFactoryTests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Nicat\\HtmlFactory\\HtmlFactoryServiceProvider"
+                "Webflorist\\HtmlFactory\\HtmlFactoryServiceProvider"
             ],
             "aliases": {
-                "Html": "Nicat\\HtmlFactory\\HtmlFactoryFacade"
+                "Html": "Webflorist\\HtmlFactory\\HtmlFactoryFacade"
             }
         }
     }

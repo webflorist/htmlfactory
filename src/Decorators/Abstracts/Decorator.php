@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Decorators\Abstracts;
+namespace Webflorist\HtmlFactory\Decorators\Abstracts;
 
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 abstract class Decorator
 {

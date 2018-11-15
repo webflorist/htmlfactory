@@ -1,16 +1,16 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\Vue\BindDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ElseDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ElseIfDirective;
-use Nicat\HtmlFactory\Attributes\Vue\HtmlDirective;
-use Nicat\HtmlFactory\Attributes\Vue\IfDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ModelDirective;
-use Nicat\HtmlFactory\Attributes\Vue\OnDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ShowDirective;
-use Nicat\HtmlFactory\Attributes\Vue\TextDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\BindDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ElseDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ElseIfDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\HtmlDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\IfDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ModelDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\OnDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ShowDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\TextDirective;
 
 trait AllowsVueModelDirective
 {
@@ -21,7 +21,7 @@ trait AllowsVueModelDirective
      * @param string $key
      * @param array $modifiers
      * @return $this
-     * @throws \Nicat\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
+     * @throws \Webflorist\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException
      */
     public function vModel(string $key, array $modifiers=[])
     {

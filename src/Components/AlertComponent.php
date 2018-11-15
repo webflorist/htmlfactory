@@ -1,11 +1,11 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Components\Traits\HasContext;
-use Nicat\HtmlFactory\Components\Traits\IsDismissible;
-use Nicat\HtmlFactory\Elements\DivElement;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Components\Traits\HasContext;
+use Webflorist\HtmlFactory\Components\Traits\IsDismissible;
+use Webflorist\HtmlFactory\Elements\DivElement;
 
 class AlertComponent extends DivElement implements RegisteredComponentInterface
 {

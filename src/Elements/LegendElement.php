@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 
 /**
  * Class representing the HTML-element '<legend></legend>'
  *
  * Class LegendElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class LegendElement extends ContainerElement
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 
 /**
  * Class representing the HTML-element '<sup></sup>'.
  *
  * Class SupElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class SupElement extends ContainerElement
 {

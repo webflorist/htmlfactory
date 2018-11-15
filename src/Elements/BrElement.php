@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\EmptyElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\EmptyElement;
 
 /**
  * Class representing the HTML-element '<br />'
  *
  * Class BrElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class BrElement extends EmptyElement
 {

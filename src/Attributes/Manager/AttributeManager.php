@@ -1,10 +1,10 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Manager;
+namespace Webflorist\HtmlFactory\Attributes\Manager;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\Attribute;
-use Nicat\HtmlFactory\Exceptions\AttributeNotFoundException;
-use Nicat\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Attributes\Abstracts\Attribute;
+use Webflorist\HtmlFactory\Exceptions\AttributeNotFoundException;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 class AttributeManager
 {
@@ -168,7 +168,7 @@ class AttributeManager
     private function evaluateAllowedAttributes()
     {
         $elementTraits = self::getClassTraits(get_class($this->element));
-        $traitPrefix = 'Nicat\HtmlFactory\Attributes\Traits\Allows';
+        $traitPrefix = 'Webflorist\HtmlFactory\Attributes\Traits\Allows';
         $traitSuffix = 'Attribute';
         foreach ($elementTraits as $traitClass) {
             if (strpos($traitClass, $traitPrefix) === 0) {

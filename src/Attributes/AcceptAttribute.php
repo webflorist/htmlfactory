@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes;
+namespace Webflorist\HtmlFactory\Attributes;
 
-use Nicat\HtmlFactory\Attributes\Abstracts\ListAttribute;
+use Webflorist\HtmlFactory\Attributes\Abstracts\ListAttribute;
 
 /**
  * Class representing the HTML-attribute 'accept'
  *
  * Class AcceptAttribute
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class AcceptAttribute extends ListAttribute
 {

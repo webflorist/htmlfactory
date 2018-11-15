@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\EnctypeAttribute;
+use Webflorist\HtmlFactory\Attributes\EnctypeAttribute;
 
 trait AllowsEnctypeAttribute
 {

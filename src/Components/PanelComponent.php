@@ -1,12 +1,12 @@
 <?php
 
-namespace Nicat\HtmlFactory\Components;
+namespace Webflorist\HtmlFactory\Components;
 
-use Nicat\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
-use Nicat\HtmlFactory\Components\Traits\HasContext;
-use Nicat\HtmlFactory\Components\Traits\HasFooter;
-use Nicat\HtmlFactory\Components\Traits\HasHeader;
-use Nicat\HtmlFactory\Elements\DivElement;
+use Webflorist\HtmlFactory\Components\Contracts\RegisteredComponentInterface;
+use Webflorist\HtmlFactory\Components\Traits\HasContext;
+use Webflorist\HtmlFactory\Components\Traits\HasFooter;
+use Webflorist\HtmlFactory\Components\Traits\HasHeader;
+use Webflorist\HtmlFactory\Elements\DivElement;
 
 class PanelComponent extends DivElement implements RegisteredComponentInterface
 {

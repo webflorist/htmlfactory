@@ -1,20 +1,20 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\Vue\BindDirective;
-use Nicat\HtmlFactory\Attributes\Vue\CloakDirective;
-use Nicat\HtmlFactory\Attributes\Vue\CustomDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ElseDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ElseIfDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ForDirective;
-use Nicat\HtmlFactory\Attributes\Vue\HtmlDirective;
-use Nicat\HtmlFactory\Attributes\Vue\IfDirective;
-use Nicat\HtmlFactory\Attributes\Vue\OnceDirective;
-use Nicat\HtmlFactory\Attributes\Vue\OnDirective;
-use Nicat\HtmlFactory\Attributes\Vue\PreDirective;
-use Nicat\HtmlFactory\Attributes\Vue\ShowDirective;
-use Nicat\HtmlFactory\Attributes\Vue\TextDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\BindDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\CloakDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\CustomDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ElseDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ElseIfDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ForDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\HtmlDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\IfDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\OnceDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\OnDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\PreDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\ShowDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\TextDirective;
 
 trait AllowsGeneralVueDirectives
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Attributes\Traits\AllowsAltAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsHeightAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsSrcAttribute;
-use Nicat\HtmlFactory\Attributes\Traits\AllowsWidthAttribute;
-use Nicat\HtmlFactory\Elements\Abstracts\EmptyElement;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsAltAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsHeightAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsSrcAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsWidthAttribute;
+use Webflorist\HtmlFactory\Elements\Abstracts\EmptyElement;
 
 /**
  * Class representing a HTML-element '<img />'.
  *
  * Class ImgElement
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class ImgElement extends EmptyElement
 {

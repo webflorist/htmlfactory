@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\SrcAttribute;
+use Webflorist\HtmlFactory\Attributes\SrcAttribute;
 
 trait AllowsSrcAttribute
 {

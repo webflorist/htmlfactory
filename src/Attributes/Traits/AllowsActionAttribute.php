@@ -1,8 +1,8 @@
 <?php
 
-namespace Nicat\HtmlFactory\Attributes\Traits;
+namespace Webflorist\HtmlFactory\Attributes\Traits;
 
-use Nicat\HtmlFactory\Attributes\ActionAttribute;
+use Webflorist\HtmlFactory\Attributes\ActionAttribute;
 
 trait AllowsActionAttribute
 {

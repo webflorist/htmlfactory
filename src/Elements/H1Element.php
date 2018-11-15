@@ -1,14 +1,14 @@
 <?php
 
-namespace Nicat\HtmlFactory\Elements;
+namespace Webflorist\HtmlFactory\Elements;
 
-use Nicat\HtmlFactory\Elements\Abstracts\ContainerElement;
+use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 
 /**
  * Class representing the HTML-element '<h1></h1>'
  *
  * Class H1Element
- * @package Nicat\HtmlFactory
+ * @package Webflorist\HtmlFactory
  */
 class H1Element extends ContainerElement
 {
