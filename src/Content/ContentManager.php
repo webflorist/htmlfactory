@@ -148,10 +148,10 @@ class ContentManager
     /**
      * Replaces a certain child-element with another content.
      *
-     * @param Element $child
+     * @param Element|string $child
      * @param Element|string $newChild
      */
-    public function replaceChild(Element $child, $newChild)
+    public function replaceChild($child, $newChild)
     {
         foreach ($this->content as $childKey => $childElement) {
             if ($childElement === $child) {
