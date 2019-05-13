@@ -4,6 +4,7 @@ namespace Webflorist\HtmlFactory;
 
 use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
+use Webflorist\HtmlFactory\Elements\BlockquoteElement;
 use Webflorist\HtmlFactory\Elements\H1Element;
 use Webflorist\HtmlFactory\Elements\ImgElement;
 use Webflorist\HtmlFactory\Elements\PElement;
@@ -58,12 +59,14 @@ use Webflorist\HtmlFactory\Components\PanelComponent;
  *
  * Elements:
  * =========
+ * @method static BlockquoteElement         blockquote()
  * @method static BrElement                 br()
  * @method static ButtonElement             button()
  * @method static DivElement                div()
  * @method static FieldsetElement           fieldset()
  * @method static FormElement               form()
  * @method static H1Element                 h1()
+ * @method static H2Element                 h2()
  * @method static ImgElement                img()
  * @method static InputElement              input()
  * @method static LabelElement              label()
@@ -71,6 +74,7 @@ use Webflorist\HtmlFactory\Components\PanelComponent;
  * @method static OptgroupElement           optgroup()
  * @method static OptionElement             option()
  * @method static PElement                  p()
+ * @method static SectionElement            section()
  * @method static SelectElement             select()
  * @method static SmallElement              small()
  * @method static SpanElement               span()
