@@ -108,6 +108,13 @@ abstract class Element
     private $closureDecorators = [];
 
     /**
+     * Custom data, that can be retrieved via $this->getData().
+     *
+     * @var []
+     */
+    private $customData = [];
+
+    /**
      * Returns the name of the element.
      *
      * @return string
@@ -406,6 +413,40 @@ abstract class Element
         foreach ($this->closureDecorators as $closure) {
             call_user_func_array($closure, [$this]);
         }
+    }
+
+    /**
+     * Returns specific custom data.
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function getData(string $key)
+    {
+        return $this->customData[$key];
+    }
+
+    /**
+     * Is a specific custom data set?
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function hasData(string $key)
+    {
+        return isset($this->data[$key]);
+    }
+
+    /**
+     * Set any custom-data in array-form.
+     *
+     * @param array $customData
+     * @return $this
+     */
+    public function customData(array $customData)
+    {
+        $this->customData = $customData;
+        return $this;
     }
 
 }
