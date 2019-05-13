@@ -434,7 +434,7 @@ abstract class Element
      */
     public function hasData(string $key)
     {
-        return isset($this->data[$key]);
+        return isset($this->customData[$key]);
     }
 
     /**
