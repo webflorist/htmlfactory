@@ -2,8 +2,10 @@
 
 namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
+use Illuminate\Support\Arr;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
+use Webflorist\HtmlFactory\Exceptions\CustomDataNotFoundException;
 use Webflorist\HtmlFactory\HtmlFactory;
 use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
@@ -418,34 +420,55 @@ abstract class Element
     /**
      * Returns specific custom data.
      *
+     * Can also get data at specific location
+     * using "dot" notation.
+     *
      * @param string $key
      * @return mixed
      */
-    public function getData(string $key)
+    public function getData(string $key, $defaultValue = null)
     {
-        return $this->customData[$key];
+        if (!$this->hasData($key)) {
+            if (!is_null($defaultValue)) {
+                return $defaultValue;
+            }
+            throw new CustomDataNotFoundException("No data found for key '$key'. Eiher add the data or state a default value.'");
+        }
+        return Arr::get($this->customData, $key);
     }
 
     /**
      * Is a specific custom data set?
+     *
+     * Can also check at specific location
+     * using "dot" notation.
      *
      * @param string $key
      * @return bool
      */
     public function hasData(string $key)
     {
-        return isset($this->customData[$key]);
+        return Arr::has($this->customData, $key);
     }
 
     /**
      * Set any custom-data in array-form.
      *
-     * @param array $customData
+     * Can also set data at specific location
+     * using "dot" notation via the $key
+     * parameter.
+     *
+     * @param array $key
      * @return $this
      */
-    public function customData(array $customData)
+    public function customData(array $customData, string $key = '')
     {
-        $this->customData = $customData;
+        if (strlen($key) > 0) {
+            Arr::set($this->customData, $key, $customData);
+        }
+        else {
+            $this->customData = $customData;
+        }
         return $this;
     }
 
