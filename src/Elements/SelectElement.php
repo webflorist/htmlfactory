@@ -31,12 +31,9 @@ class SelectElement extends ContainerElement
         AllowsVueModelDirective;
 
     /**
-     * Returns the name of the element.
+     * The name (=tag) of this element.
      *
-     * @return string
+     * @var string
      */
-    public function getName(): string
-    {
-        return 'select';
-    }
+    protected $name = 'select';
 }

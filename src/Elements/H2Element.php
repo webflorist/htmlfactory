@@ -13,12 +13,9 @@ use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 class H2Element extends ContainerElement
 {
     /**
-     * Returns the name of the element.
+     * The name (=tag) of this element.
      *
-     * @return string
+     * @var string
      */
-    public function getName(): string
-    {
-        return 'h2';
-    }
+    protected $name = 'h2';
 }

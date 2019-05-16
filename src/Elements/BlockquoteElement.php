@@ -19,12 +19,9 @@ class BlockquoteElement extends ContainerElement
     use AllowsCiteAttribute;
 
     /**
-     * Returns the name of the element.
+     * The name (=tag) of this element.
      *
-     * @return string
+     * @var string
      */
-    public function getName(): string
-    {
-        return 'blockquote';
-    }
+    protected $name = 'blockquote';
 }

@@ -96,6 +96,13 @@ abstract class Element
     private $view = null;
 
     /**
+     * The name (=tag) of this element.
+     *
+     * @var string
+     */
+    protected $name = null;
+
+    /**
      * The generated output.
      *
      * @var string
@@ -115,13 +122,6 @@ abstract class Element
      * @var []
      */
     private $payload = [];
-    
-    /**
-     * Returns the name of the element.
-     *
-     * @return string
-     */
-    abstract public function getName(): string;
 
     /**
      * Render the element to an HTML-string.
@@ -137,6 +137,28 @@ abstract class Element
     {
         $this->attributes = new AttributeManager($this);
         $this->setUp();
+    }
+
+    /**
+     * Override the name(=tag) of the element.
+     *
+     * @param string $name
+     * @return string
+     */
+    public function overrideName(string $name): string
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Returns the name of the element.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**

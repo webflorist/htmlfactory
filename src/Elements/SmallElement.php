@@ -13,12 +13,9 @@ use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 class SmallElement extends ContainerElement
 {
     /**
-     * Returns the name of the element.
+     * The name (=tag) of this element.
      *
-     * @return string
+     * @var string
      */
-    public function getName(): string
-    {
-        return 'small';
-    }
+    protected $name = 'small';
 }
