@@ -4,7 +4,7 @@ namespace Webflorist\HtmlFactory\Exceptions;
 
 use \Exception;
 
-class CustomDataNotFoundException extends Exception
+class PayloadNotFoundException extends Exception
 {
 
 }

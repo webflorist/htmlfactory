@@ -5,7 +5,7 @@ namespace Webflorist\HtmlFactory\Elements\Abstracts;
 use Illuminate\Support\Arr;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
-use Webflorist\HtmlFactory\Exceptions\CustomDataNotFoundException;
+use Webflorist\HtmlFactory\Exceptions\PayloadNotFoundException;
 use Webflorist\HtmlFactory\HtmlFactory;
 use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
@@ -110,12 +110,12 @@ abstract class Element
     private $closureDecorators = [];
 
     /**
-     * Custom data, that can be retrieved via $this->getData().
+     * Any custom data, that can be retrieved via $this->getPayload().
      *
      * @var []
      */
-    private $customData = [];
-
+    private $payload = [];
+    
     /**
      * Returns the name of the element.
      *
@@ -424,21 +424,23 @@ abstract class Element
      * using "dot" notation.
      *
      * @param string $key
+     * @param null $defaultValue
      * @return mixed
+     * @throws PayloadNotFoundException
      */
-    public function getData(string $key, $defaultValue = null)
+    public function getPayload(string $key, $defaultValue = null)
     {
-        if (!$this->hasData($key)) {
+        if (!$this->hasPayload($key)) {
             if (!is_null($defaultValue)) {
                 return $defaultValue;
             }
-            throw new CustomDataNotFoundException("No data found for key '$key'. Eiher add the data or state a default value.'");
+            throw new PayloadNotFoundException("No data found for key '$key'. Eiher add the data or state a default value.'");
         }
-        return Arr::get($this->customData, $key);
+        return Arr::get($this->payload, $key);
     }
 
     /**
-     * Is a specific custom data set?
+     * Is a payload set?
      *
      * Can also check at specific location
      * using "dot" notation.
@@ -446,28 +448,29 @@ abstract class Element
      * @param string $key
      * @return bool
      */
-    public function hasData(string $key)
+    public function hasPayload(string $key)
     {
-        return Arr::has($this->customData, $key);
+        return Arr::has($this->payload, $key);
     }
 
     /**
-     * Set any custom-data in array-form.
+     * Set any payload in array-form.
      *
      * Can also set data at specific location
      * using "dot" notation via the $key
      * parameter.
      *
-     * @param array $key
+     * @param string|array $payload
+     * @param string $key
      * @return $this
      */
-    public function customData(array $customData, string $key = '')
+    public function payload($payload, string $key = '')
     {
         if (strlen($key) > 0) {
-            Arr::set($this->customData, $key, $customData);
+            Arr::set($this->payload, $key, $payload);
         }
         else {
-            $this->customData = $customData;
+            $this->payload = $payload;
         }
         return $this;
     }
