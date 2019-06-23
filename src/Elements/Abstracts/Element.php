@@ -143,9 +143,9 @@ abstract class Element
      * Override the name(=tag) of the element.
      *
      * @param string $name
-     * @return string
+     * @return $this
      */
-    public function overrideName(string $name): string
+    public function overrideName(string $name)
     {
         $this->name = $name;
         return $this;
@@ -456,7 +456,7 @@ abstract class Element
             if (!is_null($defaultValue)) {
                 return $defaultValue;
             }
-            throw new PayloadNotFoundException("No data found for key '$key'. Eiher add the data or state a default value.'");
+            throw new PayloadNotFoundException("No data found for key '$key'. Either add the data or state a default value.'");
         }
         return Arr::get($this->payload, $key);
     }

@@ -6,6 +6,7 @@ use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
 use Webflorist\HtmlFactory\Elements\BlockquoteElement;
 use Webflorist\HtmlFactory\Elements\H1Element;
+use Webflorist\HtmlFactory\Elements\H2Element;
 use Webflorist\HtmlFactory\Elements\ImgElement;
 use Webflorist\HtmlFactory\Elements\PElement;
 use Webflorist\HtmlFactory\Elements\TemplateElement;
@@ -13,6 +14,7 @@ use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
 use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 use Webflorist\HtmlFactory\Elements\SpanElement;
 use Webflorist\HtmlFactory\Elements\DivElement;
+use Webflorist\HtmlFactory\Elements\SectionElement;
 use Webflorist\HtmlFactory\Elements\FieldsetElement;
 use Webflorist\HtmlFactory\Elements\BrElement;
 use Webflorist\HtmlFactory\Elements\FormElement;
@@ -45,6 +47,7 @@ use Webflorist\HtmlFactory\Elements\ButtonElement;
 use Webflorist\HtmlFactory\Elements\SelectElement;
 use Webflorist\HtmlFactory\Elements\OptionElement;
 use Webflorist\HtmlFactory\Elements\OptgroupElement;
+use Webflorist\HtmlFactory\Elements\IElement;
 use Webflorist\HtmlFactory\Components\SubmitButtonComponent;
 use Webflorist\HtmlFactory\Components\ResetButtonComponent;
 use Webflorist\HtmlFactory\Components\AlertComponent;
@@ -67,6 +70,7 @@ use Webflorist\HtmlFactory\Components\PanelComponent;
  * @method static FormElement               form()
  * @method static H1Element                 h1()
  * @method static H2Element                 h2()
+ * @method static IElement                  i()
  * @method static ImgElement                img()
  * @method static InputElement              input()
  * @method static LabelElement              label()
