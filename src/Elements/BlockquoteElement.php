@@ -3,26 +3,25 @@
 namespace Webflorist\HtmlFactory\Elements;
 
 use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
-use Webflorist\HtmlFactory\Attributes\Traits\AllowsLabelAttribute;
+use Webflorist\HtmlFactory\Attributes\Traits\AllowsCiteAttribute;
 
 /**
- * Class representing the HTML-element '<optgroup></optgroup>'.
+ * Class representing the HTML-element '<blockquote></blockquote>'
  *
- * Class OptgroupElement
+ * Class BlockquoteElement
  * @package Webflorist\HtmlFactory
  */
-class OptgroupElement extends ContainerElement
+class BlockquoteElement extends ContainerElement
 {
-
     /**
      * Use corresponding traits for all element-specific HTML-attributes.
      */
-    use AllowsLabelAttribute;
+    use AllowsCiteAttribute;
 
     /**
      * The name (=tag) of this element.
      *
      * @var string
      */
-    protected $name = 'optgroup';
+    protected $name = 'blockquote';
 }

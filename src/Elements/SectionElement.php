@@ -5,17 +5,17 @@ namespace Webflorist\HtmlFactory\Elements;
 use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
 
 /**
- * Class representing the HTML-element '<template></template>'
+ * Class representing the HTML-element '<section></section>'
  *
- * Class TemplateElement
+ * Class SectionElement
  * @package Webflorist\HtmlFactory
  */
-class TemplateElement extends ContainerElement
+class SectionElement extends ContainerElement
 {
     /**
      * The name (=tag) of this element.
      *
      * @var string
      */
-    protected $name = 'template';
+    protected $name = 'section';
 }

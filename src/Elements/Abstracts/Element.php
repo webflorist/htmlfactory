@@ -2,8 +2,10 @@
 
 namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
+use Illuminate\Support\Arr;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
+use Webflorist\HtmlFactory\Exceptions\PayloadNotFoundException;
 use Webflorist\HtmlFactory\HtmlFactory;
 use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
@@ -94,6 +96,13 @@ abstract class Element
     private $view = null;
 
     /**
+     * The name (=tag) of this element.
+     *
+     * @var string
+     */
+    protected $name = null;
+
+    /**
      * The generated output.
      *
      * @var string
@@ -108,11 +117,11 @@ abstract class Element
     private $closureDecorators = [];
 
     /**
-     * Returns the name of the element.
+     * Any custom data, that can be retrieved via $this->getPayload().
      *
-     * @return string
+     * @var []
      */
-    abstract public function getName(): string;
+    private $payload = [];
 
     /**
      * Render the element to an HTML-string.
@@ -128,6 +137,28 @@ abstract class Element
     {
         $this->attributes = new AttributeManager($this);
         $this->setUp();
+    }
+
+    /**
+     * Override the name(=tag) of the element.
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function overrideName(string $name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Returns the name of the element.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -406,6 +437,64 @@ abstract class Element
         foreach ($this->closureDecorators as $closure) {
             call_user_func_array($closure, [$this]);
         }
+    }
+
+    /**
+     * Returns specific custom data.
+     *
+     * Can also get data at specific location
+     * using "dot" notation.
+     *
+     * @param string $key
+     * @param null $defaultValue
+     * @return mixed
+     * @throws PayloadNotFoundException
+     */
+    public function getPayload(string $key, $defaultValue = null)
+    {
+        if (!$this->hasPayload($key)) {
+            if (!is_null($defaultValue)) {
+                return $defaultValue;
+            }
+            throw new PayloadNotFoundException("No data found for key '$key'. Either add the data or state a default value.'");
+        }
+        return Arr::get($this->payload, $key);
+    }
+
+    /**
+     * Is a payload set?
+     *
+     * Can also check at specific location
+     * using "dot" notation.
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function hasPayload(string $key)
+    {
+        return Arr::has($this->payload, $key);
+    }
+
+    /**
+     * Set any payload in array-form.
+     *
+     * Can also set data at specific location
+     * using "dot" notation via the $key
+     * parameter.
+     *
+     * @param string|array $payload
+     * @param string $key
+     * @return $this
+     */
+    public function payload($payload, string $key = '')
+    {
+        if (strlen($key) > 0) {
+            Arr::set($this->payload, $key, $payload);
+        }
+        else {
+            $this->payload = $payload;
+        }
+        return $this;
     }
 
 }

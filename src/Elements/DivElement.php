@@ -12,13 +12,12 @@ use Webflorist\HtmlFactory\Elements\Abstracts\ContainerElement;
  */
 class DivElement extends ContainerElement
 {
+
     /**
-     * Returns the name of the element.
+     * The name (=tag) of this element.
      *
-     * @return string
+     * @var string
      */
-    public function getName(): string
-    {
-        return 'div';
-    }
+    protected $name = 'div';
+
 }

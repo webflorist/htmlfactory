@@ -1,6 +1,4 @@
-# Development
 .idea
-
-# Dependencies
 composer.lock
 vendor
+.phpunit.result.cache
