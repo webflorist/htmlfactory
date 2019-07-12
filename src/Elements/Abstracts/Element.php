@@ -442,16 +442,24 @@ abstract class Element
     /**
      * Returns specific custom data.
      *
-     * Can also get data at specific location
-     * using "dot" notation.
+     * Returns complete array of custom data,
+     * if called with no parameters.
      *
-     * @param string $key
-     * @param null $defaultValue
+     * Can also get data at specific location
+     * of a nested array using "dot" notation.
+     *
+     * @param string|null $key
+     * @param string|null $defaultValue
      * @return mixed
      * @throws PayloadNotFoundException
      */
-    public function getPayload(string $key, $defaultValue = null)
+    public function getPayload(string $key = null, string $defaultValue = null)
     {
+        // Return complete payload-array, if $key is null.
+        if (is_null($key)) {
+            return $this->payload;
+        }
+
         if (!$this->hasPayload($key)) {
             if (!is_null($defaultValue)) {
                 return $defaultValue;
@@ -464,14 +472,23 @@ abstract class Element
     /**
      * Is a payload set?
      *
-     * Can also check at specific location
-     * using "dot" notation.
+     * Checks if any payload is set,
+     * if called with no parameters.
+     *
+     * Can also check data at specific location
+     * of a nested array using "dot" notation.
      *
      * @param string $key
      * @return bool
      */
-    public function hasPayload(string $key)
+    public function hasPayload(string $key=null)
     {
+        if (is_null($key)) {
+            if (count($this->payload)>0) {
+                return true;
+            }
+            return false;
+        }
         return Arr::has($this->payload, $key);
     }
 
