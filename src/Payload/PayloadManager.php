@@ -27,11 +27,10 @@ class PayloadManager
     }
 
     /**
-     * Set any payload.
+     * Set any payload under a specific key.
      *
-     * Can also set data at specific location
-     * using "dot" notation via the $key
-     * parameter.
+     * Sets complete payload,
+     * if $key is null.
      *
      * @param mixed|Payload $payload
      * @param string|null $key
@@ -48,9 +47,9 @@ class PayloadManager
                 throw new InvalidPayloadException("You can only set a Payload object as the root payload-element.");
             }
         }
-        // Set specific data inside the payload
+        // Set specific payload
         else {
-            dd($this->payload);
+            $this->payload->{$key} = $payload;
         }
     }
 

@@ -61,12 +61,16 @@ class DivElementTest extends TestCase
             ->view('ElementsTestViews::payload-test')
             ->payload($myPayload)
         ;
+
+        // Overwrite a payload-item
+        $html->payload('myNewPayloadString', 'payloadString');
+
         $result = $html->generate();
 
         $this->assertHtmlEquals(
             '
                 <div></div>
-                myPayloadString
+                myNewPayloadString
                 5
                 payloadBool is true
                 myPayloadArrayItem1
