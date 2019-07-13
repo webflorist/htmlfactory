@@ -47,15 +47,13 @@ class DivElementTest extends TestCase
     {
         $myPayload = new Payload();
         $myPayload->payloadString = 'myPayloadString';
-        $myPayload->payloadInteger = 5;
+        $myPayload->payloadInteger(5);
         $myPayload->payloadBool = true;
         $myPayload->payloadArray = [
             'myPayloadArrayItem1',
             'myPayloadArrayItem2'
         ];
-        $mySubPayload = new Payload();
-        $mySubPayload->subPayloadString = 'mySubPayloadString';
-        $myPayload->subPayload = $mySubPayload;
+        $myPayload->subPayload = new Payload(['subPayloadString' => 'mySubPayloadString']);
 
         $html = \Html::div()
             ->view('ElementsTestViews::payload-test')
