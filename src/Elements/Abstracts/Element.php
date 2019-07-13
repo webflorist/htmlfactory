@@ -5,6 +5,7 @@ namespace Webflorist\HtmlFactory\Elements\Abstracts;
 use Illuminate\Support\Arr;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
+use Webflorist\HtmlFactory\Exceptions\InvalidPayloadException;
 use Webflorist\HtmlFactory\Exceptions\PayloadNotFoundException;
 use Webflorist\HtmlFactory\HtmlFactory;
 use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
@@ -16,6 +17,8 @@ use Webflorist\HtmlFactory\Attributes\Traits\AllowsIdAttribute;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
 use Webflorist\HtmlFactory\HtmlFactoryTools;
+use Webflorist\HtmlFactory\Payload\Abstracts\Payload;
+use Webflorist\HtmlFactory\Payload\PayloadManager;
 
 /**
  * A HTML-element.
@@ -43,6 +46,13 @@ abstract class Element
      * @var AttributeManager
      */
     public $attributes;
+
+    /**
+     * PayloadManager
+     *
+     * @var PayloadManager
+     */
+    public $payload;
 
     /**
      * Wrapper.
@@ -117,13 +127,6 @@ abstract class Element
     private $closureDecorators = [];
 
     /**
-     * Any custom data, that can be retrieved via $this->getPayload().
-     *
-     * @var []
-     */
-    private $payload = [];
-
-    /**
      * Render the element to an HTML-string.
      *
      * @return string
@@ -136,6 +139,7 @@ abstract class Element
     public function __construct()
     {
         $this->attributes = new AttributeManager($this);
+        $this->payload = new PayloadManager();
         $this->setUp();
     }
 
@@ -440,77 +444,20 @@ abstract class Element
     }
 
     /**
-     * Returns specific custom data.
-     *
-     * Returns complete array of custom data,
-     * if called with no parameters.
-     *
-     * Can also get data at specific location
-     * of a nested array using "dot" notation.
-     *
-     * @param string|null $key
-     * @param string|null $defaultValue
-     * @return mixed
-     * @throws PayloadNotFoundException
-     */
-    public function getPayload(string $key = null, string $defaultValue = null)
-    {
-        // Return complete payload-array, if $key is null.
-        if (is_null($key)) {
-            return $this->payload;
-        }
-
-        if (!$this->hasPayload($key)) {
-            if (!is_null($defaultValue)) {
-                return $defaultValue;
-            }
-            throw new PayloadNotFoundException("No data found for key '$key'. Either add the data or state a default value.'");
-        }
-        return Arr::get($this->payload, $key);
-    }
-
-    /**
-     * Is a payload set?
-     *
-     * Checks if any payload is set,
-     * if called with no parameters.
-     *
-     * Can also check data at specific location
-     * of a nested array using "dot" notation.
-     *
-     * @param string $key
-     * @return bool
-     */
-    public function hasPayload(string $key=null)
-    {
-        if (is_null($key)) {
-            if (count($this->payload)>0) {
-                return true;
-            }
-            return false;
-        }
-        return Arr::has($this->payload, $key);
-    }
-
-    /**
      * Set any payload in array-form.
      *
      * Can also set data at specific location
      * using "dot" notation via the $key
      * parameter.
      *
-     * @param string|array $payload
-     * @param string $key
+     * @param mixed|Payload $payload
+     * @param string|null $key
      * @return $this
+     * @throws InvalidPayloadException
      */
-    public function payload($payload, string $key = '')
+    public function payload($payload, string $key = null)
     {
-        if (strlen($key) > 0) {
-            Arr::set($this->payload, $key, $payload);
-        }
-        else {
-            $this->payload = $payload;
-        }
+        $this->payload->set($payload, $key);
         return $this;
     }
 
