@@ -68,10 +68,11 @@ class DivElementTest extends TestCase
         $result = $html->generate();
 
         $this->assertHtmlEquals(
-            '
-                <div></div>
-                myNewPayloadString 5 payloadBool is true myPayloadArrayItem1 myPayloadArrayItem2 mySubPayloadString myDefaultValue
-            ',
+'<div></div>
+myNewPayloadString
+5 payloadBool is true myPayloadArrayItem1 myPayloadArrayItem2
+mySubPayloadString
+myDefaultValue',
             $result
         );
     }

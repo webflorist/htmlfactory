@@ -9,10 +9,11 @@
     ],
     "require": {
 		"laravel/framework": "~5.5"
-	},
+    },
     "require-dev": {
         "orchestra/testbench": "~3.5",
-        "gajus/dindent": "^2.0"
+        "gajus/dindent": "^2.0",
+        "ext-dom": "*"
     },
     "autoload": {
         "psr-4": {
