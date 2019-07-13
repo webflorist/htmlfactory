@@ -2,8 +2,6 @@
 
 namespace Webflorist\HtmlFactory\Payload;
 
-use Illuminate\Support\Arr;
-use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 use Webflorist\HtmlFactory\Exceptions\InvalidPayloadException;
 use Webflorist\HtmlFactory\Exceptions\PayloadNotFoundException;
 use Webflorist\HtmlFactory\Payload\Abstracts\Payload;
@@ -71,7 +69,7 @@ class PayloadManager
             return $this->payload;
         }
 
-        if (!$this->hasPayload($key)) {
+        if (!$this->has($key)) {
             if (!is_null($defaultValue)) {
                 return $defaultValue;
             }
@@ -81,14 +79,14 @@ class PayloadManager
     }
 
     /**
-     * Is a specific payload-key set?.
+     * Is a specific payload-key set and not null?.
      *
      * @param string $key
      * @return bool
      */
-    public function hasPayload(string $key)
+    public function has(string $key)
     {
-        return property_exists($this->payload, $key);
+        return property_exists($this->payload, $key) && !is_null($this->payload->$key);
     }
 
     /**
