@@ -3,7 +3,6 @@
 namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
 use Webflorist\HtmlFactory\Content\ContentManager;
-use Webflorist\HtmlFactory\Elements\TemplateElement;
 
 /**
  * A HTML-element, that can contain content.
