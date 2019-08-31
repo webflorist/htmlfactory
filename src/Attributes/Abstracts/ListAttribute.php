@@ -101,4 +101,16 @@ abstract class ListAttribute extends Attribute
             }
         }
     }
+
+    /**
+     * Removes a value.
+     *
+     * @param string|\Closure $value
+     */
+    public function removeValue($value)
+    {
+        if (array_search($value, $this->values) !== false) {
+            unset($this->values[$value]);
+        }
+    }
 }
