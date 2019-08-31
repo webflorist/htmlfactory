@@ -55,9 +55,9 @@ class DecorateFields extends Decorator
     protected function getFormControlClass(): string
     {
 		if ($this->element->is(CheckboxInputComponent::class) || $this->element->is(RadioInputComponent::class)) {
-			return 'form-check-input';
+			return 'custom-control-input';
 		}
-		
+
         if ($this->element->is(FileInputComponent::class)) {
             return 'form-control-file';
         }
