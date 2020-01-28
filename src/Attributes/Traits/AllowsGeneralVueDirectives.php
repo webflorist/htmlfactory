@@ -13,6 +13,7 @@ use Webflorist\HtmlFactory\Attributes\Vue\IfDirective;
 use Webflorist\HtmlFactory\Attributes\Vue\OnceDirective;
 use Webflorist\HtmlFactory\Attributes\Vue\OnDirective;
 use Webflorist\HtmlFactory\Attributes\Vue\PreDirective;
+use Webflorist\HtmlFactory\Attributes\Vue\RefAttribute;
 use Webflorist\HtmlFactory\Attributes\Vue\ShowDirective;
 use Webflorist\HtmlFactory\Attributes\Vue\TextDirective;
 
@@ -282,4 +283,16 @@ trait AllowsGeneralVueDirectives
         return $this;
     }
 
+    /**
+     * Set the Vue-Reference-Attribute 'ref'.
+     *
+     * @param string $expression
+     * @param array $modifiers
+     * @return $this
+     */
+    public function ref(string $reference)
+    {
+        $this->attributes->establish(RefAttribute::class)->setValue($reference);
+        return $this;
+    }
 }
