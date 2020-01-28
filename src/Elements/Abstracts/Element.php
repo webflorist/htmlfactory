@@ -2,11 +2,9 @@
 
 namespace Webflorist\HtmlFactory\Elements\Abstracts;
 
-use Illuminate\Support\Arr;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsGeneralVueDirectives;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsRoleAttribute;
 use Webflorist\HtmlFactory\Exceptions\InvalidPayloadException;
-use Webflorist\HtmlFactory\Exceptions\PayloadNotFoundException;
 use Webflorist\HtmlFactory\HtmlFactory;
 use Webflorist\HtmlFactory\Attributes\Manager\AttributeManager;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsAriaDescribedbyAttribute;
@@ -18,7 +16,6 @@ use Webflorist\HtmlFactory\Attributes\Traits\AllowsStyleAttribute;
 use Webflorist\HtmlFactory\Attributes\Traits\AllowsTitleAttribute;
 use Webflorist\HtmlFactory\HtmlFactoryTools;
 use Webflorist\HtmlFactory\Payload\Abstracts\Payload;
-use Webflorist\HtmlFactory\Payload\PayloadManager;
 
 /**
  * A HTML-element.
@@ -48,9 +45,9 @@ abstract class Element
     public $attributes;
 
     /**
-     * PayloadManager
+     * Payload.
      *
-     * @var PayloadManager
+     * @var Payload
      */
     public $payload;
 
@@ -139,7 +136,7 @@ abstract class Element
     public function __construct()
     {
         $this->attributes = new AttributeManager($this);
-        $this->payload = new PayloadManager();
+        $this->payload = new Payload();
         $this->setUp();
     }
 
@@ -444,11 +441,10 @@ abstract class Element
     }
 
     /**
-     * Set any payload in array-form.
+     * Set any payload under a specific key.
      *
-     * Can also set data at specific location
-     * using "dot" notation via the $key
-     * parameter.
+     * Sets complete payload,
+     * if $key is null.
      *
      * @param mixed|Payload $payload
      * @param string|null $key
@@ -457,7 +453,19 @@ abstract class Element
      */
     public function payload($payload, string $key = null)
     {
-        $this->payload->set($payload, $key);
+        // Set complete payload.
+        if (is_null($key) || strlen($key) === 0) {
+            if (is_a($payload, Payload::class)) {
+                $this->payload = $payload;
+            }
+            else {
+                throw new InvalidPayloadException("You can only set a Payload object as the root payload-element.");
+            }
+        }
+        // Set specific payload
+        else {
+            $this->payload->{$key} = $payload;
+        }
         return $this;
     }
 

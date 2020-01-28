@@ -36,4 +36,27 @@ class Payload
         return $this;
     }
 
+    /**
+     * Magic getter returns null for
+     * all non-existent properties.
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return null;
+    }
+
+    /**
+     * Is a specific payload-property set?
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function has($name)
+    {
+        return property_exists($this, $name);
+    }
+
 }
