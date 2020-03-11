@@ -2,6 +2,7 @@
 
 namespace Webflorist\HtmlFactory;
 
+use Illuminate\Support\Str;
 use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
 use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
@@ -181,8 +182,8 @@ class HtmlFactory
     {
         $frontendFramework = config('htmlfactory.frontend_framework');
         if (strpos($frontendFramework,':') > 0) {
-            $this->frontendFrameworkVersion =  str_after($frontendFramework,':');
-            $frontendFramework = str_before($frontendFramework,':');
+            $this->frontendFrameworkVersion =  Str::after($frontendFramework,':');
+            $frontendFramework = Str::before($frontendFramework,':');
         }
         $this->frontendFramework = $frontendFramework;
     }
