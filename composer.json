@@ -1,6 +1,6 @@
 {
     "name": "webflorist/htmlfactory",
-    "description": "Convenient and powerful HTML-builder for Laravel 5.5 and later",
+    "description": "Convenient and powerful HTML-builder for Laravel",
     "authors": [
         {
             "name": "Gerald Buttinger",
@@ -8,10 +8,10 @@
         }
     ],
     "require": {
-		"laravel/framework": "~5.5"
-    },
+		"laravel/framework": ">=5.5 <7.0.0"
+	},
     "require-dev": {
-        "orchestra/testbench": "~3.5",
+        "orchestra/testbench": ">=3.5",
         "gajus/dindent": "^2.0",
         "ext-dom": "*"
     },

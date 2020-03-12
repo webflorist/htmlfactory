@@ -2,6 +2,7 @@
 
 namespace Webflorist\HtmlFactory\Attributes\Manager;
 
+use Illuminate\Support\Str;
 use Webflorist\HtmlFactory\Attributes\Abstracts\Attribute;
 use Webflorist\HtmlFactory\Exceptions\AttributeNotFoundException;
 use Webflorist\HtmlFactory\Elements\Abstracts\Element;
@@ -172,7 +173,7 @@ class AttributeManager
         $traitSuffix = 'Attribute';
         foreach ($elementTraits as $traitClass) {
             if (strpos($traitClass, $traitPrefix) === 0) {
-                $this->allowedAttributes[] = kebab_case(str_before(str_after($traitClass, $traitPrefix), $traitSuffix));
+                $this->allowedAttributes[] = Str::kebab(Str::before(Str::after($traitClass, $traitPrefix), $traitSuffix));
             }
         }
     }
@@ -208,6 +209,7 @@ class AttributeManager
     }
 
     /**
+     * Is an attribute allowed for $this->element?
      * Is the attribute a Vue-directive (=does it start with a 'v-');
      *
      * @param string $attributeName
