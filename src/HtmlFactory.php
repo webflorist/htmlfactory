@@ -2,56 +2,57 @@
 
 namespace Webflorist\HtmlFactory;
 
-use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
-use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
-use Webflorist\HtmlFactory\Elements\BlockquoteElement;
-use Webflorist\HtmlFactory\Elements\H1Element;
-use Webflorist\HtmlFactory\Elements\H2Element;
-use Webflorist\HtmlFactory\Elements\ImgElement;
-use Webflorist\HtmlFactory\Elements\PElement;
-use Webflorist\HtmlFactory\Elements\TemplateElement;
-use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
-use Webflorist\HtmlFactory\Elements\Abstracts\Element;
-use Webflorist\HtmlFactory\Elements\SpanElement;
-use Webflorist\HtmlFactory\Elements\DivElement;
-use Webflorist\HtmlFactory\Elements\SectionElement;
-use Webflorist\HtmlFactory\Elements\FieldsetElement;
-use Webflorist\HtmlFactory\Elements\BrElement;
-use Webflorist\HtmlFactory\Elements\FormElement;
-use Webflorist\HtmlFactory\Elements\LabelElement;
-use Webflorist\HtmlFactory\Elements\LegendElement;
-use Webflorist\HtmlFactory\Elements\InputElement;
-use Webflorist\HtmlFactory\Components\TextInputComponent;
-use Webflorist\HtmlFactory\Components\EmailInputComponent;
-use Webflorist\HtmlFactory\Components\NumberInputComponent;
+use Illuminate\Support\Str;
+use Webflorist\HtmlFactory\Components\AlertComponent;
+use Webflorist\HtmlFactory\Components\CheckboxInputComponent;
 use Webflorist\HtmlFactory\Components\ColorInputComponent;
 use Webflorist\HtmlFactory\Components\DateInputComponent;
 use Webflorist\HtmlFactory\Components\DatetimeInputComponent;
 use Webflorist\HtmlFactory\Components\DatetimeLocalInputComponent;
-use Webflorist\HtmlFactory\Components\CheckboxInputComponent;
-use Webflorist\HtmlFactory\Components\RadioInputComponent;
-use Webflorist\HtmlFactory\Elements\TextareaElement;
-use Webflorist\HtmlFactory\Components\HiddenInputComponent;
+use Webflorist\HtmlFactory\Components\EmailInputComponent;
 use Webflorist\HtmlFactory\Components\FileInputComponent;
+use Webflorist\HtmlFactory\Components\HiddenInputComponent;
+use Webflorist\HtmlFactory\Components\Manager\ComponentManager;
 use Webflorist\HtmlFactory\Components\MonthInputComponent;
-use Webflorist\HtmlFactory\Components\PasswordInputComponent;
-use Webflorist\HtmlFactory\Components\SearchInputComponent;
-use Webflorist\HtmlFactory\Components\RangeInputComponent;
-use Webflorist\HtmlFactory\Components\TelInputComponent;
-use Webflorist\HtmlFactory\Components\TimeInputComponent;
-use Webflorist\HtmlFactory\Components\WeekInputComponent;
-use Webflorist\HtmlFactory\Components\UrlInputComponent;
-use Webflorist\HtmlFactory\Elements\SmallElement;
-use Webflorist\HtmlFactory\Elements\SupElement;
-use Webflorist\HtmlFactory\Elements\ButtonElement;
-use Webflorist\HtmlFactory\Elements\SelectElement;
-use Webflorist\HtmlFactory\Elements\OptionElement;
-use Webflorist\HtmlFactory\Elements\OptgroupElement;
-use Webflorist\HtmlFactory\Elements\IElement;
-use Webflorist\HtmlFactory\Components\SubmitButtonComponent;
-use Webflorist\HtmlFactory\Components\ResetButtonComponent;
-use Webflorist\HtmlFactory\Components\AlertComponent;
+use Webflorist\HtmlFactory\Components\NumberInputComponent;
 use Webflorist\HtmlFactory\Components\PanelComponent;
+use Webflorist\HtmlFactory\Components\PasswordInputComponent;
+use Webflorist\HtmlFactory\Components\RadioInputComponent;
+use Webflorist\HtmlFactory\Components\RangeInputComponent;
+use Webflorist\HtmlFactory\Components\ResetButtonComponent;
+use Webflorist\HtmlFactory\Components\SearchInputComponent;
+use Webflorist\HtmlFactory\Components\SubmitButtonComponent;
+use Webflorist\HtmlFactory\Components\TelInputComponent;
+use Webflorist\HtmlFactory\Components\TextInputComponent;
+use Webflorist\HtmlFactory\Components\TimeInputComponent;
+use Webflorist\HtmlFactory\Components\UrlInputComponent;
+use Webflorist\HtmlFactory\Components\WeekInputComponent;
+use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
+use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\BlockquoteElement;
+use Webflorist\HtmlFactory\Elements\BrElement;
+use Webflorist\HtmlFactory\Elements\ButtonElement;
+use Webflorist\HtmlFactory\Elements\DivElement;
+use Webflorist\HtmlFactory\Elements\FieldsetElement;
+use Webflorist\HtmlFactory\Elements\FormElement;
+use Webflorist\HtmlFactory\Elements\H1Element;
+use Webflorist\HtmlFactory\Elements\H2Element;
+use Webflorist\HtmlFactory\Elements\IElement;
+use Webflorist\HtmlFactory\Elements\ImgElement;
+use Webflorist\HtmlFactory\Elements\InputElement;
+use Webflorist\HtmlFactory\Elements\LabelElement;
+use Webflorist\HtmlFactory\Elements\LegendElement;
+use Webflorist\HtmlFactory\Elements\OptgroupElement;
+use Webflorist\HtmlFactory\Elements\OptionElement;
+use Webflorist\HtmlFactory\Elements\PElement;
+use Webflorist\HtmlFactory\Elements\SectionElement;
+use Webflorist\HtmlFactory\Elements\SelectElement;
+use Webflorist\HtmlFactory\Elements\SmallElement;
+use Webflorist\HtmlFactory\Elements\SpanElement;
+use Webflorist\HtmlFactory\Elements\SupElement;
+use Webflorist\HtmlFactory\Elements\TemplateElement;
+use Webflorist\HtmlFactory\Elements\TextareaElement;
+use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
 
 /**
  * The main class of this package.
@@ -170,8 +171,21 @@ class HtmlFactory
         }
 
         // If the accessor is neither a element nor a component, we throw an exception.
-        throw new InvalidAccessorException('No element found for accessor "'.$accessor.'".');
+        throw new InvalidAccessorException('No element found for accessor "' . $accessor . '".');
 
     }
 
+    /**
+     * Evaluate config 'htmlfactory.frontend_framework'
+     * and fill $this->frontendFramework and $this->frontendFrameworkVersion accordingly.
+     */
+    private function evaluateFrontendFramework()
+    {
+        $frontendFramework = config('htmlfactory.frontend_framework');
+        if (strpos($frontendFramework, ':') > 0) {
+            $this->frontendFrameworkVersion = Str::after($frontendFramework, ':');
+            $frontendFramework = Str::before($frontendFramework, ':');
+        }
+        $this->frontendFramework = $frontendFramework;
+    }
 }
