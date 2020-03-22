@@ -4,7 +4,7 @@ namespace Webflorist\HtmlFactory\Attributes\Manager;
 
 use Illuminate\Support\Str;
 use Webflorist\HtmlFactory\Attributes\Abstracts\Attribute;
-use Webflorist\HtmlFactory\Exceptions\AttributeNotFoundException;
+use Webflorist\HtmlFactory\Attributes\Abstracts\VueDirective;
 use Webflorist\HtmlFactory\Elements\Abstracts\Element;
 
 class AttributeManager
@@ -97,6 +97,24 @@ class AttributeManager
         }
 
         return $html;
+    }
+
+    public function toArray($htmlOnly=false)
+    {
+        $attributes = [];
+        foreach ($this->attributes as $attribute) {
+            if ($attribute->isSet()) {
+                if ($htmlOnly == false || !is_a($attribute, VueDirective::class)) {
+                    $attributes[$attribute->getName()] = $attribute->getValue();
+                }
+            }
+        }
+        return $attributes;
+    }
+
+    public function toJson($htmlOnly=false)
+    {
+        return json_encode($this->toArray($htmlOnly));
     }
 
     /**
