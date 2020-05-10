@@ -29,6 +29,7 @@ use Webflorist\HtmlFactory\Components\UrlInputComponent;
 use Webflorist\HtmlFactory\Components\WeekInputComponent;
 use Webflorist\HtmlFactory\Decorators\Manager\DecoratorManager;
 use Webflorist\HtmlFactory\Elements\Abstracts\Element;
+use Webflorist\HtmlFactory\Elements\AElement;
 use Webflorist\HtmlFactory\Elements\BlockquoteElement;
 use Webflorist\HtmlFactory\Elements\BrElement;
 use Webflorist\HtmlFactory\Elements\ButtonElement;
@@ -63,6 +64,7 @@ use Webflorist\HtmlFactory\Exceptions\InvalidAccessorException;
  *
  * Elements:
  * =========
+ * @method static AElement                  a()
  * @method static BlockquoteElement         blockquote()
  * @method static BrElement                 br()
  * @method static ButtonElement             button()
