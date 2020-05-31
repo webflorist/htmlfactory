@@ -1,4 +1,5 @@
 <?php
+
 namespace HtmlFactoryTests\Feature\Elements;
 
 use HtmlFactoryTests\TestCase;
@@ -57,8 +58,7 @@ class DivElementTest extends TestCase
 
         $html = \Html::div()
             ->view('ElementsTestViews::payload-test')
-            ->payload($myPayload)
-        ;
+            ->payload($myPayload);
 
         // Overwrite a payload-item
         $html->payload('myNewPayloadString', 'payloadString');
@@ -66,7 +66,39 @@ class DivElementTest extends TestCase
         $result = $html->generate();
 
         $this->assertHtmlEquals(
-'<div></div>
+            '<div></div>
+myNewPayloadString
+5 payloadBool is true myPayloadArrayItem1 myPayloadArrayItem2
+mySubPayloadString
+myDefaultValue',
+            $result
+        );
+    }
+
+    public function testComplexDivElementWithPayloadHandedAsArray()
+    {
+        $myPayload = [
+            'payloadString' => 'myPayloadString',
+            'payloadInteger' => 5,
+            'payloadBool' => true,
+            'payloadArray' => [
+                'myPayloadArrayItem1',
+                'myPayloadArrayItem2'
+            ],
+            'subPayload' => new Payload(['subPayloadString' => 'mySubPayloadString'])
+        ];
+
+        $html = \Html::div()
+            ->view('ElementsTestViews::payload-test')
+            ->payload($myPayload);
+
+        // Overwrite a payload-item
+        $html->payload('myNewPayloadString', 'payloadString');
+
+        $result = $html->generate();
+
+        $this->assertHtmlEquals(
+            '<div></div>
 myNewPayloadString
 5 payloadBool is true myPayloadArrayItem1 myPayloadArrayItem2
 mySubPayloadString
