@@ -443,8 +443,11 @@ abstract class Element
     /**
      * Set any payload under a specific key.
      *
-     * Sets complete payload,
-     * if $key is null.
+     * Sets complete payload, if $key is null.
+     * 
+     * Complete payload can be:
+     * - an existing Payload-object,
+     * - or an associative array.
      *
      * @param mixed|Payload $payload
      * @param string|null $key
@@ -458,8 +461,11 @@ abstract class Element
             if (is_a($payload, Payload::class)) {
                 $this->payload = $payload;
             }
+            else if (is_array($payload)) {
+                $this->payload = new Payload($payload);
+            }
             else {
-                throw new InvalidPayloadException("You can only set a Payload object as the root payload-element.");
+                throw new InvalidPayloadException("Either state a key to set a single payload-item, or provide a full payload as Payload-object or as associative array.");
             }
         }
         // Set specific payload
