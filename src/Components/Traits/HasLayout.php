@@ -27,9 +27,9 @@ trait HasLayout
     /**
      * Get the layout.
      *
-     * @return $this
+     * @return null|string
      */
-    public function getLayout() : string
+    public function getLayout()
     {
         return $this->layout;
     }
