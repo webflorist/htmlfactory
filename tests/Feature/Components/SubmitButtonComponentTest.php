@@ -1,5 +1,5 @@
 <?php
-namespace HtmlFactoryTests\Feature\Elements;
+namespace HtmlFactoryTests\Feature\Components;
 
 use HtmlFactoryTests\TestCase;
 
