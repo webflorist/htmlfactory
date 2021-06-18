@@ -4,7 +4,7 @@ namespace HtmlFactoryTests\Feature\Components;
 
 use HtmlFactoryTests\TestCase;
 
-class urlInputComponentTest extends TestCase
+class UrlInputComponentTest extends TestCase
 {
 
     public function testSimpleurlInputComponent()

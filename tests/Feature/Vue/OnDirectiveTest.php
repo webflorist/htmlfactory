@@ -1,5 +1,5 @@
 <?php
-namespace HtmlFactoryTests\Feature\Elements;
+namespace HtmlFactoryTests\Feature\Vue;
 
 use HtmlFactoryTests\TestCase;
 use Webflorist\HtmlFactory\Exceptions\VueDirectiveModifierNotAllowedException;
