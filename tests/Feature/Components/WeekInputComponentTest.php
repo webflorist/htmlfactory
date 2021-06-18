@@ -4,7 +4,7 @@ namespace HtmlFactoryTests\Feature\Components;
 
 use HtmlFactoryTests\TestCase;
 
-class weekInputComponentTest extends TestCase
+class WeekInputComponentTest extends TestCase
 {
 
     public function testSimpleweekInputComponent()

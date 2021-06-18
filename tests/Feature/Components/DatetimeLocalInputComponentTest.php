@@ -4,7 +4,7 @@ namespace HtmlFactoryTests\Feature\Components;
 
 use HtmlFactoryTests\TestCase;
 
-class DatetimeLocalLocalInputComponentTest extends TestCase
+class DatetimeLocalInputComponentTest extends TestCase
 {
 
     public function testSimpleDatetimeLocalInputComponent()
