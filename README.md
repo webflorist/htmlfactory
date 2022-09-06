@@ -1,6 +1,9 @@
 # webflorist/htmlfactory
 **Convenient and powerful HTML-builder for Laravel (>=v5.5)**
 
+[![Build Status](https://api.travis-ci.com/webflorist/htmlfactory.svg?branch=master)](https://app.travis-ci.com/github/webflorist/htmlfactory)
+[![Latest Stable Version](https://poser.pugx.org/webflorist/htmlfactory/v/stable)](https://packagist.org/packages/webflorist/htmlfactory)
+
 ## Description
 This package provides functionality for building HTML in Laravel without the need to write any HTML.
 
